@@ -31,37 +31,100 @@ namespace Chat_Client
         }
 
         /* used to a new server entry */
-        public static void CreateNewServer()
+        public void CreateNewServer()
         {
             ServerSettings settings = new ServerSettings();
 
+            // data validation
+            string inStr = ""; 
+            int inInt = 0;
+
+
             // settings.server_name
             Console.WriteLine("Enter the name of the new server: ");
-            settings.server_name = Console.ReadLine();
+            while (true)
+            {
+                inStr = Console.ReadLine();
 
-            // settings.backlog
-            Console.WriteLine("Enter the backlog for {0}: ", settings.server_name);
-            settings.backlog = int.Parse( Console.ReadLine() );
+                if (!(string.IsNullOrEmpty(inStr)))
+                {
+                    settings.server_name = inStr;
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Please enter in a name for your server");
+                }                                  
+                inStr = "";
+            }
+            
+
+            // settings.backlog       
+            while(true)
+            {
+                Console.WriteLine("Enter the backlog for {0}: ", settings.server_name);
+                try
+                {
+                    inInt = int.Parse( Console.ReadLine());
+
+                    if (IsNumber(inInt))
+                    {
+                        settings.backlog = inInt;
+                        break;
+                    }
+                    inInt = 0;
+
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Invalid Input, please enter in a number \n(hint): try 5");                    
+                }
+                
+
+            }         
 
             // settings.port_number
-            Console.WriteLine("Enter the port number for {0} ", settings.server_name);
-            settings.port_number = int.Parse( Console.ReadLine() );
+            
+            while (true)
+            {
+                Console.WriteLine("Enter the port number for {0} ", settings.server_name);
+                try
+                {
+                    inInt = int.Parse(Console.ReadLine());
+
+                    if (IsNumber(inInt))
+                    {
+                        settings.port_number = inInt;
+                        break;
+                    }
+
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Invalid Input, please enter in a valid port number \n(hint: try 12000");
+                }
+                
+            }
+            
 
             // settings_ip_address
             IPHostEntry host = Dns.Resolve(Dns.GetHostName() ); // only need the IP as a string here
 
-            // iterate through the hosts address list to find the private address
-            for (int i = 0; i < host.AddressList.Length; i++)
-            {
-                if (IsPrivateAddress(host.AddressList[i].ToString()))
-                {
-                    settings.server_ip_address = host.AddressList[i].ToString();
-                }    
-            }
-
+            // TODO: iterate through the hosts address list to find the private address
+           
+            settings.server_ip_address = host.AddressList[1].ToString();
 
             Create(settings);
         }
+
+        // TODO: write this
+        private bool IsNumber(int num)
+        {
+            return true;
+        }
+
+        
+        // TODO: this needs to get done but for now we can use host.AddressList[1].
         /* checks to see if an address is private and returns true if it is. */
         private static bool IsPrivateAddress(string address)
         {
@@ -76,7 +139,8 @@ namespace Chat_Client
         }
         private static void Create(ServerSettings settings)
         {
-
+            ServerList Servers = new ServerList();
+            Servers.Add(settings);
         }
         
         /* this method is used when the server starts to search and load settings to be passed to the Listen() method */
