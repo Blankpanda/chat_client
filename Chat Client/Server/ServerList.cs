@@ -15,32 +15,29 @@ namespace Chat_Client
 	{
 		private string ServerDirectory = "Servers";
 
+		public string MainServerDirectory
+		{
+			get { return ServerDirectory;  }
+			set { MainServerDirectory = ServerDirectory; }
+		}
+
 		/* Initalizes a directory in the constructor to hold all fo the servers config files */        
 		public ServerList()
 		{
 			Directory.CreateDirectory(ServerDirectory);
 		}
 
+	
+
 		/* Creates a directory to store the configuration file and writes the configuration file */
 		internal void Add (Server.ServerSettings settings)
 		{
 			
 			string NewDirectory = ServerDirectory + @"\" + settings.server_name; // EX Servers\myserver\
-
-
-			while (true)
-			{
-				if (!(Directory.Exists(NewDirectory)))
-				{
-					Directory.CreateDirectory(NewDirectory);
-					break;
-				}
-				else
-				{
-					// TODO: should I add something that allows them to select wether or not they want to remove a server?
-					Console.WriteLine("Server already created under this name");
-				}
-			}
+			Directory.CreateDirectory(NewDirectory);
+																				
+				
+			
 			
 			List<string> settings_content = new List<string>();
 			// build a list that makes the configuration file
@@ -86,7 +83,7 @@ namespace Chat_Client
 
 		/* Reads a text file  and returns the output in a list or a string.*/
 
-		// Overload for List
+		//  for List
 		public List<string> ReadTextFileList (string FileName)
 		{
 			List<string> elems = new List<string>();
@@ -107,7 +104,7 @@ namespace Chat_Client
 			return elems;
 		}
 
-		// Overload for string (string is appended with new line constant).
+		//  for string (string is appended with new line constant).
 		public string ReadTextFileString (string FileName)
 		{
 			StringBuilder sb = new StringBuilder();
@@ -132,8 +129,33 @@ namespace Chat_Client
 			return readFile;
 		}
 
+		// returns the server list with their config files
+		public string[] GetServerList()
+		{
+			string[] directories = Directory.GetDirectories(ServerDirectory);
 
+			return directories;
+		}
 
+		// displays the server list using standard output
+		public void DisplayServerList()
+		{
+			string[] directories = Directory.GetDirectories(ServerDirectory);
+
+			if (directories.Length == 0)
+			{
+				Console.WriteLine("No servers");
+			}
+			else
+			{
+
+				for (int i = 0; i < directories.Length; i++)
+				{
+					Console.WriteLine(directories[i]);
+				}
+			}
+
+		}
 
 		/* Gets the total number of directories in the servers directory */        
 		public int GetServerListCount()

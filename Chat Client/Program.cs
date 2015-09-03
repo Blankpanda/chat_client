@@ -14,6 +14,10 @@ namespace Chat_Client
         {
             Server server = new Server();
             server.CreateNewServer();
+            ServerList sl = new ServerList();
+            sl.DisplayServerList();
+
+            Console.ReadLine();
                        
 
         }

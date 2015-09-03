@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
+using System.IO;
 
 namespace Chat_Client
 {
-    class Server
+    class Server 
     {
         
         private static string data = null;
@@ -34,6 +35,7 @@ namespace Chat_Client
         public void CreateNewServer()
         {
             ServerSettings settings = new ServerSettings();
+            ServerList serverlist = new ServerList();
 
             // data validation
             string  inStr = ""; 
@@ -48,12 +50,20 @@ namespace Chat_Client
 
                 if (!(string.IsNullOrEmpty(inStr)))
                 {
-                    settings.server_name = inStr;
-                    break;
+                    if (!(Directory.Exists(serverlist.MainServerDirectory + @"\" + inStr)))
+                    {
+                        settings.server_name = inStr;
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("The server already exists");
+                    }
+                   
                 }
                 else
                 {
-                    Console.WriteLine("Please enter in a name for your server");
+                    Console.WriteLine("please enter in a name for the server");
                 }                                  
                 inStr = "";
             }
@@ -63,17 +73,13 @@ namespace Chat_Client
             while(true)
             {
                 Console.WriteLine("Enter the backlog for {0}: ", settings.server_name);
+                inInt = 0;
                 try
                 {
                     inInt = int.Parse( Console.ReadLine());
-
-                    if (IsNumber(inInt))
-                    {
-                        settings.backlog = inInt;
-                        break;
-                    }
-                    inInt = 0;
-
+                    
+                    settings.backlog = inInt;
+                    break;
                 }
                 catch (Exception)
                 {
@@ -88,16 +94,14 @@ namespace Chat_Client
             while (true)
             {
                 Console.WriteLine("Enter the port number for {0} ", settings.server_name);
+                inInt = 0;
                 try
                 {
                     inInt = int.Parse(Console.ReadLine());
 
-                    if (IsNumber(inInt))
-                    {
-                        settings.port_number = inInt;
-                        break;
-                    }
-
+                    settings.port_number = inInt;
+                    break;
+                    
                 }
                 catch (Exception)
                 {
@@ -117,12 +121,6 @@ namespace Chat_Client
             Create(settings);
         }
 
-        // TODO: write this
-        private bool IsNumber(int num)
-        {
-            return true;
-        }
-
         
         // TODO: this needs to get done but for now we can use host.AddressList[1].
         /* checks to see if an address is private and returns true if it is. */
@@ -137,6 +135,7 @@ namespace Chat_Client
             // class C
 
         }
+
         private static void Create(ServerSettings settings)
         {
             ServerList Servers = new ServerList();
