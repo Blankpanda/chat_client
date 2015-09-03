@@ -28,7 +28,7 @@ namespace Chat_Client
                 server_ip_address = ip;
                 server_name = name;
             }
-
+            
         }
 
         /* used to a new server entry */
@@ -145,13 +145,62 @@ namespace Chat_Client
         /* this method is used when the server starts to search and load settings to be passed to the Listen() method */
         private static void Init(string ServerName)
         {
+            ServerList SL = new ServerList();
+            string[] ServerList = SL.GetServerList(); // list of all directory paths
+            string ServerPath = "";
+            // ex: ServerList[0] = Server\Caleb
+            
+            
+            
 
+            // we want to remove the parent directory from the path so we can retrieve the name
+            // for checking
+            // then we populate ConfigurationFile with elements of the txt file.
+            // we then use a SeverSettings to pass into Listen()
+           
+            for (int i = 0; i < ServerList.Length; i++)            
+                ServerList[i] = ServerList[i].Remove(0, SL.MainServerDirectory.Length + 1);
+
+
+            for (int i = 0; i < ServerList.Length; i++)
+            {
+                if ( ServerName == ServerList[i])
+                {
+                    ServerPath = SL.MainServerDirectory + @"\" + ServerName;
+                }
+            }
+
+            //gets the configuration file from the Servers\myserver directory
+            DirectoryInfo ConfigFileInfo = new DirectoryInfo(ServerPath);
+            FileInfo[] files = ConfigFileInfo.GetFiles();
+            string ConfigFilePath = "";
+            
+            for (int i = 0; i < files.Length; i++)
+            {
+                if (files[i].Extension == ".txt" && files[i].Name.Contains("_Config"))
+                {
+                    ConfigFilePath = files[i].FullName;
+                }
+   
+            }
+
+            // used when reading config file
+            List<string> ConfigurationFile = SL.ReadTextFileList(ConfigFilePath);
+            ServerSettings settings = new ServerSettings();
+
+            settings.server_name        = ConfigurationFile[1];
+            settings.backlog            =  int.Parse( ConfigurationFile[2] );
+            settings.server_ip_address  = ConfigurationFile[3];
+            settings.port_number        =  int.Parse ( ConfigurationFile[4] );
+
+            Console.WriteLine(settings.server_name + settings.backlog + settings.server_ip_address + settings.port_number);
         }
 
         /* this method is used to listen for incoming connections */
-        public static void Listen(ServerSettings ServerSettings)
+        public void Listen()
         {
 
+            Init("caleb");
         }
 
         

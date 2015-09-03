@@ -27,7 +27,6 @@ namespace Chat_Client
 			Directory.CreateDirectory(ServerDirectory);
 		}
 
-	
 
 		/* Creates a directory to store the configuration file and writes the configuration file */
 		internal void Add (Server.ServerSettings settings)
@@ -65,6 +64,12 @@ namespace Chat_Client
 			WriteToTextFile(settings_content, ConfigPath);
 
 			
+		}
+
+		/* delets a server from the server list */
+		internal void Delete(string path)
+		{
+			Directory.Delete(path);
 		}
 
 		/* Writes to a Text File for the servers configuration. */
