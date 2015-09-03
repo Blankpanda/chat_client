@@ -36,8 +36,8 @@ namespace Chat_Client
             ServerSettings settings = new ServerSettings();
 
             // data validation
-            string inStr = ""; 
-            int inInt = 0;
+            string  inStr = ""; 
+            int     inInt = 0;
 
 
             // settings.server_name
