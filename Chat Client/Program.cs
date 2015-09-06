@@ -12,13 +12,10 @@ namespace Chat_Client
     {
         static void Main(string[] args)
         {
-
-            Server x = new Server();
-                x.Listen();
+            
 
 
-
-            Console.ReadLine();
+            
         }
     }
 }

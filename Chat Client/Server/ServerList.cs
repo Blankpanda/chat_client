@@ -29,7 +29,7 @@ namespace Chat_Client
 
 
 		/* Creates a directory to store the configuration file and writes the configuration file */
-		internal void Add (Server.ServerSettings settings)
+		internal void Add (ServerInit.ServerSettings settings)
 		{
 			
 			string NewDirectory = ServerDirectory + @"\" + settings.server_name; // EX Servers\myserver\
