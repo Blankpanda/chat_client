@@ -43,7 +43,8 @@ namespace Chat_Client
 
 			// Example config file:
 			//      server #
-			//      name 
+			//      name
+			//      password
 			//      backlog
 			//      IP
 			//      Port
@@ -53,6 +54,7 @@ namespace Chat_Client
 
 			settings_content.Add(ServerNumber.ToString());  // Server #
 			settings_content.Add(settings.server_name);     // Name
+			settings_content.Add(settings.server_password); // password
 			settings_content.Add(settings.backlog.ToString());  // Backlog
 			settings_content.Add(settings.server_ip_address);   // IP
 			settings_content.Add(settings.port_number.ToString());  //  Port

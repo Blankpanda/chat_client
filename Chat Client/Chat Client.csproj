@@ -43,6 +43,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client\Client.cs" />
+    <Compile Include="CommandStructure\CommandStructure.cs" />
+    <Compile Include="CommandStructure\Commands\Create.cs" />
+    <Compile Include="CommandStructure\Commands\Delete.cs" />
+    <Compile Include="CommandStructure\Commands\Ping.cs" />
+    <Compile Include="CommandStructure\Commands\SList.cs" />
+    <Compile Include="CommandStructure\Commands\Start.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server\Server.cs" />

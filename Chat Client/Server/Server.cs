@@ -18,7 +18,7 @@ namespace Chat_Client.Server
 
         public Server(ServerInit.ServerSettings ServerConfiguration)
         {
-            settings = ServerConfiguration;
+            settings = ServerConfiguration; // the configuration of the server that is being initalzied
         }
         
 

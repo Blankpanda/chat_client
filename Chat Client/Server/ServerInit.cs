@@ -19,14 +19,15 @@ namespace Chat_Client
         public struct ServerSettings
         {
             public int port_number, backlog;
-            public string server_ip_address ,server_name;
+            public string server_ip_address, server_password ,server_name;
 
-            public ServerSettings(int port, int log, string ip, string name)
+            public ServerSettings(int port, int log, string ip, string name, string password)
             {
                 port_number = port;
                 backlog = log;
                 server_ip_address = ip;
                 server_name = name;
+                server_password = password;
             }
             
         }
@@ -40,7 +41,7 @@ namespace Chat_Client
             // data validation
             string  inStr = ""; 
             int     inInt = 0;
-
+            
 
             // settings.server_name
             Console.WriteLine("Enter the name of the new server: ");
@@ -66,6 +67,24 @@ namespace Chat_Client
                     Console.WriteLine("please enter in a name for the server");
                 }                                  
                 inStr = "";
+            }
+
+
+            while (true)
+            {
+                Console.WriteLine("Enter in the password for this sever: ");
+                inStr = Console.ReadLine();
+
+                if (!(string.IsNullOrEmpty(inStr)))
+                {                   
+                    settings.server_password = inStr;
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Please enter in a valid password");
+                }
+
             }
             
 
@@ -109,6 +128,7 @@ namespace Chat_Client
                 }
                 
             }
+
             
 
             // settings_ip_address
@@ -188,10 +208,12 @@ namespace Chat_Client
             List<string> ConfigurationFile = SL.ReadTextFileList(ConfigFilePath);
             ServerSettings settings = new ServerSettings();
 
+            //TODO: could I just iterate through this and add through the structure to make it less hacky?
             settings.server_name        = ConfigurationFile[1];
-            settings.backlog            =  int.Parse( ConfigurationFile[2] );
-            settings.server_ip_address  = ConfigurationFile[3];
-            settings.port_number        =  int.Parse ( ConfigurationFile[4] );
+            settings.server_password    = ConfigurationFile[2];
+            settings.backlog            =  int.Parse( ConfigurationFile[3] );
+            settings.server_ip_address  = ConfigurationFile[4];
+            settings.port_number        =  int.Parse ( ConfigurationFile[5] );
 
             Console.WriteLine(settings.server_name + settings.backlog + settings.server_ip_address + settings.port_number);
 
