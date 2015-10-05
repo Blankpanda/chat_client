@@ -22,7 +22,13 @@ namespace Chat_Client.Server
         }
         
 
-        public void Listen()
+        // this is used to organzie RunCommand.cs
+        public void Start(ServerInit.ServerSettings settings)
+        {
+            Listen(settings);
+        }
+
+        private void Listen(ServerInit.ServerSettings settings)
         {
 
         }
