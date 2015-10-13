@@ -13,6 +13,10 @@ namespace Chat_Client.CommandStructure.Commands
     {
         public static void Execute()
         {
+            ServerList Slist = new ServerList();
+
+
+            Slist.Delete();
 
         }
     }

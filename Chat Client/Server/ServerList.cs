@@ -69,9 +69,30 @@ namespace Chat_Client
 		}
 
 		/* delets a server from the server list */
-		internal void Delete(string path)
+		public void Delete()
 		{
-			Directory.Delete(path);
+			Console.WriteLine("Enter the name of the server you want to remove.");
+
+			string inp = 
+				Console.ReadLine();
+
+			string path = @"Servers\" + inp;
+			string[] srvs = GetServerList();
+
+			bool exists = false; // I dont really want to do this.
+
+			for (int i = 0; i < srvs.Length; i++)            
+				if (path == srvs[i])				
+					exists = true;
+				
+
+			if (exists)			
+				Directory.Delete(path, true);		
+			else			
+				Console.WriteLine("Sever doesn't exist. type 'SList' to display the lists of servers");
+			
+			
+			
 		}
 
 		/* Writes to a Text File for the servers configuration. */

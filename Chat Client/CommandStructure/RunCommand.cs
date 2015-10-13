@@ -23,25 +23,24 @@ namespace Chat_Client.CommandStructure
             CommandList CList = new CommandList();
             List<string> CommandList = CList.GetCommands();
             
-            /* error checking */          
+            /* error checking */
 
 
-            // Empty String
-            if (string.IsNullOrEmpty(command))            
-                Console.WriteLine("Missing Input. type 'Help' for a list of commands.");
+             
+            //if (string.IsNullOrEmpty(command))            
+            //    Console.WriteLine("Missing Input. type 'Help' for a list of commands.");
 
 
             // Invalid Command
 
             int err = 0; 
             for (int i = 0; i < CommandList.Count; i++)
-                if (command != CommandList[i])
-                {
+                if (command != CommandList[i]) 
                     err++;
-                    break;
-                }
+                    
+                
 
-            if (err >= 1)
+            if (err != CommandList.Count - 1  || string.IsNullOrEmpty(command)) // we already cover string.Empty above
                 Console.WriteLine("Invalid Command.  type 'Help' for a list of commands.");
 
 
@@ -65,10 +64,7 @@ namespace Chat_Client.CommandStructure
                     break;
                 case "START":
                     Commands.Start.Execute();
-                    break;
-                default:
-                    Console.WriteLine("Invalid Command.  type 'Help' for a list of commands.");
-                    break;
+                    break;              
             }    
                 
             

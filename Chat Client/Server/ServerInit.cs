@@ -12,8 +12,7 @@ namespace Chat_Client
 	class ServerInit 
 	{
 		
-		private static string data = null;
-		
+	
 
 		/* settings of the server */
 		public struct ServerSettings
