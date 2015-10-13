@@ -12,6 +12,22 @@ namespace Chat_Client
     {
         static void Main(string[] args)
         {
+            // handles command input
+            CommandStructure.RunCommand CommandRun = new CommandStructure.RunCommand();
+
+            // initalizes the prompt
+            CommandRun.init();
+
+            while (true)
+            {              
+                string request =
+                 Console.ReadLine();
+
+                CommandRun.Run(request);
+
+                CommandRun.init(); // restore the prompt
+            }
+
 
         }
     }

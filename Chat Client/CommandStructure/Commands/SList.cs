@@ -11,5 +11,9 @@ namespace Chat_Client.CommandStructure.Commands
     /// </summary>
     class SList
     {
+        public static void Execute()
+        {
+
+        }
     }
 }

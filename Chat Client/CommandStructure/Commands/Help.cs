@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace Chat_Client.CommandStructure.Commands
 {
+    /// <summary>
+    /// 
+    /// </summary>
     class Help
     {
+        public static void Execute()
+        {
+
+        }
     }
 }

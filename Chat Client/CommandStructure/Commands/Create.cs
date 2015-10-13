@@ -12,5 +12,10 @@ namespace Chat_Client.CommandStructure.Commands
     /// </summary>
     class Create
     {
+
+        public static void Execute()
+        {
+
+        }
     }
 }

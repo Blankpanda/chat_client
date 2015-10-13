@@ -11,5 +11,9 @@ namespace Chat_Client.CommandStructure.Commands
     /// </summary>
     class Start
     {
+        public static void Execute()
+        {
+
+        }
     }
 }

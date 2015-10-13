@@ -43,6 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client\Client.cs" />
+    <Compile Include="CommandStructure\CommandList.cs" />
+    <Compile Include="CommandStructure\Commands\Help.cs" />
     <Compile Include="CommandStructure\RunCommand.cs" />
     <Compile Include="CommandStructure\Commands\Create.cs" />
     <Compile Include="CommandStructure\Commands\Delete.cs" />

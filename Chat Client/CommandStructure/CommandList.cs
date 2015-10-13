@@ -10,20 +10,21 @@ namespace Chat_Client.CommandStructure
     {
         enum Commands
         {
-            Create = 1,
-            Delete = 2,
-            Exit = 3,
-            Ping = 4,
-            SList = 5,
-            Start = 6,
+            CREATE = 1,
+            DELETE = 2,
+            HELP   = 3,
+            EXIT   = 4,
+            PING   = 5,
+            SLIST  = 6,
+            START  = 7,
         }
-        const int NUMBER_OF_COMMANDS = 6;
+         int NUMBER_OF_COMMANDS = Enum.GetValues(typeof(Commands)).Length;
 
 
 
 
         // create a list of commands               
-        public  List<string> GetCommandList()
+        public  List<string> GetCommands()
         {
             List<string> commands = new List<string>();
             for (int i = 0; i < NUMBER_OF_COMMANDS; i++)
