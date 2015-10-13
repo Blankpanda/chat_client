@@ -4,36 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Chat_Client.Commands
+namespace Chat_Client.CommandStructure
 {
     // TODO: write summary for commands
     class RunCommand
     {
-        enum Commands
-        {
-            Create,
-            Delete,
-            Exit,
-            Ping,
-            SList,
-            Start,
-        }
-
-  
+      
        
         public void Run()
         {
-            while(true)
-            {
-                Console.ReadLine();
-                string request = "";
+            CommandList CList = new CommandList();
+            List<string> CommandList = CList.GetCommandList();
 
-                // if the request is equal to one of the commands, execute that particular command
-                if ()
-                {
-                    
-                }
-            }
+            
+
         }
 
 

@@ -12,7 +12,7 @@ namespace Chat_Client
     {
         static void Main(string[] args)
         {
-            
+
         }
     }
 }
