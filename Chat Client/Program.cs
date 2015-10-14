@@ -23,9 +23,16 @@ namespace Chat_Client
                 string request =
                  Console.ReadLine();
 
-                CommandRun.Run(request);
+                if (request.ToUpper() == "EXIT")
+                {
+                    break;
+                }
+                else
+                {
+                    CommandRun.Run(request);
+                    CommandRun.init(); // restore the prompt
+                }
 
-                CommandRun.init(); // restore the prompt
             }
 
 

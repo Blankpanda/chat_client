@@ -12,12 +12,12 @@ namespace Chat_Client.CommandStructure.Commands
     class Start
     {
 
-        private string _Name;
-        private string _Desc;
+        private string _Name = "Start";
+        private string _Desc = "Starts a server by name";
         public string Name
         {
             get { return _Name; }
-            set { Description = _Name; }
+            set { Name = _Name; }
         }
 
         public string Description

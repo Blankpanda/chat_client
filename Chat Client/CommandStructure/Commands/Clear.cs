@@ -13,12 +13,12 @@ namespace Chat_Client.CommandStructure.Commands
     
     class Clear
     {
-        private string _Name;
-        private string _Desc;
+        private string _Name = "Clear";
+        private string _Desc = "Clears the contents of the console.";
         public string Name
         {
             get { return _Name; }
-            set { Description = _Name; }
+            set { Name = _Name; }
         }
 
         public string Description
@@ -29,7 +29,7 @@ namespace Chat_Client.CommandStructure.Commands
 
         public static void Execute()
         {
-
+            Console.Clear();
         }
     }
 }

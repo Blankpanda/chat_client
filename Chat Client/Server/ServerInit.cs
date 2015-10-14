@@ -161,6 +161,7 @@ namespace Chat_Client
 		   
 			settings.server_ip_address = host.AddressList[1].ToString();
 
+			Console.WriteLine(settings.server_name + " server created.");
 			CreateNewServer(settings);
 		}
 

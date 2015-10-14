@@ -47,10 +47,16 @@ namespace Chat_Client.CommandStructure
             // Execute a correct command
             switch (command)
             {
+                case "CLEAR":
+                    Commands.Clear.Execute();
+                    break;
                 case "CREATE":
                     Commands.Create.Execute();
                     break;
                 case "DELETE":
+                    Commands.Delete.Execute();
+                    break;
+                case "Exit":
                     Commands.Delete.Execute();
                     break;
                 case "HELP":

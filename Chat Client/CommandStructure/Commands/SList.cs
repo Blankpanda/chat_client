@@ -12,12 +12,12 @@ namespace Chat_Client.CommandStructure.Commands
     class SList
     {
 
-        private string _Name;
-        private string _Desc;
+        private string _Name = "SList";
+        private string _Desc = "Generates a List of created servers.";
         public string Name
         {
             get { return _Name; }
-            set { Description = _Name; }
+            set { Name = _Name; }
         }
 
         public string Description

@@ -14,12 +14,12 @@ namespace Chat_Client.CommandStructure.Commands
     class Delete
     {
 
-        private string _Name;
-        private string _Desc;
+        private string _Name = "Delete";
+        private string _Desc = "Removes a Server from the /Server Directory";
         public string Name
         {
             get { return _Name; }
-            set { Description = _Name; }
+            set { Name = _Name; }
         }
 
         public string Description
