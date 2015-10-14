@@ -172,7 +172,7 @@ namespace Chat_Client
 
 			if (directories.Length == 0)
 			{
-				Console.WriteLine("No servers");
+				Console.WriteLine("No servers currently created.");
 			}
 			else
 			{
