@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace Chat_Client.CommandStructure.Commands
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    class SList
+    class Clear
     {
-
         private string _Name;
         private string _Desc;
         public string Name

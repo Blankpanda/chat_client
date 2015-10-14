@@ -10,13 +10,14 @@ namespace Chat_Client.CommandStructure
     {
         enum Commands
         {
-            CREATE = 1,
-            DELETE = 2,
-            HELP   = 3,
-            EXIT   = 4,
-            PING   = 5,
-            SLIST  = 6,
-            START  = 7,
+            CLEAR = 1,
+            CREATE   ,
+            DELETE   ,
+            EXIT     ,
+            HELP     ,           
+            PING     ,
+            SLIST    ,
+            START    ,
         }
          int NUMBER_OF_COMMANDS = Enum.GetValues(typeof(Commands)).Length;
 

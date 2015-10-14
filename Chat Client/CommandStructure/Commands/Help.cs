@@ -9,11 +9,26 @@ namespace Chat_Client.CommandStructure.Commands
     /// <summary>
     /// 
     /// </summary>
-    class Help
+    class Help : CommandList
     {
+
+        private string _Name;
+        private string _Desc;
+        public string Name
+        {
+            get { return _Name; }
+            set { Description = _Name; }
+        }
+
+        public string Description
+        {
+            get { return _Desc; }
+            set { Description = _Desc; }
+        }
+
         public static void Execute()
         {
-
+           
         }
     }
 }
