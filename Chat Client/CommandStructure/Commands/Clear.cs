@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace Chat_Client.CommandStructure.Commands
 {
+    /// <summary>
+    ///  This command is used to clear the console window.
+    ///  using console.Clear();
+    /// </summary>  
+    
     class Clear
     {
         private string _Name;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Chat_Client.CommandStructure.Commands
 {
     /// <summary>
-    /// 
+    /// supplies a list of the current servers.
     /// </summary>
     class SList
     {

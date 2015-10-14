@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Chat_Client.CommandStructure.Commands
 {
     /// <summary>
-    /// 
+    /// starts a supplied server from name.
     /// </summary>
     class Start
     {

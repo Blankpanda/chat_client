@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace Chat_Client.CommandStructure.Commands
 {
+    
+    /// <summary>
+    ///  Terminates the program and shutsdown any active server.
+    /// </summary>
+    
     class Exit
     {
         private string _Name;

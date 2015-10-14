@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Chat_Client.CommandStructure.Commands
 {
     /// <summary>
-    /// 
+    /// generates a list of commands and a description on how they are used.
     /// </summary>
     class Help : CommandList
     {

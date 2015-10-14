@@ -1,5 +1,0 @@
-git commit -m 'desc'
-
-git push origin master
-
-git pull origin master

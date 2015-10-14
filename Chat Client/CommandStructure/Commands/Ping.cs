@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Chat_Client.CommandStructure.Commands
 {
     /// <summary>
-    /// 
+    ///  a simple built in diagnostics tool so the user can verify connectivity.
     /// </summary>
     class Ping
     {

@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 namespace Chat_Client.CommandStructure.Commands
 {
     /// <summary>
-    /// 
+    ///  This command is used to remove a severs configuration file from the Servers/ directory
+    ///  The Delete function is contain in ServerList.cs.
     /// </summary>
+    
     class Delete
     {
 

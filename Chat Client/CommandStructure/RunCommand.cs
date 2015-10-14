@@ -11,7 +11,7 @@ namespace Chat_Client.CommandStructure
     {
         public void init()
         {
-            Console.Write("srv>");
+            Console.Write(">");
         }
        
         
