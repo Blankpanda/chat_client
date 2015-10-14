@@ -87,7 +87,10 @@ namespace Chat_Client
 				
 
 			if (exists)			
-				Directory.Delete(path, true);		
+			{
+				Directory.Delete(path, true);            
+				Console.WriteLine(path + " server deleted.");
+			}
 			else			
 				Console.WriteLine("Sever doesn't exist. type 'SList' to display the lists of servers");
 			

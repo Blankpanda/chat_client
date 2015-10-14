@@ -31,29 +31,7 @@ namespace Chat_Client
 			
 		}
 
-
-		// todo: find a place an approriate place to move this something like a net.cs ?
-		private static bool IsPrivateAddress(string address)
-		{
-			string[] octs = address.Split('.'); // checks to see if the vlaues are in the right format
-			if (octs.Length != 4)
-			{
-				return false;
-			}
-
-			byte b = 0; // checks each value in octs to make sure its a valid byte
-			for (int i = 0; i < octs.Length; i++)
-			{
-				if (!byte.TryParse(octs[i], out b))
-				{
-					return false;
-				}
-
-			}
-
-			return true;
-		}
-
+		
 
 		/* used to a new server entry */
 		public void Create()

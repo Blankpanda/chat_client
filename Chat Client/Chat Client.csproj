@@ -53,6 +53,7 @@
     <Compile Include="CommandStructure\Commands\Ping.cs" />
     <Compile Include="CommandStructure\Commands\SList.cs" />
     <Compile Include="CommandStructure\Commands\Start.cs" />
+    <Compile Include="Net.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server\Server.cs" />

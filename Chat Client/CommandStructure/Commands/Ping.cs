@@ -29,6 +29,10 @@ namespace Chat_Client.CommandStructure.Commands
         public static void Execute()
         {
 
+            Net pinger = new Net();
+
+            pinger.PingAddress();
+
         }
     }
 }

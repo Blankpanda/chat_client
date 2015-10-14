@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Chat_Client.CommandStructure
 {
-    // TODO: write summary for commands
+    
     class RunCommand
     {
         public void init()
