@@ -196,9 +196,36 @@ namespace Chat_Client
 			return ServerCount;
 		}
 
-		internal ServerInit.ServerSettings GetServerByName()
+		public bool ServerExists(string ServerName)
 		{
-			throw new NotImplementedException();
+			// we need to add the Folder that Servers is contained in so we can check for equality.
+			ServerName = @"Servers\" + ServerName;
+
+			string[] Servers = GetServerList();
+
+			for (int i = 0; i <= Servers.Length; i++)
+				if (ServerName == Servers[i])
+					return true;    // the user entry and a entry in the server list matched
+
+
+			return false;          // the user entry and a entry in the server list didnt match
+
+		}
+
+		internal ServerInit.ServerSettings GetServerByName(string ServerName)
+		{
+			string[] Servers = GetServerList();
+			
+			// search the server list for the inputed name.
+			// this should always work as long as ServerExists() is used before to check if it has a valid name
+
+			string ServerPath = ""; // we need to extract the path from Servers[]
+			for (int i = 0; i < Servers.Length; i++)
+			{
+				
+			}
+				
+			
 		}
 	}
 }

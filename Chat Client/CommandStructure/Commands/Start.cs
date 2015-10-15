@@ -6,43 +6,49 @@ using System.Threading.Tasks;
 
 namespace Chat_Client.CommandStructure.Commands
 {
-    /// <summary>
-    /// starts a supplied server from name.
-    /// </summary>
-    class Start
-    {
+	/// <summary>
+	/// starts a supplied server from name.
+	/// </summary>
+	class Start
+	{
 
-        private string _Name = "Start";
-        private string _Desc = "Starts a server by name";
-        public string Name
-        {
-            get { return _Name; }
-            set { Name = _Name; }
-        }
+		private string _Name = "Start";
+		private string _Desc = "Starts a server by name";
+		public string Name
+		{
+			get { return _Name; }
+			set { Name = _Name; }
+		}
 
-        public string Description
-        {
-            get { return _Desc; }
-            set { Description = _Desc; }
-        }
-
-
-        public static void Execute()
-        {
-            Console.WriteLine("Enter the server by name that you would like to start.");
-            string ServerName =
-                Console.ReadLine();
+		public string Description
+		{
+			get { return _Desc; }
+			set { Description = _Desc; }
+		}
 
 
-            ServerList InitalizeSettings = new ServerList();
+		public static void Execute()
+		{
+			Console.WriteLine("Enter the server by name that you would like to start.");
+			string ServerName =
+				Console.ReadLine();
 
-            // TODO: retireve the server configuration by name and store it in a ServerSettings struct.
-            ServerInit.ServerSettings Settings = InitalizeSettings.GetServerByName();
 
-            Server Server = new Server(Settings);
+			ServerList InitalizeSettings = new ServerList();
 
+			// TODO: retireve the server configuration by name and store it in a ServerSettings struct.
 
-            Server.Start();
-        }
-    }
+			if (InitalizeSettings.ServerExists(ServerName))
+			{
+				ServerInit.ServerSettings Settings = InitalizeSettings.GetServerByName();
+				Server Server = new Server(Settings)
+				Server.Start();
+			}
+			else
+			{
+				Console.WriteLine("Invalid server name supplied.");
+			}   
+			
+		}
+	}
 }
