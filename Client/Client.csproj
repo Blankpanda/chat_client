@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F4FC6765-BAFC-4ACD-A61C-29A0BFA6998D}</ProjectGuid>
+    <ProjectGuid>{12E013B4-1C8C-4245-A3FF-B98757D3C08F}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Chat_Client</RootNamespace>
-    <AssemblyName>Chat Client</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <RootNamespace>Client</RootNamespace>
+    <AssemblyName>Client</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -42,28 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client\Client.cs" />
-    <Compile Include="CommandStructure\CommandList.cs" />
-    <Compile Include="CommandStructure\Commands\Clear.cs" />
-    <Compile Include="CommandStructure\Commands\Exit.cs" />
-    <Compile Include="CommandStructure\Commands\Help.cs" />
-    <Compile Include="CommandStructure\RunCommand.cs" />
-    <Compile Include="CommandStructure\Commands\Create.cs" />
-    <Compile Include="CommandStructure\Commands\Delete.cs" />
-    <Compile Include="CommandStructure\Commands\Ping.cs" />
-    <Compile Include="CommandStructure\Commands\SList.cs" />
-    <Compile Include="CommandStructure\Commands\Start.cs" />
-    <Compile Include="Net.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Server\Server.cs" />
-    <Compile Include="Server\ServerInit.cs" />
-    <Compile Include="Server\ServerList.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
