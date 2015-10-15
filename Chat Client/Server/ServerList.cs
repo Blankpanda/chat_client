@@ -195,5 +195,10 @@ namespace Chat_Client
 			ServerCount = Directory.GetDirectories(ServerDirectory, "*").Length;
 			return ServerCount;
 		}
+
+		internal ServerInit.ServerSettings GetServerByName()
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

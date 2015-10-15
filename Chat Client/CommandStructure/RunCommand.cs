@@ -9,9 +9,9 @@ namespace Chat_Client.CommandStructure
     
     class RunCommand
     {
-        public void init()
+        public void Prompt(string prompt)
         {
-            Console.Write(">");
+            Console.Write(prompt);
         }
        
         
@@ -40,7 +40,7 @@ namespace Chat_Client.CommandStructure
                     
                 
 
-            if (err != CommandList.Count - 1  || string.IsNullOrEmpty(command)) // we already cover string.Empty above
+            if (err > CommandList.Count - 1   || string.IsNullOrEmpty(command)) // we already cover string.Empty above
                 Console.WriteLine("Invalid Command.  type 'Help' for a list of commands.");
 
 

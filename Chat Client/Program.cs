@@ -16,7 +16,7 @@ namespace Chat_Client
             CommandStructure.RunCommand CommandRun = new CommandStructure.RunCommand();
 
             // initalizes the prompt
-            CommandRun.init();
+            CommandRun.Prompt(">");
 
             while (true)
             {              
@@ -30,7 +30,7 @@ namespace Chat_Client
                 else
                 {
                     CommandRun.Run(request);
-                    CommandRun.init(); // restore the prompt
+                    CommandRun.Prompt(">"); // restore the prompt
                 }
 
             }

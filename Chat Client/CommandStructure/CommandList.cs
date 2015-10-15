@@ -26,13 +26,13 @@ namespace Chat_Client.CommandStructure
 
         // create a list of commands               
         public  List<string> GetCommands()
-        {
-            List<string> commands = new List<string>();
-            for (int i = 0; i < NUMBER_OF_COMMANDS; i++)
-                commands.Add(Enum.GetName(typeof(Commands), i));
-            return commands;
-            
-        }
+         {
+             List<string> commands = new List<string>();
+             for (int i = 0; i < NUMBER_OF_COMMANDS; i++)
+             commands.Add(Enum.GetName(typeof(Commands), i));
+             return commands;
+
+         }
 
     }
 }

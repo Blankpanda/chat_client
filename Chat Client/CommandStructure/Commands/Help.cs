@@ -65,6 +65,7 @@ namespace Chat_Client.CommandStructure.Commands
             foreach (string command in HelpDisplay)
                 Console.WriteLine(command);
 
+            HelpDisplay.Clear(); // static list.
         }
     }
 }

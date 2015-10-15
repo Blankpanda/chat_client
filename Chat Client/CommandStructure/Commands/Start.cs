@@ -29,7 +29,20 @@ namespace Chat_Client.CommandStructure.Commands
 
         public static void Execute()
         {
+            Console.WriteLine("Enter the server by name that you would like to start.");
+            string ServerName =
+                Console.ReadLine();
 
+
+            ServerList InitalizeSettings = new ServerList();
+
+            // TODO: retireve the server configuration by name and store it in a ServerSettings struct.
+            ServerInit.ServerSettings Settings = InitalizeSettings.GetServerByName();
+
+            Server Server = new Server(Settings);
+
+
+            Server.Start();
         }
     }
 }

@@ -113,14 +113,23 @@ namespace Chat_Client
 			
 			while (true)
 			{
-				Console.WriteLine("Enter the port number for {0} ", settings.server_name);
+				Console.WriteLine("Enter the port number for {0}.  if nothing is supplied the port will default to 7777.", settings.server_name);
 				inInt = 0;
 				try
 				{
-					inInt = int.Parse(Console.ReadLine());
+					string inp = Console.ReadLine(); // so we can read the input as a string first instead of directly parsing Console.ReadLine().
+					if (inp == "")
+					{
+						settings.port_number = 7777;
+						break;
+					}
+					else
+					{
+						inInt = int.Parse(inp);
+						settings.port_number = inInt;
+						break;
 
-					settings.port_number = inInt;
-					break;
+					}
 					
 				}
 				catch (Exception)
@@ -153,7 +162,7 @@ namespace Chat_Client
 		}
 		
 		/* this method is used when the server starts to search and load settings to be passed to the Listen() method */
-		private static ServerSettings Init(string ServerName)
+		public static ServerSettings Init(string ServerName)
 		{
 			ServerList SL = new ServerList();
 			string[] ServerList = SL.GetServerList(); // list of all directory paths

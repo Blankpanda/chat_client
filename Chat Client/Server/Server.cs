@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
 
-namespace Chat_Client.Server
+namespace Chat_Client
 {
     /// <summary>
     /// Listens for connections and makes desicions based on that.
@@ -23,9 +23,14 @@ namespace Chat_Client.Server
         
 
         // this is used to organzie RunCommand.cs
-        public void Start(ServerInit.ServerSettings settings)
+        public void Start()
         {
+            CommandStructure.RunCommand command = new CommandStructure.RunCommand(); // change the prompt.
+            command.Prompt(settings.server_name + ">");
+
+
             Listen(settings);
+            
         }
 
         private void Listen(ServerInit.ServerSettings settings)
