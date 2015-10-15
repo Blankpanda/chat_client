@@ -40,7 +40,7 @@ namespace Chat_Client.CommandStructure
                     
                 
 
-            if (err > CommandList.Count - 1   || string.IsNullOrEmpty(command)) // we already cover string.Empty above
+            if (err == CommandList.Count && command != "") // we already cover string.Empty above
                 Console.WriteLine("Invalid Command.  type 'Help' for a list of commands.");
 
 

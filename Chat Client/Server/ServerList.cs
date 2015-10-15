@@ -203,7 +203,7 @@ namespace Chat_Client
 
 			string[] Servers = GetServerList();
 
-			for (int i = 0; i <= Servers.Length; i++)
+			for (int i = 0; i <= Servers.Length - 1; i++)
 				if (ServerName == Servers[i])
 					return true;    // the user entry and a entry in the server list matched
 
@@ -213,19 +213,9 @@ namespace Chat_Client
 		}
 
 		internal ServerInit.ServerSettings GetServerByName(string ServerName)
-		{
-			string[] Servers = GetServerList();
-			
-			// search the server list for the inputed name.
-			// this should always work as long as ServerExists() is used before to check if it has a valid name
-
-			string ServerPath = ""; // we need to extract the path from Servers[]
-			for (int i = 0; i < Servers.Length; i++)
-			{
-				
-			}
-				
-			
+		{         
+			// this should always work as long as ServerExists() is used before to check if it has a valid name			
+			return ServerInit.Init(ServerName);
 		}
 	}
 }

@@ -40,8 +40,9 @@ namespace Chat_Client.CommandStructure.Commands
 
 			if (InitalizeSettings.ServerExists(ServerName))
 			{
-				ServerInit.ServerSettings Settings = InitalizeSettings.GetServerByName();
-				Server Server = new Server(Settings)
+				ServerInit.ServerSettings Settings = InitalizeSettings.GetServerByName(ServerName);
+				Server Server = new Server(Settings);
+				Console.WriteLine(Settings.server_name + " starting.");
 				Server.Start();
 			}
 			else
