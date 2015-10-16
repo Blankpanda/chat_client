@@ -13,6 +13,7 @@ namespace Client
     {
         private int scount = 0;
 
+        // this is used to make sure that the entered address is correct.
         public int SuccessCount
         {
             get { return scount; }
@@ -74,6 +75,27 @@ namespace Client
             for (int i = 0; i < replies.Count; i++)            
                 if (replies[i] == IPStatus.Success)                
                     scount++;                           
+        }
+
+
+        /*Pings the entered address to see if the address is on the network.*/
+        public static bool CheckAddress(string addr)
+        {
+            Console.WriteLine("Checking address...");
+        
+
+            (addr); // ping the supplied address to track replies.
+
+            if (scount >= 1)
+            {
+                Console.WriteLine("Address found.");
+                return true;
+            }
+            else
+                Console.WriteLine("Address was not found.");
+
+
+            return false;
         }
     }
 }

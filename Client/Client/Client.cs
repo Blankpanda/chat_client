@@ -11,12 +11,15 @@ namespace Client.Client
 {
     class Client
     {
-        Entry.ClientRequestInfo settings;
-     public Client(Entry.ClientRequestInfo userSettings)
-     {
+        public Entry.ClientRequestInfo settings; /* settings for the user to pass in*/
+
+        /* constructor requires the user to enter in a strucutre with settings.*/
+        public Client(Entry.ClientRequestInfo userSettings)
+        {
          settings = userSettings;
-     }
+        }
      
+        /*template... */
         public static void Start()
         {
             byte[] buffer = new byte[1024];

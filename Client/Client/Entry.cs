@@ -52,7 +52,7 @@ namespace Client.Client
 
                 if (Net.IsPrivateAddress(inAddr))
                 {
-                    if (CheckAddress(inAddr))
+                    if (Net.CheckAddress(inAddr))
                     {
                         break;
                     }
@@ -113,24 +113,6 @@ namespace Client.Client
 
         //}
 
-        /*Pings the entered address to see if the address is on the network.*/
-        private bool CheckAddress(string addr)
-        {
-            Console.WriteLine("Checking address...");
-            Net Pinger = new Net();
-
-            Pinger.PingAddress(addr); // ping the supplied address to track replies.
-
-            if (Pinger.SuccessCount >= 1)
-            {
-                Console.WriteLine("Address found.");
-                return true;
-            }
-            else            
-                Console.WriteLine("Address was not found.");              
-            
-
-                return false;
-        }
+       
     }
 }
