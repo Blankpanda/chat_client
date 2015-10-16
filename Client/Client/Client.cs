@@ -43,7 +43,7 @@ namespace Client.Client
 
                     int bytesRec = sender.Receive(buffer);
 
-                    Console.WriteLine("arko = " + Encoding.ASCII.GetString(buffer, 0, bytesRec));
+                    Console.WriteLine("echo = " + Encoding.ASCII.GetString(buffer, 0, bytesRec));
 
                     buffer = new byte[1024];
                     sender.Shutdown(SocketShutdown.Both);

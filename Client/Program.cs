@@ -12,9 +12,10 @@ namespace Client
     {
         static void Main(string[] args)
         {
+            /*Obtains server information from the user. */
             Client.Entry UserEntry = new Client.Entry();
-
             UserEntry.FindServer();
+            
   
         }
     }

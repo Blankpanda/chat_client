@@ -7,10 +7,18 @@ using System.Net;
 using System.Net.NetworkInformation;
 namespace Client
 {
-    /* THIS CLASS IS A COPY OF A CLASS IN THE SERVER PROJECT. */
+    /* THIS CLASS IS A COPY OF A CLASS IN THE SERVER PROJECT. 
+        with some modifications. */
     class Net
     {
+        private int scount = 0;
 
+        public int SuccessCount
+        {
+            get { return scount; }
+            set { scount = SuccessCount; }
+        }
+        
         
         public static bool IsPrivateAddress(string address)
         {
@@ -33,16 +41,17 @@ namespace Client
             return true;
         }
 
-        public void PingAddress()
+
+        /* Ping an entered address */
+        public void PingAddress(string addr)
         {
-            Console.WriteLine("Enter in an address to ping.");
-            string addr = Console.ReadLine();
+            List<IPStatus> replies = new List<IPStatus>();
 
             int count = 0;
 
-            while (count <= 4)
+            // send 4 pings
+            while (count < 4)
             {
-
                 // used to construct a 32 byte message 
                 string data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
                 byte[] buffer = Encoding.ASCII.GetBytes(data);
@@ -55,17 +64,16 @@ namespace Client
                 // send the ping
                 PingReply Reply = Pinger.Send(addr, timeout, buffer, PingSettings);
 
-                // output the statistics of the reply to the console window.
-
-                Console.Write("Ping #1: Reply from "
-                               + Reply.Address + " size:"
-                               + Reply.Buffer.Length.ToString() + " time:" +
-                                Reply.RoundtripTime.ToString() + " status:" +
-                                Reply.Status.ToString());
-                Console.WriteLine();
+                replies.Add(Reply.Status);
 
                 ++count;
             }
+
+
+            // tracks the ammount of successful replies
+            for (int i = 0; i < replies.Count; i++)            
+                if (replies[i] == IPStatus.Success)                
+                    scount++;                           
         }
     }
 }

@@ -46,22 +46,31 @@ namespace Client.Client
             string inAddr = "";
             while (true)
             {
-                Console.WriteLine("Enter in the Ip address of the server: ");
+                Console.WriteLine("Enter in the IP address of the server: ");
                 inAddr = Console.ReadLine();
                 inAddr = inAddr.Trim();
 
                 if (Net.IsPrivateAddress(inAddr))
-                    break;
+                {
+                    if (CheckAddress(inAddr))
+                    {
+                        break;
+                    }
+                }                    
                 else
                 {
                     Console.WriteLine("Invalid entry. format: X.X.X.X");
                     continue;
-                }                
-            }
+                }
 
-            
+            }
             return inAddr;
         }
+
+         
+            
+         
+        
 
 
         /* Gets the desired port from the user. 7777 by default. */
@@ -103,5 +112,25 @@ namespace Client.Client
         //{
 
         //}
+
+        /*Pings the entered address to see if the address is on the network.*/
+        private bool CheckAddress(string addr)
+        {
+            Console.WriteLine("Checking address...");
+            Net Pinger = new Net();
+
+            Pinger.PingAddress(addr); // ping the supplied address to track replies.
+
+            if (Pinger.SuccessCount >= 1)
+            {
+                Console.WriteLine("Address found.");
+                return true;
+            }
+            else            
+                Console.WriteLine("Address was not found.");              
+            
+
+                return false;
+        }
     }
 }
