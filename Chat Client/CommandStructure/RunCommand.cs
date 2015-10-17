@@ -62,6 +62,9 @@ namespace Chat_Client.CommandStructure
                 case "HELP":
                     Commands.Help.Execute();
                     break;
+                case "?":
+                    Commands.Help.Execute();
+                    break;
                 case "PING":
                     Commands.Ping.Execute();
                     break;

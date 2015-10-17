@@ -14,8 +14,12 @@ namespace Client
         {
             /*Obtains server information from the user. */
             Client.Entry UserEntry = new Client.Entry();
-            UserEntry.FindServer();
-            
+            Client.Entry.ClientRequestInfo settings = UserEntry.FindServer();
+
+            /*load settings and starts the server*/
+            Client.Client client = new Client.Client(settings);
+            client.Start();
+
   
         }
     }

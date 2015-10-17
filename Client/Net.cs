@@ -11,7 +11,7 @@ namespace Client
         with some modifications. */
     class Net
     {
-        private int scount = 0;
+        private static int scount = 0;
 
         // this is used to make sure that the entered address is correct.
         public int SuccessCount
@@ -82,9 +82,10 @@ namespace Client
         public static bool CheckAddress(string addr)
         {
             Console.WriteLine("Checking address...");
-        
 
-            (addr); // ping the supplied address to track replies.
+            Net pinger = new Net();
+
+            pinger.PingAddress(addr); // ping the supplied address.
 
             if (scount >= 1)
             {
@@ -93,7 +94,6 @@ namespace Client
             }
             else
                 Console.WriteLine("Address was not found.");
-
 
             return false;
         }

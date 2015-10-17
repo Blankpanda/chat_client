@@ -16,20 +16,20 @@ namespace Client.Client
         /* constructor requires the user to enter in a strucutre with settings.*/
         public Client(Entry.ClientRequestInfo userSettings)
         {
-         settings = userSettings;
+            settings = userSettings;
         }
      
         /*template... */
-        public static void Start()
+        public void Start()
         {
             byte[] buffer = new byte[1024];
 
 
             try
             {
-                IPHostEntry ipHostInfo = Dns.Resolve(Dns.GetHostName());
-                IPAddress ip = ipHostInfo.AddressList[1];
-                IPEndPoint remoteEP = new IPEndPoint(ip, 7777);
+                
+                IPAddress ip = IPAddress.Parse(settings.ip_address);
+                IPEndPoint remoteEP = new IPEndPoint(ip, settings.port_number);
 
                 try
                 {

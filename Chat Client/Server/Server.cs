@@ -31,7 +31,7 @@ namespace Chat_Client
 
             CommandStructure.RunCommand command = new CommandStructure.RunCommand(); // change the prompt.
             Console.WriteLine();
-            command.Prompt(settings.server_name);
+            command.Prompt(settings.server_name + ">");
 
            Listen(settings);
         }

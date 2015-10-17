@@ -146,7 +146,7 @@ namespace Chat_Client
 
 			// TODO: iterate through the hosts address list to find the private address
 		   
-			settings.server_ip_address = host.AddressList[1].ToString();
+			settings.server_ip_address = host.AddressList[0].ToString();
 
 			Console.WriteLine(settings.server_name + " server created.");
 			CreateNewServer(settings);
@@ -213,9 +213,7 @@ namespace Chat_Client
 			settings.backlog            =  int.Parse( ConfigurationFile[3] );
 			settings.server_ip_address  = ConfigurationFile[4];
 			settings.port_number        =  int.Parse ( ConfigurationFile[5] );
-
-			Console.WriteLine(settings.server_name + settings.backlog + settings.server_ip_address + settings.port_number);
-
+		
 			return settings;
 		}       
 	}
