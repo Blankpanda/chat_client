@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 
 
-namespace Chat_Client
+namespace Chat_Client.Server
 {
 	/// <summary>
 	/// Used to maintain and add to a list of directories 
@@ -63,7 +63,8 @@ namespace Chat_Client
 			string ConfigPath = ServerDirectory + @"\" + settings.server_name + @"\";
 
 			ConfigPath = ConfigPath + TextFile;
-			WriteToTextFile(settings_content, ConfigPath);
+		
+		   	Logger.WriteToTextFile(settings_content, ConfigPath);
 
 			
 		}
@@ -98,67 +99,6 @@ namespace Chat_Client
 			
 		}
 
-		/* Writes to a Text File for the servers configuration. */
-
-		private void WriteToTextFile (List<string> content, string path)
-		{           
-			using ( StreamWriter writer = new StreamWriter(path) )
-			{
-				for (int i = 0; i < content.Count; i++)
-				{
-					writer.WriteLine(content[i]);
-				}
-			}
-		}
-
-
-		/* Reads a text file  and returns the output in a list or a string.*/
-
-		//  for List
-		public List<string> ReadTextFileList (string FileName)
-		{
-			List<string> elems = new List<string>();
-			using( StreamReader reader = new StreamReader(FileName))
-			{
-				if (File.Exists(FileName))
-				{
-				  while (reader.Peek() >= 0)
-				  {
-
-					  elems.Add(reader.ReadLine());
-
-				  }  
-				}
-				
-			}
-
-			return elems;
-		}
-
-		//  for string (string is appended with new line constant).
-		public string ReadTextFileString (string FileName)
-		{
-			StringBuilder sb = new StringBuilder();
-			
-			using (StreamReader reader = new StreamReader(FileName))
-			{
-				if (File.Exists(FileName))
-				{
-					while (reader.Peek() >= 0)
-					{
-
-						sb.Append(reader.ReadLine() + "\n");
-
-					}
-
-
-				}
-			}
-
-			string readFile = sb.ToString();
-
-			return readFile;
-		}
 
 		// returns the server list with their config files
 		public string[] GetServerList()

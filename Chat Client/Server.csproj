@@ -70,6 +70,8 @@
     <Compile Include="Net.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Server\Logger.cs" />
+    <Compile Include="Server\LogType.cs" />
     <Compile Include="Server\Server.cs" />
     <Compile Include="Server\ServerInit.cs" />
     <Compile Include="Server\ServerList.cs" />

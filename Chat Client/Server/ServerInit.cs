@@ -7,7 +7,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.IO;
 
-namespace Chat_Client
+namespace Chat_Client.Server
 {
 	class ServerInit 
 	{
@@ -204,7 +204,8 @@ namespace Chat_Client
 			}
 
 			// used when reading config file
-			List<string> ConfigurationFile = SL.ReadTextFileList(ConfigFilePath);
+			Logger FileReader = new Logger(LogType.Type.READER);
+			List<string> ConfigurationFile = FileReader.ReadTextFileList(ConfigFilePath);
 			ServerSettings settings = new ServerSettings();
 
 			//TODO: could I just iterate through this and add through the structure to make it less hacky?
