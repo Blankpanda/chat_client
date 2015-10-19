@@ -12,6 +12,8 @@ namespace Chat_Client
     {
         static void Main(string[] args)
         {
+
+            Server.TimeStamp.WriteTime();
             // handles command input
             CommandStructure.RunCommand CommandRun = new CommandStructure.RunCommand();
 

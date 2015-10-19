@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
 
-namespace Chat_Client
+namespace Chat_Client.Server
 {
     /// <summary>
     /// Listens for connections and makes desicions based on that.

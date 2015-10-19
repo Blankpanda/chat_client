@@ -34,16 +34,16 @@ namespace Chat_Client.CommandStructure.Commands
 				Console.ReadLine();
 
 
-			ServerList InitalizeSettings = new ServerList();
-
-			// TODO: retireve the server configuration by name and store it in a ServerSettings struct.
+			Server.ServerList InitalizeSettings = new Server.ServerList();
+			
 
 			if (InitalizeSettings.ServerExists(ServerName))
 			{
-				ServerInit.ServerSettings Settings = InitalizeSettings.GetServerByName(ServerName);
-				Server Server = new Server(Settings);
-				Console.WriteLine(Settings.server_name + " starting.");
-				Server.Start();
+				Server.ServerInit.ServerSettings Settings = InitalizeSettings.GetServerByName(ServerName); //   load in user settings.
+				Server.Server Server = new Server.Server(Settings);                                       //    create a new object with those server settings
+
+				Console.WriteLine(Settings.server_name + " starting.");                             
+				Server.Start();                                                                         //      start the server
 			}
 			else
 			{

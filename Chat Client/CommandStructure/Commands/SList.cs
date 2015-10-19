@@ -28,7 +28,7 @@ namespace Chat_Client.CommandStructure.Commands
 
         public static void Execute()
         {
-            ServerList srvList = new ServerList();
+            Server.ServerList srvList = new Server.ServerList();
 
             srvList.DisplayServerList();
         }

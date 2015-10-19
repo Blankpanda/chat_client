@@ -75,6 +75,7 @@
     <Compile Include="Server\Server.cs" />
     <Compile Include="Server\ServerInit.cs" />
     <Compile Include="Server\ServerList.cs" />
+    <Compile Include="Server\TimeStamp.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -38,7 +38,7 @@ namespace Chat_Client.CommandStructure.Commands
 
         public static void Execute()
         {
-            ServerInit InitalizeServer = new ServerInit();
+            Server.ServerInit InitalizeServer = new Server.ServerInit();
 
             InitalizeServer.Create();
         }
