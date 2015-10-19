@@ -1,0 +1,6 @@
+[10/19/2015 5:49:00 PM]Help command issued to console.
+[10/19/2015 5:50:12 PM]Help command issued to console.
+[10/19/2015 5:50:14 PM]Clear command issued to console.
+[10/19/2015 5:50:16 PM]Create command issued to console.
+[10/19/2015 5:50:23 PM]SList command issued to console.
+[10/19/2015 5:50:26 PM]Clear command issued to console.

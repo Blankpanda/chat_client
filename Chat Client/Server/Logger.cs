@@ -25,13 +25,13 @@ namespace Chat_Client.Server
             switch (Type)
             {
                 case LogType.Type.CHAT:     // Chat log.
-                    LogName = "chat_log.text";
+                    LogName = "chat_log.txt";
                     break;
                 case LogType.Type.EVENT:    // Event history.
-                    LogName = "event_log.text";
+                    LogName = "event_log.txt";
                     break;
                 case LogType.Type.HISTORY:  // Command history.
-                    LogName = "history_log.text";
+                    LogName = "history_log.txt";
                     break;
                 case LogType.Type.READER:   // were not doing anything special here. we just need to use this class for reading a text file.
                     server = "";
@@ -48,13 +48,13 @@ namespace Chat_Client.Server
             switch (Type)
             {
                 case LogType.Type.CHAT:     // Chat log.
-                    LogName = "chat_log.text";
+                    LogName = "chat_log.txt";
                     break;
                 case LogType.Type.EVENT:    // Event history.
-                    LogName = "event_log.text";
+                    LogName = "event_log.txt";
                     break;
                 case LogType.Type.HISTORY:  // command history.
-                    LogName = "history_log.text";
+                    LogName = "history_log.txt";
                     break;
                 case LogType.Type.READER:   // were not doing anything special here. we just need to use this class for reading a text file.                    
                     break;
@@ -67,7 +67,9 @@ namespace Chat_Client.Server
 
         public void Write(string s)
         {
-            string SrvDir = @"Servers\" + ServerName + LogName;  // example Servers\Caleb\chat_log.text
+            // adds a time stamp.
+            s = TimeStamp.WriteTime(s);
+            string SrvDir = ServerName + LogName;  // example Servers\Caleb\chat_log.text
             WriteToTextFile(s,SrvDir);
         }
 
@@ -86,9 +88,8 @@ namespace Chat_Client.Server
         }
         public static void WriteToTextFile(string content, string path)
         {
-            using (StreamWriter writer = new StreamWriter(path))            
-                   writer.WriteLine(content);                
-            
+            using (StreamWriter writer = File.AppendText(path))
+                writer.WriteLine(content);                            
         }
 
         /* Reads a text file  and returns the output in a list or a string.*/

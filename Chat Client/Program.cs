@@ -12,8 +12,9 @@ namespace Chat_Client
     {
         static void Main(string[] args)
         {
+            Server.Logger EventLogger = new Server.Logger(Server.LogType.Type.EVENT);
+            EventLogger.Write("Program Started.");
 
-            Server.TimeStamp.WriteTime();
             // handles command input
             CommandStructure.RunCommand CommandRun = new CommandStructure.RunCommand();
 
@@ -27,6 +28,7 @@ namespace Chat_Client
 
                 if (request.ToUpper() == "EXIT")
                 {
+                    EventLogger.Write("Program Exited.");
                     break;
                 }
                 else

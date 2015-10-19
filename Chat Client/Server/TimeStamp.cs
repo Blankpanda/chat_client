@@ -10,9 +10,11 @@ namespace Chat_Client.Server
     class TimeStamp
     {
         // appends a time stamp to an inputed string
-        public static void WriteTime()
+        public static string WriteTime(string s)
         {
-            Console.WriteLine(DateTime.Now);
+            
+            string stamp = "[" + DateTime.Now.ToString() + "]";            
+            return stamp + s;
         }
     }
 }
