@@ -31,39 +31,47 @@ namespace Chat_Client
             return true;
         }
 
-
+        // TODO: data validation 
         public void PingAddress()
         {
             Console.WriteLine("Enter in an address to ping.");
             string addr = Console.ReadLine();
 
+            
             int count = 0;
 
-            while (count <= 4)
+            if (IsPrivateAddress(addr))
             {
+                while (count <= 4)
+                {
 
-                // used to construct a 32 byte message 
-                string data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-                byte[] buffer = Encoding.ASCII.GetBytes(data);
-                int timeout = 120;
+                    // used to construct a 32 byte message 
+                    string data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+                    byte[] buffer = Encoding.ASCII.GetBytes(data);
+                    int timeout = 120;
 
-                // intalize the ping object with ttl and no fragment options
-                PingOptions PingSettings = new PingOptions(53, true);
-                Ping Pinger = new Ping();
+                    // intalize the ping object with ttl and no fragment options
+                    PingOptions PingSettings = new PingOptions(53, true);
+                    Ping Pinger = new Ping();
 
-                // send the ping
-                PingReply Reply = Pinger.Send(addr, timeout, buffer, PingSettings);
+                    // send the ping
+                    PingReply Reply = Pinger.Send(addr, timeout, buffer, PingSettings);
 
-                // output the statistics of the reply to the console window.
+                    // output the statistics of the reply to the console window.
 
-                Console.Write("Ping #1: Reply from " 
-                               + Reply.Address + " size:" 
-                               + Reply.Buffer.Length.ToString() + " time:" +
+                    Console.Write("Ping #1: Reply from "
+                                + Reply.Address + " size:"
+                                + Reply.Buffer.Length.ToString() + " time:" +
                                 Reply.RoundtripTime.ToString() + " status:" +
                                 Reply.Status.ToString());
-                Console.WriteLine();
+                    Console.WriteLine();
 
-                ++count;
+                    ++count;
+                }
+            }
+            else
+            {
+                Console.WriteLine("The entered address is not an IP address.");
             }
             
         }
@@ -74,31 +82,38 @@ namespace Chat_Client
         {
             int count = 0;
 
-            while (count <= 4)
+            if (IsPrivateAddress(addr))
             {
+                while (count <= 4)
+                {
 
-                // used to construct a 32 byte message 
-                string data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-                byte[] buffer = Encoding.ASCII.GetBytes(data);
-                int timeout = 120;
+                    // used to construct a 32 byte message 
+                    string data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+                    byte[] buffer = Encoding.ASCII.GetBytes(data);
+                    int timeout = 120;
 
-                // intalize the ping object with ttl and no fragment options
-                PingOptions PingSettings = new PingOptions(53, true);
-                Ping Pinger = new Ping();
+                    // intalize the ping object with ttl and no fragment options
+                    PingOptions PingSettings = new PingOptions(53, true);
+                    Ping Pinger = new Ping();
 
-                // send the ping
-                PingReply Reply = Pinger.Send(addr, timeout, buffer, PingSettings);
+                    // send the ping
+                    PingReply Reply = Pinger.Send(addr, timeout, buffer, PingSettings);
 
-                // output the statistics of the reply to the console window.
+                    // output the statistics of the reply to the console window.
 
-                Console.Write("Ping #1: Reply from "
-                               + Reply.Address + " size:"
-                               + Reply.Buffer.Length.ToString() + " time:" +
-                                Reply.RoundtripTime.ToString() + " status:" +
-                                Reply.Status.ToString());
-                Console.WriteLine();
+                    Console.Write("Ping #1: Reply from "
+                                   + Reply.Address + " size:"
+                                   + Reply.Buffer.Length.ToString() + " time:" +
+                                    Reply.RoundtripTime.ToString() + " status:" +
+                                    Reply.Status.ToString());
+                    Console.WriteLine();
 
-                ++count;
+                    ++count;
+                }
+            }
+            else
+            {
+                Console.WriteLine("The entered address is not an IP address.");
             }
 
         }

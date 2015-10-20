@@ -73,13 +73,7 @@ namespace Chat_Client.CommandStructure
 
                     Commands.Help.Execute();
                     break;
-
-                case "?":
-                    CommandHistoryLog.Write("Help command issued to console.");
-
-                    Commands.Help.Execute();
-                    break;
-                    
+      
                 case "PING":
                     CommandHistoryLog.Write("Ping command issued to console.");
 
@@ -148,65 +142,24 @@ namespace Chat_Client.CommandStructure
 
             // Execute a correct command
             switch (command)
-            {
-                case "CLEAR":
-                    CommandHistoryLog.Write("Clear command issued to console.");
-
-                    Commands.Clear.Execute();
-                    break;
-
-                case "CREATE":
-                    CommandHistoryLog.Write("Create command issued to console.");
-
-                    Commands.Create.Execute();
-                    break;
-
+            {           
                 case "DELETE":
                     CommandHistoryLog.Write("Delete command issued to console.");
 
                     Commands.Delete.Execute(argument);
-                    break;
-
-                case "Exit":
-                    CommandHistoryLog.Write("Exit command issued to console.");
-
-                    Commands.Delete.Execute();
-                    break;
-
-                case "HELP":
-                    CommandHistoryLog.Write("Help command issued to console.");
-
-                    Commands.Help.Execute();
-                    break;
-
-                case "?":
-                    CommandHistoryLog.Write("Help command issued to console.");
-
-                    Commands.Help.Execute();
-                    break;
-
+                    break;            
                 case "PING":
                     CommandHistoryLog.Write("Ping command issued to console.");
 
                     Commands.Ping.Execute(argument);
                     break;
-
-                case "SLIST":
-                    CommandHistoryLog.Write("SList command issued to console.");
-
-                    Commands.SList.Execute();
-                    break;
-
-                case "LS":
-                    CommandHistoryLog.Write("SList command issued to console.");
-
-                    Commands.SList.Execute();
-                    break;
-
                 case "START":
                     CommandHistoryLog.Write("SList command issued to console.");
 
                     Commands.Start.Execute(argument);
+                    break;
+                default:
+                    Console.WriteLine("The " + command + " doesn't allow for arguments.");
                     break;
 
             }

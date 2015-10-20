@@ -26,6 +26,7 @@ namespace Chat_Client
             {              
                 string request =
                  Console.ReadLine();
+                request = request.Trim();
 
                 string[] arguments = request.Split(' ');
 
