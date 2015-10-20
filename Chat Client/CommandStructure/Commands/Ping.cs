@@ -34,5 +34,13 @@ namespace Chat_Client.CommandStructure.Commands
             pinger.PingAddress();
 
         }
+        public static void Execute(string addr)
+        {
+
+            Net pinger = new Net();
+
+            pinger.PingAddress(addr);
+
+        }
     }
 }

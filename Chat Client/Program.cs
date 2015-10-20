@@ -21,10 +21,13 @@ namespace Chat_Client
             // initalizes the prompt
             CommandRun.Prompt(">");
 
+            // REEPL
             while (true)
             {              
                 string request =
                  Console.ReadLine();
+
+                string[] arguments = request.Split(' ');
 
                 if (request.ToUpper() == "EXIT")
                 {
@@ -33,8 +36,14 @@ namespace Chat_Client
                 }
                 else
                 {
-                    CommandRun.Run(request);
+                    if (arguments.Length > 1 )                    
+                        CommandRun.Run(arguments);                    
+                    else                                        
+                        CommandRun.Run(request);
+
+
                     CommandRun.Prompt(">"); // restore the prompt
+
                 }
 
             }

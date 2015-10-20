@@ -64,7 +64,7 @@ namespace Chat_Client.Server
 
 			ConfigPath = ConfigPath + TextFile;
 		
-		   	Logger.WriteToTextFile(settings_content, ConfigPath);
+			Logger.WriteToTextFile(settings_content, ConfigPath);
 
 			
 		}
@@ -97,6 +97,32 @@ namespace Chat_Client.Server
 			
 			
 			
+		}
+
+		public void Delete(string name)
+		{
+			name = name.ToLower();
+
+			string path = @"Servers\" + name;
+			string[] srvs = GetServerList();
+
+			bool exists = false; // I dont really want to do this.
+
+			for (int i = 0; i < srvs.Length; i++)
+				if (path == srvs[i])
+					exists = true;
+
+
+			if (exists)
+			{
+				Directory.Delete(path, true);
+				Console.WriteLine(path + " server deleted.");
+			}
+			else
+				Console.WriteLine("Sever doesn't exist. type 'SList' to display the lists of servers");
+
+
+
 		}
 
 

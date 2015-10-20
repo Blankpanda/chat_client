@@ -17,7 +17,7 @@ namespace Chat_Client.CommandStructure
             HELP     ,           
             PING     ,
             SLIST    ,
-            START    
+            START                
         }
          int NUMBER_OF_COMMANDS = Enum.GetValues(typeof(Commands)).Length;
 

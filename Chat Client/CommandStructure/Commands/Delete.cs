@@ -36,5 +36,12 @@ namespace Chat_Client.CommandStructure.Commands
             Slist.Delete();
 
         }
+        public static void Execute(string ServerName)
+        {
+            Server.ServerList Slist = new Server.ServerList();
+
+            Slist.Delete(ServerName);
+
+        }
     }
 }
