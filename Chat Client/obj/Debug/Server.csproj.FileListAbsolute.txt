@@ -9,5 +9,3 @@ C:\Users\CalebsComp\Documents\chat\Chat Client\obj\Debug\Chat Client.exe
 C:\Users\CalebsComp\Documents\chat\Chat Client\obj\Debug\Chat Client.pdb
 C:\Users\CalebsComp\Documents\chat\Chat Client\bin\Debug\Chat Client.exe
 C:\Users\CalebsComp\Documents\chat\Chat Client\bin\Debug\Chat Client.pdb
-C:\Users\CalebsComp\Documents\chat\Chat Client\bin\Debug\Chat Client.exe.CodeAnalysisLog.xml
-C:\Users\CalebsComp\Documents\chat\Chat Client\bin\Debug\Chat Client.exe.lastcodeanalysissucceeded

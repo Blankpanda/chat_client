@@ -192,3 +192,4 @@
 [10/21/2015 4:41:23 PM]Clear command issued to console.
 [10/21/2015 4:41:33 PM]Clear command issued to console.
 [10/21/2015 4:41:44 PM]SList command issued to console.
+[10/21/2015 4:53:00 PM]Help command issued to console.

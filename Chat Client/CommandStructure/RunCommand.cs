@@ -122,13 +122,13 @@ namespace Chat_Client.CommandStructure
 
             /* error checking */
 
-            // To many arguments
+            // Too Many Arguments.
             if (args.Length > 2)
                 Console.WriteLine("Invlaid number of Arugments supplied for " + command + ".");
                 
             
 
-            // Invalid Command
+            // Invalid Command.
             int err = 0;
             for (int i = 0; i < CommandList.Count; i++)
                 if (command != CommandList[i])
@@ -138,6 +138,13 @@ namespace Chat_Client.CommandStructure
             // The command doesn't exist.
             if (err == CommandList.Count && command != "")
                 Console.WriteLine("Invalid Command.  type 'Help' for a list of commands.");
+
+
+            // The List of all of the commands without arguments
+            List<string> NoArgsCommands = CList.GetCommands();
+            NoArgsCommands.Remove("DELETE");
+            NoArgsCommands.Remove("PING");
+            NoArgsCommands.Remove("START");
 
 
             // Execute a correct command
@@ -159,7 +166,11 @@ namespace Chat_Client.CommandStructure
                     Commands.Start.Execute(argument);
                     break;
                 default:
-                    Console.WriteLine("The " + command + " doesn't allow for arguments.");
+
+                    for (int i = 0;  i < NoArgsCommands.Count;  i++)                    
+                        if (command == NoArgsCommands[i])                        
+                            Console.WriteLine("The " + command + " command doesn't allow for arguments.");                                         
+                    
                     break;
 
             }
