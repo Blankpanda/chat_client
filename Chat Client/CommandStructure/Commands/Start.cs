@@ -35,41 +35,48 @@ namespace Chat_Client.CommandStructure.Commands
 
 			if (ServerList.Length > 0) // does a server exist?
 			{
+				// Remove @"Servers\" from the strings in the server list.
+				// HACK: consider adding to this ServerList.GetServerList(); 
+				for (int i = 0; i < ServerList.Length; i++)
+					ServerList[i] = ServerList[i].Replace(@"Servers\", "");
+					
+				
+
 
 				// Display the server information and ask the user what server they would like to start.
-				Console.WriteLine("What server would you like to start?");
+				Console.WriteLine("What server would you like to start (Enter in the number or name)?");
 				for (int i = 0; i < ServerList.Length; i++)
-					Console.WriteLine(i.ToString() + "). " + ServerList[i]);
+				{
+					int ServerIndex = i + 1;
+					Console.WriteLine(ServerIndex.ToString() + "). " + ServerList[i]);
+				}
+				Console.WriteLine("------"); // gives the user some space
 				string ServerName =
 					   Console.ReadLine();
 
 				ServerName = ServerName.ToUpper();
 
-				Server.Logger EventLogger = new Server.Logger(Server.LogType.Type.EVENT, ServerName); // Set up loggers.
-
+				
 
 				for (int i = 0; i < ServerList.Length; i++)
 				{
-					if (ServerName == i.ToString() || ServerName == ServerList[i].ToUpper())  // the user can enter the name or a number
+					int ServerCount = i + 1;
+					if (ServerName == ServerCount.ToString()|| ServerName == ServerList[i].ToUpper())  // the user can enter the name or a number
 					{
-						if (InitalizeSettings.ServerExists(ServerName))
-						{
-							Server.ServerInit.ServerSettings Settings = InitalizeSettings.GetServerByName(ServerName); //   load in user settings.               
-							Server.Server srv = new Server.Server(Settings);                                       //    create a new object with those server settings
+						ServerName = ServerList[i]; // if the user enters a number we need to make the input a string of the servers name.
+						ServerName = ServerName.Replace(@"Servers\", "");
 
+						Server.ServerInit.ServerSettings Settings = InitalizeSettings.GetServerByName(ServerName); //   load in user settings.               
+						Server.Server srv = new Server.Server(Settings);                                       //    create a new object with those server settings
+				
+						Console.WriteLine(Settings.server_name + " starting.");
+				
+						srv.Start();     // start the server
 
-							EventLogger.Write(ServerName + " settings are loaded.");
-
-							Console.WriteLine(Settings.server_name + " starting.");
-							EventLogger.Write(Settings.server_name + " started.");
-							srv.Start();     // start the server
-
-						}
-						else
-						{
-							Console.WriteLine("Invalid server name supplied.");
-							EventLogger.Write(ServerName + "is an invalid name.  Server was not found.");
-						}
+					}
+					else
+					{
+						Console.WriteLine("Invalid server name supplied.");						
 					}
 				} 
 			}

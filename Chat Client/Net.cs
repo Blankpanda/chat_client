@@ -30,8 +30,7 @@ namespace Chat_Client
 
             return true;
         }
-
-        // TODO: data validation 
+        
         public void PingAddress()
         {
             Console.WriteLine("Enter in an address to ping.");
