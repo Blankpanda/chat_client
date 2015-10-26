@@ -98,9 +98,9 @@ namespace Client
             return false;
         }
 
-        internal static string GetHostIpAddress()
+         public static string GetHostIpAddress()
         {
-            IPHostEntry host = new IPHostEntry();
+            IPHostEntry host = Dns.Resolve(Dns.GetHostName());
             return host.AddressList[0].ToString();
         }
     }

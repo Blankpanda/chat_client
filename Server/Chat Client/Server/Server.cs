@@ -16,6 +16,8 @@ namespace Chat_Client.Server
        
         private ServerInit.ServerSettings settings;
         public static string data = null;
+        
+    
 
         public Server(ServerInit.ServerSettings ServerConfiguration)
         {
@@ -60,27 +62,16 @@ namespace Chat_Client.Server
 
                     // another socket handles the data that was returned
                     Socket handler = listener.Accept();
-
-                    while (true)
-                    {
-                        buffer = new byte[1024];
-                        int bytesRc = handler.Receive(buffer);
-
-                        data += Encoding.ASCII.GetString(buffer, 0, bytesRc);
-                        if (data.IndexOf("<EOF>") > - 1)
-                        {
-                            break;
-                        }
-                    }
+                    
+                    data = ProcessData(buffer, handler);
+                    
 
                     Console.WriteLine(data);
 
                     // send it back!
                     byte[] msg = Encoding.ASCII.GetBytes(data);
 
-                    handler.Send(msg);
                     handler.Shutdown(SocketShutdown.Both);
-                    handler.Close();
                 }
             }
             catch (Exception)
@@ -89,6 +80,24 @@ namespace Chat_Client.Server
                 throw;
             }
 
+        }
+
+        // reads incoming bytes from a a scoekt
+        private string ProcessData(byte[] buffer, Socket handler)
+        {
+            string inData = "";
+            while (true)
+            {
+                buffer = new byte[1024];
+                int bytesRc = handler.Receive(buffer);               
+
+                inData += Encoding.ASCII.GetString(buffer, 0, bytesRc);
+                if (inData.IndexOf("<EOF>") > -1)
+                {
+                    break;
+                }               
+            }
+            return inData;
         }
     }
 }

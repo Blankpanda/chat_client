@@ -22,8 +22,8 @@ namespace Client.Client
         /*template... */
         public void Start()
         {
-            byte[] buffer = new byte[1024]; // used as a general buffer.
-            
+          //  byte[] buffer = new byte[1024]; // used as a general buffer.
+
 
             try
             {
@@ -33,26 +33,31 @@ namespace Client.Client
 
                 try
                 {
+                
                     // socket used to send information
-                    Socket sender = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                   Socket sender = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
-                    sender.Connect(remoteEP);
-                  
-                    // intially we want to send a message to the server telling what IP is connecting to it
-                    string hostIpAddress = Net.GetHostIpAddress();
+                   // intially we want to send a message to the server telling what IP is connecting to it
+                   sender.Connect(remoteEP);
+                   string hostIpAddress = Net.GetHostIpAddress();
+                   byte[] msg = Encoding.ASCII.GetBytes(hostIpAddress + " connected. " + "<EOF>");
+                   int sent = sender.Send(msg);
+                 
 
-                    byte[] msg = Encoding.ASCII.GetBytes(hostIpAddress);
-                    int sent = sender.Send(msg);
-                    int bytesRec = sender.Receive(buffer);
+                   // Begin Chat.
+                   while (true)
+                   {
 
-                    Console.WriteLine("echo = " + Encoding.ASCII.GetString(buffer, 0, bytesRec));
+                       Chat client = new Chat();
+                       string ChatMessage = "";
 
-                    buffer = new byte[1024];
-                    sender.Shutdown(SocketShutdown.Both);
-                    sender.Close();
+                       ChatMessage = client.GetMessageFromStream();
+                       byte[] message = Encoding.ASCII.GetBytes(ChatMessage + "<EOF>");
 
+                       sent = sender.Send(message);
 
-
+                       sender.Shutdown(SocketShutdown.Both);
+                   }
 
                 }
                 catch (Exception)
