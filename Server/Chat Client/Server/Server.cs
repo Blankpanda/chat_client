@@ -56,23 +56,24 @@ namespace Chat_Client.Server
                 listener.Bind(localEndPoint);
                 listener.Listen(settings.backlog);
 
+                // another socket handles the data that was returned
+                Socket handler = listener.Accept();
+                    
                 while (true)
                 {
                     Console.WriteLine("Server is listening.");
 
-                    // another socket handles the data that was returned
-                    Socket handler = listener.Accept();
-                    
                     data = ProcessData(buffer, handler);
                     
 
                     Console.WriteLine(data);
 
                     // send it back!
-                    byte[] msg = Encoding.ASCII.GetBytes(data);
+                    // byte[] msg = Encoding.ASCII.GetBytes(data);
 
-                    handler.Shutdown(SocketShutdown.Both);
                 }
+
+                handler.Shutdown(SocketShutdown.Both);
             }
             catch (Exception)
             {
@@ -82,7 +83,7 @@ namespace Chat_Client.Server
 
         }
 
-        // reads incoming bytes from a a scoekt
+        // reads incoming bytes from a socket
         private string ProcessData(byte[] buffer, Socket handler)
         {
             string inData = "";

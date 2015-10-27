@@ -54,10 +54,9 @@ namespace Client.Client
                        ChatMessage = client.GetMessageFromStream();
                        byte[] message = Encoding.ASCII.GetBytes(ChatMessage + "<EOF>");
 
-                       sent = sender.Send(message);
-
-                       sender.Shutdown(SocketShutdown.Both);
+                       sent = sender.Send(message);                      
                    }
+                   sender.Shutdown(SocketShutdown.Both);
 
                 }
                 catch (Exception)
