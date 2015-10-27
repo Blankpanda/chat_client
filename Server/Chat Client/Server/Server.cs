@@ -18,14 +18,20 @@ namespace Chat_Client.Server
         public static string data = null;
         
     
-
+        /// <summary>
+        /// Constructor takes Server configuration structure which is read from the config file.
+        /// </summary>
+        /// <param name="ServerConfiguration"></param>
         public Server(ServerInit.ServerSettings ServerConfiguration)
         {
             settings = ServerConfiguration; // the configuration of the server that is being initalzied
         }
         
 
-        // this is used to organzie RunCommand.cs
+      
+        /// <summary>
+        ///  Organizes the Start prompt and begins listening by passing in the settings.
+        /// </summary>
         public void Start()
         {
                       
@@ -34,13 +40,17 @@ namespace Chat_Client.Server
             CommandStructure.RunCommand command = new CommandStructure.RunCommand(); // change the prompt.
             Console.WriteLine();
             command.Prompt(settings.server_name + "> ");
-
-           Listen(settings);
+            
+            Listen(settings);
         }
 
+        /// <summary>
+        /// Listens for a connection.
+        /// </summary>
+        /// <param name="settings"></param>
         private void Listen(ServerInit.ServerSettings settings)
         {
-            byte[] buffer = new byte[1024]; // holds the incoming message.
+            // byte[] buffer = new byte[1024]; // holds the incoming message.
 
             //endpoint for the socket.
             IPAddress ip = IPAddress.Parse(settings.server_ip_address);
@@ -53,50 +63,55 @@ namespace Chat_Client.Server
             // Bind the socket to the local endpoint
             try
             {
+                // starts listening for incoming connections,
                 listener.Bind(localEndPoint);
                 listener.Listen(settings.backlog);
 
-                // another socket handles the data that was returned
+                // another socket handles the data that was sent in and retireved by the listener
+                Console.WriteLine("Server is listening.");
                 Socket handler = listener.Accept();
                     
                 while (true)
                 {
                     Console.WriteLine("Server is listening.");
-
-                    data = ProcessData(buffer, handler);
                     
-
+                    data = ProcessData(handler); // returns the incoming data as a string.
                     Console.WriteLine(data);
 
-                    // send it back!
-                    // byte[] msg = Encoding.ASCII.GetBytes(data);
-
+                    if (Console.ReadLine() == "END")
+                        handler.Shutdown(SocketShutdown.Both);
                 }
-
-                handler.Shutdown(SocketShutdown.Both);
+                
+               
             }
             catch (Exception)
             {
-                
-                throw;
+                throw;   
             }
 
         }
 
-        // reads incoming bytes from a socket
-        private string ProcessData(byte[] buffer, Socket handler)
+        /// <summary>
+        /// Reads incoming data and stores it in a buffer which then
+        /// </summary>
+        /// <param name="buffer"></param>
+        /// <param name="handler"></param>
+        /// <returns></returns>
+        private string ProcessData(Socket handler)
         {
             string inData = "";
+            byte[] buffer = new byte[handler.SendBufferSize];
+
             while (true)
             {
                 buffer = new byte[1024];
-                int bytesRc = handler.Receive(buffer);               
+                int bytesRc = handler.Receive(buffer); // the number of bytes we recieve               
 
                 inData += Encoding.ASCII.GetString(buffer, 0, bytesRc);
-                if (inData.IndexOf("<EOF>") > -1)
-                {
+
+                if (inData.IndexOf("<EOF>") > -1)                
                     break;
-                }               
+                               
             }
             return inData;
         }

@@ -18,8 +18,7 @@ namespace Client.Client
         {
             settings = userSettings;
         }
-     
-        /*template... */
+             
         public void Start()
         {
           //  byte[] buffer = new byte[1024]; // used as a general buffer.
@@ -39,8 +38,9 @@ namespace Client.Client
 
                    // intially we want to send a message to the server telling what IP is connecting to it
                    sender.Connect(remoteEP);
+                    
                    string hostIpAddress = Net.GetHostIpAddress();
-                   byte[] msg = Encoding.ASCII.GetBytes(hostIpAddress + " connected. " + "<EOF>");
+                   byte[] msg = Encoding.ASCII.GetBytes(hostIpAddress + " connected. " + Chat.EOF_FLAG);
                    int sent = sender.Send(msg);
                  
 
