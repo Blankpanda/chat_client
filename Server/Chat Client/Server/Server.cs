@@ -74,12 +74,10 @@ namespace Chat_Client.Server
                 while (true)
                 {
                     Console.WriteLine("Server is listening.");
-                    
+                   
                     data = ProcessData(handler); // returns the incoming data as a string.
-                    Console.WriteLine(data);
 
-                    if (Console.ReadLine() == "END")
-                        handler.Shutdown(SocketShutdown.Both);
+                    Console.WriteLine(data);
                 }
                 
                
@@ -92,7 +90,7 @@ namespace Chat_Client.Server
         }
 
         /// <summary>
-        /// Reads incoming data and stores it in a buffer which then
+        /// Reads incoming data and stores it in a buffer which then formats it into a string.
         /// </summary>
         /// <param name="buffer"></param>
         /// <param name="handler"></param>

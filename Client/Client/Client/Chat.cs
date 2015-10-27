@@ -11,6 +11,10 @@ namespace Client.Client
     {
         public const string EOF_FLAG = "<EOF>";
         
+        /// <summary>
+        /// Constructs a message prompt and accepts input from a user.
+        /// </summary>
+        /// <returns></returns>
         public string GetMessageFromStream()
         {
             Console.Write(":");
@@ -18,13 +22,38 @@ namespace Client.Client
             return input;
         }
 
-        internal static int SendMessage(System.Net.Sockets.Socket sender)
+        public int SendMessage(System.Net.Sockets.Socket sender)
         {
-            string hostIpAddress = Net.GetHostIpAddress();
+            Enum MessageType = Message.MessageType.Message; // the type of message where sending here is a Ip address.
+            Message msg = new Message();
 
-            byte[] msg = Encoding.ASCII.GetBytes(hostIpAddress + " connected. " + Chat.EOF_FLAG);
+            string ChatMessage = "";
+            ChatMessage = GetMessageFromStream();
 
-            int sent = sender.Send(msg);
+            byte[] message = Encoding.ASCII.GetBytes(ChatMessage + "<EOF>");
+            int sent = sender.Send(message);
+
+            return sent;
+        }
+
+        public int SendIP(System.Net.Sockets.Socket sender)
+        {
+
+            Message msg = new Message();
+
+            string HostIpAddress = 
+                Net.GetHostIpAddress();
+
+            // the type of message where sending here is a Ip address.
+            string type = 
+                "type:" + msg.GetMessageTypeByName(Message.MessageType.SentIP); 
+            
+            byte[] SendingMessage = Encoding.ASCII.GetBytes(HostIpAddress + 
+                                                " connected. " +
+                                                 type + 
+                                                  Chat.EOF_FLAG);
+
+            int sent = sender.Send(SendingMessage);
 
             return sent;
         }

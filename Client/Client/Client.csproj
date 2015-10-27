@@ -45,6 +45,7 @@
     <Compile Include="Client\Chat.cs" />
     <Compile Include="Client\Client.cs" />
     <Compile Include="Client\Entry.cs" />
+    <Compile Include="Client\Message.cs" />
     <Compile Include="Net.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

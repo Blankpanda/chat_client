@@ -248,3 +248,13 @@
 [10/27/2015 11:50:07 AM]SList command issued to console.
 [10/27/2015 12:36:00 PM]SList command issued to console.
 [10/27/2015 12:39:05 PM]SList command issued to console.
+[10/27/2015 1:36:40 PM]SList command issued to console.
+[10/27/2015 1:36:41 PM]SList command issued to console.
+[10/27/2015 1:36:42 PM]SList command issued to console.
+[10/27/2015 1:36:46 PM]Delete command issued to console.
+[10/27/2015 1:36:47 PM]SList command issued to console.
+[10/27/2015 1:36:48 PM]Help command issued to console.
+[10/27/2015 1:36:57 PM]Clear command issued to console.
+[10/27/2015 1:54:30 PM]SList command issued to console.
+[10/27/2015 1:54:33 PM]Create command issued to console.
+[10/27/2015 1:54:40 PM]SList command issued to console.

@@ -21,9 +21,7 @@ namespace Client.Client
              
         public void Start()
         {
-          //  byte[] buffer = new byte[1024]; // used as a general buffer.
-
-
+         
             try
             {
                 // get the server and its port and connect it to an endpoint
@@ -35,33 +33,24 @@ namespace Client.Client
                 
                     // socket used to send information
                    Socket sender = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                   Chat client = new Chat();
+                   sender.Connect(remoteEP);
 
                    // intially we want to send a message to the server telling what IP is connecting to it
-                   sender.Connect(remoteEP);
-                    
-                   string hostIpAddress = Net.GetHostIpAddress();
-                   byte[] msg = Encoding.ASCII.GetBytes(hostIpAddress + " connected. " + Chat.EOF_FLAG);
-                   int sent = sender.Send(msg);
-                 
-
+                   int bytesRecieved = client.SendIP(sender);                    
+             
                    // Begin Chat.
                    while (true)
-                   {
-
-                       Chat client = new Chat();
-                       string ChatMessage = "";
-
-                       ChatMessage = client.GetMessageFromStream();
-                       byte[] message = Encoding.ASCII.GetBytes(ChatMessage + "<EOF>");
-
-                       sent = sender.Send(message);                      
+                   {                      
+                       bytesRecieved = client.SendMessage(sender);
+                    
                    }
-                   sender.Shutdown(SocketShutdown.Both);
 
+                   sender.Shutdown(SocketShutdown.Both);
                 }
                 catch (Exception)
-                {                    
-                    throw;
+                {
+                    
                 }
 
             }
