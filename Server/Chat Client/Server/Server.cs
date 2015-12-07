@@ -59,6 +59,13 @@ namespace Chat_Client.Server
             // basic TCP stream.
             Socket listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
+            // list of IPs that have connected to the server.
+            List<string> IPconnectionsList = new List<string>();
+
+
+            // clear the contents of the console.
+            CommandStructure.Commands.Clear.Execute();
+
 
             // Bind the socket to the local endpoint
             try
@@ -70,21 +77,43 @@ namespace Chat_Client.Server
                 // another socket handles the data that was sent in and retireved by the listener
                 Console.WriteLine("Server is listening.");
                 Socket handler = listener.Accept();
+
+
                     
                 while (true)
                 {
-                    Console.WriteLine("Server is listening.");
+                    Console.WriteLine("Server is listening.");                    
                    
                     data = ProcessData(handler); // returns the incoming data as a string.
 
-                    Console.WriteLine(data);
+                    // if the type is SentIp from the client we want to store the IP and clear
+                    // data so we can echo actual messages.
+
+                    if (data.Contains("type:SentIP"))
+                    {
+                        string[] SplitMessage = data.Split(' ');
+                        IPconnectionsList.Add(SplitMessage[0]);
+                    }
+                    else // return any other message
+                    {
+                        // we want to return the data to the client
+                        byte[] ReturnMessage = Encoding.ASCII.GetBytes(data);
+                        handler.Send(ReturnMessage);
+
+                    }
+                   
+
+                    
                 }
                 
                
             }
-            catch (Exception)
+            catch (SocketException e)
             {
-                throw;   
+                if( e.NativeErrorCode == 10035 )
+                {
+                    Console.WriteLine();
+                }
             }
 
         }

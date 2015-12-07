@@ -37,16 +37,25 @@ namespace Client.Client
                    sender.Connect(remoteEP);
 
                    // intially we want to send a message to the server telling what IP is connecting to it
-                   int bytesRecieved = client.SendIP(sender);                    
+                   client.SendIP(sender);                    
              
                    // Begin Chat.
                    while (true)
                    {                      
-                       bytesRecieved = client.SendMessage(sender);
+                       client.SendMessage(sender); // send the message
+                       
+                       // get the bytes that we recieve
+                       byte[] buf = new byte[1024];
+                       int BytesRecieved = sender.Receive(buf);
+
+                       // write out any response we recieve.
+                       Console.WriteLine(Encoding.ASCII.GetString(buf,0,BytesRecieved));
+
+                       
                     
                    }
 
-                   sender.Shutdown(SocketShutdown.Both);
+                   sender.Shutdown(SocketShutdown.Send);
                 }
                 catch (Exception)
                 {

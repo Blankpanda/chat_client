@@ -24,7 +24,7 @@ namespace Client.Client
 
         public int SendMessage(System.Net.Sockets.Socket sender)
         {
-            Enum MessageType = Message.MessageType.Message; // the type of message where sending here is a Ip address.
+            Enum MessageType = Message.MessageType.Message; // the type of message where sending here is a text message.
             Message msg = new Message();
 
             string ChatMessage = "";
