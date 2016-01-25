@@ -45,9 +45,6 @@ namespace Chat_Client.Server
 			settings.backlog = GetServerBacklog();
 			settings.port_number = GetServerPortNumber();
 			settings.server_ip_address = GetServerIPAddress();
-					
-
-			// TODO: iterate through the hosts address list to find the private address 
 
 			Console.WriteLine(settings.server_name + " server created.");
 			CreateNewServer(settings);
@@ -95,9 +92,8 @@ namespace Chat_Client.Server
    
 			}
 
-
-			Logger FileReader = new Logger(LogType.Type.READER); // used when reading config file
-			List<string> ConfigurationFile = FileReader.ReadTextFileList(ConfigFilePath);
+			
+			List<string> ConfigurationFile = Logger.ReadTextFileList(ConfigFilePath);
 			ServerSettings settings = new ServerSettings();
 
 			//TODO: could I just iterate through this and add through the structure to make it less hacky?

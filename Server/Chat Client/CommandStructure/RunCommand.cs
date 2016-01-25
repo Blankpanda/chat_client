@@ -98,8 +98,7 @@ namespace Chat_Client.CommandStructure
 
         /*Overload to contain arguments*/
         public void Run(string[] args)
-        {
-            // setup loggers.            
+        {       
             string command = args[0];  // the first element is the command.
             string argument = args[1]; // the second element is the argument to the command.
 
@@ -144,7 +143,10 @@ namespace Chat_Client.CommandStructure
             {           
                 case "DELETE":                    
                     Commands.Delete.Execute(argument);
-                    break;            
+                    break;
+                case "RM":
+                    Commands.Delete.Execute(argument);
+                    break;
                 case "PING":                    
                     Commands.Ping.Execute(argument);
                     break;

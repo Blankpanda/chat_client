@@ -38,10 +38,7 @@ namespace Chat_Client.CommandStructure.Commands
 				// Remove @"Servers\" from the strings in the server list.
 				// HACK: consider adding to this ServerList.GetServerList(); 
 				for (int i = 0; i < ServerList.Length; i++)
-					ServerList[i] = ServerList[i].Replace(@"Servers\", "");
-					
-				
-
+					ServerList[i] = ServerList[i].Replace(@"Servers\", "");					                        
 
 				// Display the server information and ask the user what server they would like to start.
 				Console.WriteLine("What server would you like to start (Enter in the number or name)?");
@@ -70,7 +67,6 @@ namespace Chat_Client.CommandStructure.Commands
 						Server.Server srv = new Server.Server(Settings);                                          //    create a new object with those server settings
 				
 						Console.WriteLine(Settings.server_name + " starting.");
-				
 						srv.Start();     // start the server
 
 					}
