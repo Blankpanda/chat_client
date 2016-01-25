@@ -60,9 +60,9 @@ namespace Chat_Client.CommandStructure.Commands
                    
 
             // im sorry mom
-            HelpDisplay.Add(clear.Name  + " - "  + clear.Description + "| " + clear.Alias);
+            HelpDisplay.Add(clear.Name  + " - "  + clear.Description);
             HelpDisplay.Add(create.Name + " - " + create.Description);
-            HelpDisplay.Add(delete.Name + " - " + delete.Description + "| " );
+            HelpDisplay.Add(delete.Name + " - " + delete.Description);
             HelpDisplay.Add(exit.Name   + " - " + exit.Description);
             HelpDisplay.Add(ping.Name   + " - " + ping.Description);
             HelpDisplay.Add(slist.Name  + " - " + slist.Description);

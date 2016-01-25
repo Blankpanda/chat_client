@@ -193,7 +193,7 @@ namespace Chat_Client.Server
 		{
 			while (true)
 			{
-				Console.WriteLine("Enter the port number for {0}.\nif nothing is supplied the port will default to 7777.", settings.server_name);
+				Console.WriteLine("Enter the port number.\nif nothing is supplied the port will default to 7777.");
 				int input = 0;
 				try
 				{

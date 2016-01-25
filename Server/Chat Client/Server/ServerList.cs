@@ -95,7 +95,7 @@ namespace Chat_Client.Server
 			
 			
 		}
-        // The user supplied a name to the delete command and we want to remove it using the name they supplied
+		// The user supplied a name to the delete command and we want to remove it using the name they supplied
 		public void Delete(string name)
 		{
 			name = name.ToLower();
