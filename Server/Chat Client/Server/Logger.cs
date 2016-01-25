@@ -133,11 +133,9 @@ namespace Chat_Client.Server
 
 
                 }
-            }
+            }           
 
-            string readFile = sb.ToString();
-
-            return readFile;
+            return sb.ToString();
         }
 
     }

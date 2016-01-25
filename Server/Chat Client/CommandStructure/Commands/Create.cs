@@ -21,7 +21,7 @@ namespace Chat_Client.CommandStructure.Commands
     class Create
     {
 
-        private string _Name = "Create";
+        private string _Name = "create";
         private string _Desc = "allows the user to create a new server by inputing a " +
                                "\n\tname\n\tbacklog\n\tIP\n\tPort\n\tPassword";
         public string Name
@@ -35,6 +35,7 @@ namespace Chat_Client.CommandStructure.Commands
             get { return _Desc; }
             set { Description = _Desc; }
         }
+
 
         public static void Execute()
         {

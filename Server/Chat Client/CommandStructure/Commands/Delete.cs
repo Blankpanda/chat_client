@@ -14,8 +14,10 @@ namespace Chat_Client.CommandStructure.Commands
     class Delete
     {
 
-        private string _Name = "Delete";
+        private string _Name = "delete";
         private string _Desc = "Removes a Server from the /Server Directory";
+        private string _Alias = "rm";
+
         public string Name
         {
             get { return _Name; }
@@ -27,6 +29,13 @@ namespace Chat_Client.CommandStructure.Commands
             get { return _Desc; }
             set { Description = _Desc; }
         }
+
+        public string Alias
+        {
+            get { return _Alias; }
+            set { Alias = _Alias; }
+        }
+         
 
 
         public static void Execute()

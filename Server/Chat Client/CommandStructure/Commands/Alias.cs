@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 namespace Chat_Client.CommandStructure.Commands
 {
     /// <summary>
-    ///  a simple built in diagnostics tool so the user can verify connectivity.
+    /// Generate a list of Aliases.
     /// </summary>
-    class Ping
+    class Alias
     {
-
-        private string _Name = "ping";
-        private string _Desc = "Sends a simple ICMP to a target IP.";
+        private string _Name = "alias";
+        private string _Desc = "Generates a list of Aliases";
+        
         public string Name
         {
             get { return _Name; }
@@ -28,19 +28,18 @@ namespace Chat_Client.CommandStructure.Commands
 
         public static void Execute()
         {
+            List<string> aliases = new List<string>();
+            aliases.Add("clear - cls");
+            aliases.Add("slist - ls");
+            aliases.Add("help - ?");
+            aliases.Add("delete - rm");
 
-            Net pinger = new Net();
-
-            pinger.PingAddress();
-
-        }
-        public static void Execute(string addr)
-        {
-
-            Net pinger = new Net();
-
-            pinger.PingAddress(addr);
+            foreach (string alias in aliases)
+                Console.WriteLine(alias);
+                
+            
 
         }
+
     }
 }

@@ -13,7 +13,7 @@ namespace Chat_Client.CommandStructure.Commands
     
     class Exit
     {
-        private string _Name = "Exit";
+        private string _Name = "exit";
         private string _Desc = "Closes out of the console window.";
         public string Name
         {

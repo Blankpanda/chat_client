@@ -82,7 +82,8 @@ namespace Chat_Client.Server
                     
                 while (true)
                 {
-                    Console.WriteLine("Server is listening.");                    
+                    Console.WriteLine("Server is listening."); 
+                   
                    
                     data = ProcessData(handler); // returns the incoming data as a string.
 

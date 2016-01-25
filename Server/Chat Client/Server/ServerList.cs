@@ -33,10 +33,7 @@ namespace Chat_Client.Server
 		{
 			
 			string NewDirectory = ServerDirectory + @"\" + settings.server_name; // EX Servers\myserver\
-			Directory.CreateDirectory(NewDirectory);
-																				
-				
-			
+			Directory.CreateDirectory(NewDirectory);																											
 			
 			List<string> settings_content = new List<string>();
 			// build a list that makes the configuration file
@@ -98,7 +95,7 @@ namespace Chat_Client.Server
 			
 			
 		}
-
+        // The user supplied a name to the delete command and we want to remove it using the name they supplied
 		public void Delete(string name)
 		{
 			name = name.ToLower();
@@ -121,10 +118,7 @@ namespace Chat_Client.Server
 			else
 				Console.WriteLine("Sever doesn't exist. type 'SList' to display the lists of servers");
 
-
-
 		}
-
 
 		// returns the server list with their config files
 		public string[] GetServerList()

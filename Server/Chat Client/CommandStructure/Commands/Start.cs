@@ -12,7 +12,7 @@ namespace Chat_Client.CommandStructure.Commands
 	class Start
 	{
 
-		private string _Name = "Start";
+		private string _Name = "start";
 		private string _Desc = "Starts a server by name";
 		public string Name
 		{
@@ -61,13 +61,13 @@ namespace Chat_Client.CommandStructure.Commands
 				for (int i = 0; i < ServerList.Length; i++)
 				{
 					int ServerCount = i + 1;
-					if (ServerName == ServerCount.ToString()|| ServerName == ServerList[i].ToUpper())  // the user can enter the name or a number
+					if (ServerName == ServerCount.ToString() || ServerName == ServerList[i].ToUpper())  // the user can enter the name or a number
 					{
 						ServerName = ServerList[i]; // if the user enters a number we need to make the input a string of the servers name.
 						ServerName = ServerName.Replace(@"Servers\", "");
 
 						Server.ServerInit.ServerSettings Settings = InitalizeSettings.GetServerByName(ServerName); //   load in user settings.               
-						Server.Server srv = new Server.Server(Settings);                                       //    create a new object with those server settings
+						Server.Server srv = new Server.Server(Settings);                                          //    create a new object with those server settings
 				
 						Console.WriteLine(Settings.server_name + " starting.");
 				
@@ -89,31 +89,23 @@ namespace Chat_Client.CommandStructure.Commands
 
 		/*Overload for an argument that already has been supplied*/
 		public static void Execute(string ServerName)
-		{
-			// Set up loggers.
-
-
-			Server.Logger EventLogger = new Server.Logger(Server.LogType.Type.EVENT, ServerName);
-
+		{						
 
 			Server.ServerList InitalizeSettings = new Server.ServerList();
-
 
 			if (InitalizeSettings.ServerExists(ServerName))
 			{
 				Server.ServerInit.ServerSettings Settings = InitalizeSettings.GetServerByName(ServerName); //   load in user settings.               
 				Server.Server srv = new Server.Server(Settings);                                          //    create a new object with those server settings
 
-				EventLogger.Write(ServerName + " settings are loaded.");
-
+				
 				Console.WriteLine(Settings.server_name + " starting.");
-				EventLogger.Write(Settings.server_name + " started.");
+				
 				srv.Start();     // start the server
 			}
 			else
 			{
-				Console.WriteLine("Invalid server name supplied.");
-				EventLogger.Write(ServerName + "is an invalid name.  Server was not found.");
+				Console.WriteLine("Invalid server name supplied.");			
 			}
 
 		}

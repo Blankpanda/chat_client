@@ -13,8 +13,9 @@ namespace Chat_Client.CommandStructure.Commands
     
     class Clear
     {
-        private string _Name = "Clear";
+        private string _Name = "clear";
         private string _Desc = "Clears the contents of the console.";
+        private string _Alias = "cls";
         public string Name
         {
             get { return _Name; }
@@ -26,6 +27,14 @@ namespace Chat_Client.CommandStructure.Commands
             get { return _Desc; }
             set { Description = _Desc; }
         }
+
+        public string Alias 
+        {
+            get { return _Alias; }
+            set { Alias = _Alias; }
+        }
+         
+
 
         public static void Execute()
         {

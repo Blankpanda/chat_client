@@ -12,8 +12,9 @@ namespace Chat_Client.CommandStructure.Commands
     class SList
     {
 
-        private string _Name = "SList";
+        private string _Name = "slist";
         private string _Desc = "Generates a List of created servers.";
+        private string _Alias = "ls";
         public string Name
         {
             get { return _Name; }
@@ -24,6 +25,12 @@ namespace Chat_Client.CommandStructure.Commands
         {
             get { return _Desc; }
             set { Description = _Desc; }
+        }
+
+        public string Alias
+        {
+            get { return _Alias;  }
+            set { Alias = _Alias; }
         }
 
         public static void Execute()

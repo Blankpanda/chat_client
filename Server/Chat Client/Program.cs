@@ -14,10 +14,7 @@ namespace Chat_Client
         {
             Console.WriteLine("Chat Server application by Caleb Ellis (2015).");
             Console.WriteLine();
-
-            Server.Logger EventLogger = new Server.Logger(Server.LogType.Type.EVENT);
-            EventLogger.Write("Program Started.");
-
+            
             // handles command input
             CommandStructure.RunCommand CommandRun = new CommandStructure.RunCommand();
 
@@ -34,8 +31,7 @@ namespace Chat_Client
                 string[] arguments = request.Split(' ');
 
                 if (request.ToUpper() == "EXIT")
-                {
-                    EventLogger.Write("Program Exited.");
+                {                    
                     break;
                 }
                 else

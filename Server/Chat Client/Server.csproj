@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandStructure\CommandList.cs" />
+    <Compile Include="CommandStructure\Commands\Alias.cs" />
     <Compile Include="CommandStructure\Commands\Clear.cs" />
     <Compile Include="CommandStructure\Commands\Exit.cs" />
     <Compile Include="CommandStructure\Commands\Help.cs" />

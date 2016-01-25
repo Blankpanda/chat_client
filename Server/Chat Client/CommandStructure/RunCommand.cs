@@ -17,11 +17,8 @@ namespace Chat_Client.CommandStructure
         
         public void Run(string command)
         {
-            // setup loggers.
-            Server.Logger CommandHistoryLog = new Server.Logger(Server.LogType.Type.HISTORY);
-          
-            command = command.Trim();
-            command = command.ToUpper();
+                      
+            command = command.Trim().ToUpper();           
 
             // generates a list of commands based off of CommandList.Commands Enum
             CommandList CList = new CommandList();
@@ -45,76 +42,70 @@ namespace Chat_Client.CommandStructure
             switch (command)
             {
                 case "CLEAR":
-                    CommandHistoryLog.Write("Clear command issued to console.");
-
                     Commands.Clear.Execute();                    
                     break;
 
-                case "CREATE":
-                    CommandHistoryLog.Write("Create command issued to console.");
+                case "CLS":
+                    Commands.Clear.Execute();
+                    break;
 
+                case "CREATE":                   
                     Commands.Create.Execute();                    
                     break;
 
-                case "DELETE":
-                    CommandHistoryLog.Write("Delete command issued to console.");
-
+                case "DELETE":                    
                     Commands.Delete.Execute();
                     break;
 
-                case "Exit":
-                    CommandHistoryLog.Write("Exit command issued to console.");
+                case "RM":
+                    Commands.Delete.Execute();
+                    break;
 
+
+                case "Exit":
                     Commands.Exit.Execute();
                     break;
 
-                case "HELP":
-                    CommandHistoryLog.Write("Help command issued to console.");
-
+                case "HELP":                    
                     Commands.Help.Execute();
                     break;
-      
-                case "PING":
-                    CommandHistoryLog.Write("Ping command issued to console.");
 
+                case "?":
+                    Commands.Help.Execute();
+                    break;
+
+                case "PING":                    
                     Commands.Ping.Execute();
                     break;
 
-                case "SLIST":
-                    CommandHistoryLog.Write("SList command issued to console.");
-
+                case "SLIST":                    
                     Commands.SList.Execute();
                     break;
 
-                case "LS":
-                    CommandHistoryLog.Write("SList command issued to console.");
-
+                case "LS":                    
                     Commands.SList.Execute();
                     break;
 
-                case "START":
-                    CommandHistoryLog.Write("SList command issued to console.");
-
+                case "START":                    
                     Commands.Start.Execute();
                     break;
 
+                case "ALIAS":
+                    Commands.Alias.Execute();
+                    break;
             }    
         }
 
         /*Overload to contain arguments*/
         public void Run(string[] args)
         {
-            // setup loggers.
-            Server.Logger CommandHistoryLog = new Server.Logger(Server.LogType.Type.HISTORY);
-
+            // setup loggers.            
             string command = args[0];  // the first element is the command.
             string argument = args[1]; // the second element is the argument to the command.
 
-            command = command.Trim();
-            command = command.ToUpper();
-
-            argument = argument.Trim();
-            argument = argument.ToUpper();
+            command = command.Trim().ToUpper();            
+            argument = argument.Trim().ToUpper();
+            
 
             // generates a list of commands based off of CommandList.Commands Enum
             CommandList CList = new CommandList();
@@ -128,7 +119,8 @@ namespace Chat_Client.CommandStructure
                 
             
 
-            // Invalid Command.
+            // get a number that specifies whether or not the command uses exists.
+            // if err is equal to ComandList.Count, the command doesn't exist.
             int err = 0;
             for (int i = 0; i < CommandList.Count; i++)
                 if (command != CommandList[i])
@@ -150,19 +142,13 @@ namespace Chat_Client.CommandStructure
             // Execute a correct command
             switch (command)
             {           
-                case "DELETE":
-                    CommandHistoryLog.Write("Delete command issued to console.");
-
+                case "DELETE":                    
                     Commands.Delete.Execute(argument);
                     break;            
-                case "PING":
-                    CommandHistoryLog.Write("Ping command issued to console.");
-
+                case "PING":                    
                     Commands.Ping.Execute(argument);
                     break;
-                case "START":
-                    CommandHistoryLog.Write("SList command issued to console.");
-
+                case "START":                  
                     Commands.Start.Execute(argument);
                     break;
                 default:
