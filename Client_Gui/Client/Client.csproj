@@ -61,6 +61,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Client\Chat.cs" />
+    <Compile Include="Client\Client.cs" />
+    <Compile Include="Client\Entry.cs" />
+    <Compile Include="Client\Message.cs" />
+    <Compile Include="Client\Net.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
