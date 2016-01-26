@@ -76,10 +76,11 @@ namespace Client
         }
 
 
+        // TODO: rewrite this to accomdate for GUI.
         /*Pings the entered address to see if the address is on the network.*/
         public static bool CheckAddress(string addr)
         {
-            Console.WriteLine("Checking address...");
+            // Console.WriteLine("Checking address...");
 
             Net pinger = new Net();
 
@@ -87,11 +88,11 @@ namespace Client
 
             if (scount >= 1)
             {
-                Console.WriteLine("Address found.");
+               //  Console.WriteLine("Address found.");
                 return true;
             }
             else
-                Console.WriteLine("Address was not found.");
+                // Console.WriteLine("Address was not found.");
 
             return false;
         }

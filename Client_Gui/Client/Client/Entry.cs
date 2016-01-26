@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Client
 {
+    [System.Runtime.InteropServices.GuidAttribute("C67F93C0-C172-4B7B-93AA-C29F43F91763")]
     class Entry
     {
         /* Information gained from the user will be stored here and used in Client.cs 
@@ -26,6 +27,7 @@ namespace Client
 
         }
 
+        // TODO: rewrite this
         public ClientRequestInfo FindServer()
         {
             ClientRequestInfo settings = new ClientRequestInfo();
@@ -33,13 +35,14 @@ namespace Client
             Console.WriteLine("Press 'Enter' to find a server.");
             Console.ReadLine();
 
-            settings.ip_address = GetServerIP();
-            settings.port_number = GetServerPort();
+            // settings.ip_address = GetServerIP();
+            // settings.port_number = GetServerPort();
             
             return settings;
         }
 
 
+        // TODO: Database
         /* Asks the user for the server that they want connect to.*/
         private string GetServerIP()
         {
@@ -67,7 +70,8 @@ namespace Client
             return inAddr;
         }
 
-                         
+        
+        // TODO: Rewrite this         
         /* Gets the desired port from the user. 7777 by default. */
         private int GetServerPort()
         {

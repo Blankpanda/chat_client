@@ -15,12 +15,12 @@ namespace Client
         /// Constructs a message prompt and accepts input from a user.
         /// </summary>
         /// <returns></returns>
-        public string GetMessageFromStream()
+         // TODO: This
+        private string GetMessageFromStream()
         {
-            Console.Write(":");
-            string input = Console.ReadLine();
-            return input;
+            throw new NotImplementedException();
         }
+
 
         public int SendMessage(System.Net.Sockets.Socket sender)
         {
