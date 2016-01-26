@@ -11,3 +11,6 @@ c:\users\cellis\documents\visual studio 2013\Projects\Client\Client\obj\Debug\Cl
 c:\users\cellis\documents\visual studio 2013\Projects\Client\Client\obj\Debug\Client.csproj.GenerateResource.Cache
 c:\users\cellis\documents\visual studio 2013\Projects\Client\Client\obj\Debug\Client.exe
 c:\users\cellis\documents\visual studio 2013\Projects\Client\Client\obj\Debug\Client.pdb
+C:\Users\Cellis\Desktop\Projects\chat\Client_Gui\Client\bin\Debug\Client.exe.config
+C:\Users\Cellis\Desktop\Projects\chat\Client_Gui\Client\obj\Debug\Client.exe
+C:\Users\Cellis\Desktop\Projects\chat\Client_Gui\Client\obj\Debug\Client.pdb
