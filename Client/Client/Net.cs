@@ -32,11 +32,8 @@ namespace Client
             byte b = 0; // checks each value in octs to make sure its a valid byte
             for (int i = 0; i < octs.Length; i++)
             {
-                if (!byte.TryParse(octs[i], out b))
-                {
-                    return false;
-                }
-
+                if (!byte.TryParse(octs[i], out b))                
+                    return false;                
             }
 
             return true;
