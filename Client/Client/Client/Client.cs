@@ -49,7 +49,9 @@ namespace Client.Client
                        int BytesRecieved = sender.Receive(buf);
 
                        // write out any response we recieve.
-                       Console.WriteLine(Encoding.ASCII.GetString(buf,0,BytesRecieved));
+                       string returned = Encoding.ASCII.GetString(buf, 0, BytesRecieved);
+                       returned = returned.Replace("<EOF>", "");
+                       Console.WriteLine(returned);
 
                        
                     

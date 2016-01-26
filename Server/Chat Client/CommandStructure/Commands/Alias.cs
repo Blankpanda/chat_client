@@ -35,7 +35,7 @@ namespace Chat_Client.CommandStructure.Commands
             aliases.Add("delete - rm");
 
             foreach (string alias in aliases)
-                Console.WriteLine(alias);
+                Console.WriteLine("   " + alias);
                 
             
 

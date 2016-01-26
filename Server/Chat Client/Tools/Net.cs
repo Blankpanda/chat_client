@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.NetworkInformation;
 
-namespace Chat_Client
+namespace Chat_Client.Tools
 {
     class Net
     {

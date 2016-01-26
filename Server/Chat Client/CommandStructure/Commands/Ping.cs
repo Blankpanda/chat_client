@@ -29,7 +29,7 @@ namespace Chat_Client.CommandStructure.Commands
         public static void Execute()
         {
 
-            Net pinger = new Net();
+            Tools.Net pinger = new Tools.Net();
 
             pinger.PingAddress();
 
@@ -37,7 +37,7 @@ namespace Chat_Client.CommandStructure.Commands
         public static void Execute(string addr)
         {
 
-            Net pinger = new Net();
+            Tools.Net pinger = new Tools.Net();
 
             pinger.PingAddress(addr);
 

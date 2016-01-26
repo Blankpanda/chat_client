@@ -61,7 +61,7 @@ namespace Chat_Client.Server
 
 			ConfigPath = ConfigPath + TextFile;
 		
-			Logger.WriteToTextFile(settings_content, ConfigPath);
+			Tools.IO.WriteToTextFile(settings_content, ConfigPath);
 
 			
 		}

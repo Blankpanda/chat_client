@@ -93,15 +93,15 @@ namespace Chat_Client.Server
 			}
 
 			
-			List<string> ConfigurationFile = Logger.ReadTextFileList(ConfigFilePath);
+			List<string> ConfigurationFile = Tools.IO.ReadTextFileList(ConfigFilePath);
 			ServerSettings settings = new ServerSettings();
 
 			//TODO: could I just iterate through this and add through the structure to make it less hacky?
 			settings.server_name        = ConfigurationFile[1];
 			settings.server_password    = ConfigurationFile[2];
-			settings.backlog            =  int.Parse( ConfigurationFile[3] );
+			settings.backlog            = int.Parse( ConfigurationFile[3] );
 			settings.server_ip_address  = ConfigurationFile[4];
-			settings.port_number        =  int.Parse ( ConfigurationFile[5] );
+			settings.port_number        = int.Parse ( ConfigurationFile[5] );
 		
 			return settings;
 		}       

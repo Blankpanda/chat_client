@@ -48,12 +48,12 @@ namespace Client.Client
             string type = 
                 "type:" + msg.GetMessageTypeByName(Message.MessageType.SentIP); 
             
-            byte[] SendingMessage = Encoding.ASCII.GetBytes(HostIpAddress + 
+            byte[] message = Encoding.ASCII.GetBytes(HostIpAddress + 
                                                 " connected. " +
                                                  type + 
                                                   Chat.EOF_FLAG);
 
-            int sent = sender.Send(SendingMessage);
+            int sent = sender.Send(message);
 
             return sent;
         }

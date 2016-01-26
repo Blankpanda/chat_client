@@ -81,10 +81,7 @@ namespace Chat_Client.Server
 
                     
                 while (true)
-                {
-                    Console.WriteLine("Server is listening."); 
-                   
-                   
+                {                                      
                     data = ProcessData(handler); // returns the incoming data as a string.
 
                     // if the type is SentIp from the client we want to store the IP and clear
@@ -92,8 +89,10 @@ namespace Chat_Client.Server
 
                     if (data.Contains("type:SentIP"))
                     {
-                        string[] SplitMessage = data.Split(' ');
+                        string[] SplitMessage = data.Split(' '); // split the message up. so we can retrieve the IP
+
                         IPconnectionsList.Add(SplitMessage[0]);
+                        Console.WriteLine(SplitMessage[0] + " Connected.");
                     }
                     else // return any other message
                     {
@@ -113,7 +112,7 @@ namespace Chat_Client.Server
             {
                 if( e.NativeErrorCode == 10035 )
                 {
-                    Console.WriteLine();
+                    Console.WriteLine("et");
                 }
             }
 

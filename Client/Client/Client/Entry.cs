@@ -67,12 +67,7 @@ namespace Client.Client
             return inAddr;
         }
 
-         
-            
-         
-        
-
-
+                         
         /* Gets the desired port from the user. 7777 by default. */
         private int GetServerPort()
         {

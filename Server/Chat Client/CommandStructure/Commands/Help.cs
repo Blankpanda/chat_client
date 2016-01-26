@@ -60,14 +60,14 @@ namespace Chat_Client.CommandStructure.Commands
                    
 
             // im sorry mom
-            HelpDisplay.Add(clear.Name  + " - "  + clear.Description);
-            HelpDisplay.Add(create.Name + " - " + create.Description);
-            HelpDisplay.Add(delete.Name + " - " + delete.Description);
-            HelpDisplay.Add(exit.Name   + " - " + exit.Description);
-            HelpDisplay.Add(ping.Name   + " - " + ping.Description);
-            HelpDisplay.Add(slist.Name  + " - " + slist.Description);
-            HelpDisplay.Add(start.Name  + " - " + start.Description);
-            HelpDisplay.Add(help.Name   + " - " + help.Description);
+            HelpDisplay.Add( "   " + clear.Name  + " - "  + clear.Description);
+            HelpDisplay.Add( "   " + create.Name + " - " + create.Description);
+            HelpDisplay.Add( "   " + delete.Name + " - " + delete.Description);
+            HelpDisplay.Add( "   " + exit.Name + " - " + exit.Description);
+            HelpDisplay.Add( "   " + ping.Name + " - " + ping.Description);
+            HelpDisplay.Add( "   " + slist.Name + " - " + slist.Description);
+            HelpDisplay.Add( "   " + start.Name + " - " + start.Description);
+            HelpDisplay.Add( "   " + help.Name + " - " + help.Description);
 
             foreach (string command in HelpDisplay)
                 Console.WriteLine(command);
