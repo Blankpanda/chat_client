@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Client
+namespace Chat
 {
     [System.Runtime.InteropServices.GuidAttribute("C67F93C0-C172-4B7B-93AA-C29F43F91763")]
     class Entry

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.NetworkInformation;
 
-namespace Client
+namespace Chat
 {
     /* THIS CLASS IS A COPY OF A CLASS IN THE SERVER PROJECT. 
         with some modifications. */

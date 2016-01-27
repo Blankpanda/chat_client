@@ -20,9 +20,31 @@ namespace Client
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        // public Chat.Client client = new Chat.Client()
+
         public MainWindow()
         {
             InitializeComponent();
         }
+        
+        // Open the Server connection dialog.
+        private void FileMenuItemConnect_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        // Disconnect to the current server.
+        private void FileMenuItemDisconnect_Click(object sender, RoutedEventArgs e)
+        {
+          
+        }
+
+        // Close out of the application.
+        private void FileMenuItemExit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }        
+        
     }
 }

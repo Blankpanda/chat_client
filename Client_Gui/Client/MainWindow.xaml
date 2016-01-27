@@ -37,9 +37,9 @@
                     </LinearGradientBrush>
                 </Menu.BorderBrush>
                 <MenuItem x:Name="FileMenuItem" Header="_File" Width="40" Height="25" Margin="10,0,0,0">
-                    <MenuItem x:Name="FileMenuItemConnect" Header="Connect"/>
-                    <MenuItem x:Name="FileMenuItemDisconnect" Header="Disconnect"/>
-                    <MenuItem x:Name="FileMenuItemExit" Header="Exit"/>
+                    <MenuItem x:Name="FileMenuItemConnect" Header="Connect" Click="FileMenuItemConnect_Click"/>
+                    <MenuItem x:Name="FileMenuItemDisconnect" Header="Disconnect" Click="FileMenuItemDisconnect_Click"/>
+                    <MenuItem x:Name="FileMenuItemExit" Header="Exit" Click="FileMenuItemExit_Click"/>
                 </MenuItem>
                 <MenuItem x:Name="HelpMenuItem" Header="_Help" HorizontalAlignment="Center" Height="25" Width="40"></MenuItem>
                 <MenuItem x:Name="AboutMenuItem" Header="_About" Width="52" Height="25"></MenuItem>

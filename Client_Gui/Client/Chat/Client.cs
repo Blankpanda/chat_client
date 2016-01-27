@@ -7,17 +7,32 @@ using System.Net;
 using System.Net.Sockets;
 
 
-namespace Client
+namespace Chat
 {
     class Client
     {
-        public Entry.ClientRequestInfo settings; /* settings for the user to pass in*/
 
+        private bool _isConnected = false;
+
+        public Entry.ClientRequestInfo Settings; /* settings for the user to pass in*/
+
+        /// <summary>
+        /// determines wether or not the Client is maintaining a connection with the server
+        /// </summary>
+        public bool isConnected
+        {
+            get { return _isConnected; }
+            set { isConnected = _isConnected; }
+        }
+
+
+                
         /* constructor requires the user to enter in a strucutre with settings.*/
         public Client(Entry.ClientRequestInfo userSettings)
         {
-            settings = userSettings;
+            Settings = userSettings;
         }
+
              
         public void Start()
         {
@@ -25,8 +40,8 @@ namespace Client
             try
             {
                 // get the server and its port and connect it to an endpoint
-                IPAddress ip = IPAddress.Parse(settings.ip_address);
-                IPEndPoint remoteEP = new IPEndPoint(ip, settings.port_number);
+                IPAddress ip = IPAddress.Parse(Settings.ip_address);
+                IPEndPoint remoteEP = new IPEndPoint(ip, Settings.port_number);
 
                 try
                 {
@@ -68,5 +83,6 @@ namespace Client
             }
 
         }
+
     }
 }
