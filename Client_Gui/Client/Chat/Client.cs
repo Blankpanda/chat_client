@@ -65,7 +65,10 @@ namespace Chat
 
                        // write out any response we recieve.
                        string returned = Encoding.ASCII.GetString(buf, 0, BytesRecieved);
-                       returned = returned.Replace("<EOF>", "");                                              
+                       returned = returned.Replace("<EOF>", "");
+                      
+
+                       UpdateMainWIndow(returned);
                     
                    }
 
@@ -82,6 +85,11 @@ namespace Chat
                 throw;
             }
 
+        }
+       
+        private void UpdateMainWIndow(string returned)
+        {
+            throw new NotImplementedException();
         }
 
     }

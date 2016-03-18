@@ -16,7 +16,7 @@ namespace Chat_Client.Server
        
         private ServerInit.ServerSettings settings;
         public static string data = null;
-        
+	
     
         /// <summary>
         /// Constructor takes Server configuration structure which is read from the config file.
@@ -55,13 +55,12 @@ namespace Chat_Client.Server
             //endpoint for the socket.
             IPAddress ip = IPAddress.Parse(settings.server_ip_address);
             IPEndPoint localEndPoint = new IPEndPoint(ip, settings.port_number);
-
+	    
             // basic TCP stream.
             Socket listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
             // list of IPs that have connected to the server.
             List<string> IPconnectionsList = new List<string>();
-
 
             // clear the contents of the console.
             CommandStructure.Commands.Clear.Execute();

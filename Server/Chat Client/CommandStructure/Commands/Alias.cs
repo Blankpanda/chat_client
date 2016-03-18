@@ -12,7 +12,7 @@ namespace Chat_Client.CommandStructure.Commands
     class Alias
     {
         private string _Name = "alias";
-        private string _Desc = "Generates a list of Aliases";
+        private string _Desc = "Generates a list of aliases";
         
         public string Name
         {

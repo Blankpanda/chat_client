@@ -11,7 +11,6 @@ namespace Chat_Client.CommandStructure.Commands
     /// </summary>
     class Ping
     {
-
         private string _Name = "ping";
         private string _Desc = "Sends a simple ICMP to a target IP.";
         public string Name

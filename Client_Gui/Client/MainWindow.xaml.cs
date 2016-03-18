@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Client.Connect;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,7 +32,14 @@ namespace Client
         // Open the Server connection dialog.
         private void FileMenuItemConnect_Click(object sender, RoutedEventArgs e)
         {
+            Connect.ConnectDialog ConnectDialogForm = new Connect.ConnectDialog();
+            ConnectDialogForm.RaiseCustomEvent += new EventHandler<CustomEventArgs>(ConnectDiaglogForm_RaiseCustomEvent);
+            ConnectDialogForm.Show();
+        }
 
+        void ConnectDiaglogForm_RaiseCustomEvent(object sender, CustomEventArgs e)
+        {
+            this.Title = e.Message;
         }
 
         // Disconnect to the current server.

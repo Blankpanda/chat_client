@@ -98,9 +98,24 @@ namespace Chat
         }
 
          public static string GetHostIpAddress()
-        {
+         {
             IPHostEntry host = Dns.Resolve(Dns.GetHostName());
             return host.AddressList[0].ToString();
-        }
+         }
+
+         internal static bool IsValidPortNumber(int p)
+         {
+             int ValidPortRange = 65535;
+
+             for (int i = 1; i <= ValidPortRange; i++)
+             {
+                 if (p == i)
+                 {
+                     return true;
+                 }
+             }
+
+             return false;
+         }
     }
 }

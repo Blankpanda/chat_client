@@ -39,7 +39,7 @@ namespace Chat_Client.Server
 		{
 			ServerSettings settings = new ServerSettings();
 			ServerList serverlist = new ServerList();
-
+			
 			settings.server_name = GetSeverName();
 			settings.server_password = GetServerPassword();
 			settings.backlog = GetServerBacklog();

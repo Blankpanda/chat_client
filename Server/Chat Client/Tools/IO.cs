@@ -39,7 +39,7 @@ namespace Chat_Client.Tools
                 string file = r.ReadToEnd(); // read the file
                 string[] lines = file.Split('\n'); // split it up by new lines
 
-                for (int i = 0; i < lines.Length; i++) // remove /r return character
+                for (int i = 0; i < lines.Length; i++) // remove \r return character
                     lines[i] = lines[i].Replace("\r", "");                                    
 
                 for (int i = 0; i < lines.Length; i++) // convert into a list
