@@ -42,57 +42,69 @@ namespace Chat_Client.CommandStructure
             switch (command)
             {
                 case "CLEAR":
-                    Commands.Clear.Execute();                    
-                    break;
-
+                    {
+                        Commands.Clear.Execute();
+                    } break;
+                                        
                 case "CLS":
-                    Commands.Clear.Execute();
-                    break;
+                    {
+                        Commands.Clear.Execute();
+                    } break;                                        
 
-                case "CREATE":                   
-                    Commands.Create.Execute();                    
-                    break;
-
-                case "DELETE":                    
-                    Commands.Delete.Execute();
-                    break;
+                case "CREATE":
+                    {
+                        Commands.Create.Execute();
+                    } break;                      
+                  
+                case "DELETE":
+                    {
+                        Commands.Delete.Execute();
+                    } break;
 
                 case "RM":
-                    Commands.Delete.Execute();
-                    break;
-
+                    {                        
+                        Commands.Delete.Execute();
+                    } break;                    
 
                 case "Exit":
-                    Commands.Exit.Execute();
-                    break;
+                    {
+                        Commands.Exit.Execute();
+                    } break;
 
-                case "HELP":                    
-                    Commands.Help.Execute();
-                    break;
+                case "HELP":
+                    {
+                        Commands.Help.Execute();
+                    } break;
 
                 case "?":
-                    Commands.Help.Execute();
-                    break;
+                    {
+                        Commands.Help.Execute();
+                    } break;
+                                        
+                case "PING":
+                    {
+                        Commands.Ping.Execute();
+                    } break;
 
-                case "PING":                    
-                    Commands.Ping.Execute();
-                    break;
+                case "SLIST":
+                    {
+                        Commands.SList.Execute();
+                    } break;
 
-                case "SLIST":                    
-                    Commands.SList.Execute();
-                    break;
+                case "LS":
+                    {
+                        Commands.SList.Execute();
+                    } break;
 
-                case "LS":                    
-                    Commands.SList.Execute();
-                    break;
-
-                case "START":                    
-                    Commands.Start.Execute();
-                    break;
+                case "START":
+                    {
+                        Commands.Start.Execute();
+                    } break;
 
                 case "ALIAS":
-                    Commands.Alias.Execute();
-                    break;
+                    {
+                        Commands.Alias.Execute();
+                    } break;
             }    
         }
 
@@ -140,26 +152,30 @@ namespace Chat_Client.CommandStructure
 
             // Execute a correct command
             switch (command)
-            {           
-                case "DELETE":                    
-                    Commands.Delete.Execute(argument);
-                    break;
-                case "RM":
-                    Commands.Delete.Execute(argument);
-                    break;
-                case "PING":                    
-                    Commands.Ping.Execute(argument);
-                    break;
-                case "START":                  
-                    Commands.Start.Execute(argument);
-                    break;
-                default:
+            {
+                case "DELETE":
+                    {
+                        Commands.Delete.Execute(argument);
 
-                    for (int i = 0;  i < NoArgsCommands.Count;  i++)                    
-                        if (command == NoArgsCommands[i])                        
-                            Console.WriteLine("The " + command + " command doesn't allow for arguments.");                                         
-                    
-                    break;
+                    } break;
+                case "RM":
+                    {
+                        Commands.Delete.Execute(argument);
+                    } break;
+                case "PING":
+                    {
+                        Commands.Ping.Execute(argument);
+                    } break;
+                case "START":
+                    {
+                        Commands.Start.Execute(argument);
+                    } break;
+                default:
+                    {
+                        for (int i = 0; i < NoArgsCommands.Count; i++)
+                            if (command == NoArgsCommands[i])
+                                Console.WriteLine("The " + command + " command doesn't allow for arguments.");                                         
+                    } break;
 
             }
         }
