@@ -1,0 +1,29 @@
+C:\Users\Cellis\Desktop\Projects\chat\Client\bin\Debug\Client.exe.config
+C:\Users\Cellis\Desktop\Projects\chat\Client\bin\Debug\Client.exe
+C:\Users\Cellis\Desktop\Projects\chat\Client\bin\Debug\Client.pdb
+C:\Users\Cellis\Desktop\Projects\chat\Client\obj\Debug\Client.csprojResolveAssemblyReference.cache
+C:\Users\Cellis\Desktop\Projects\chat\Client\obj\Debug\Client.exe
+C:\Users\Cellis\Desktop\Projects\chat\Client\obj\Debug\Client.pdb
+C:\Users\CalebsComp\Documents\chat\Client\bin\Debug\Client.exe.config
+C:\Users\CalebsComp\Documents\chat\Client\obj\Debug\Client.exe
+C:\Users\CalebsComp\Documents\chat\Client\obj\Debug\Client.pdb
+C:\Users\CalebsComp\Documents\chat\Client\obj\Debug\Client.csprojResolveAssemblyReference.cache
+C:\Users\CalebsComp\Documents\chat\Client\bin\Debug\Client.exe
+C:\Users\CalebsComp\Documents\chat\Client\bin\Debug\Client.pdb
+C:\Users\CalebsComp\Documents\chat\Client\bin\Debug\Client.exe.CodeAnalysisLog.xml
+C:\Users\CalebsComp\Documents\chat\Client\bin\Debug\Client.exe.lastcodeanalysissucceeded
+C:\Users\Cellis\Desktop\Projects\Client\Client\bin\Debug\Client.exe.config
+C:\Users\Cellis\Desktop\Projects\Client\Client\obj\Debug\Client.exe
+C:\Users\Cellis\Desktop\Projects\Client\Client\obj\Debug\Client.pdb
+C:\Users\Cellis\Desktop\Projects\Client\Client\bin\Debug\Client.exe
+C:\Users\Cellis\Desktop\Projects\Client\Client\bin\Debug\Client.pdb
+C:\Users\Cellis\Desktop\Projects\Client\Client\obj\Debug\Client.csprojResolveAssemblyReference.cache
+C:\Users\Cellis\Desktop\Projects\chat\Client\Client\bin\Debug\Client.exe.config
+C:\Users\Cellis\Desktop\Projects\chat\Client\Client\obj\Debug\Client.exe
+C:\Users\Cellis\Desktop\Projects\chat\Client\Client\obj\Debug\Client.pdb
+C:\Users\Cellis\Desktop\Projects\chat\Client\Client\bin\Debug\Client.exe
+C:\Users\Cellis\Desktop\Projects\chat\Client\Client\bin\Debug\Client.pdb
+C:\Users\Cellis\Desktop\Projects\chat\Client\Client\obj\Debug\Client.csprojResolveAssemblyReference.cache
+C:\Users\Cellis\Desktop\Projects\chat\old project\Client\Client\bin\Debug\Client.exe.config
+C:\Users\Cellis\Desktop\Projects\chat\old project\Client\Client\obj\Debug\Client.exe
+C:\Users\Cellis\Desktop\Projects\chat\old project\Client\Client\obj\Debug\Client.pdb
