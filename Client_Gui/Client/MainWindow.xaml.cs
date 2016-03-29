@@ -23,6 +23,7 @@ namespace Client
     {
 
         // public Chat.Client client = new Chat.Client()
+        public Chat.Entry.ClientRequestInfo UserSettings;
 
         public MainWindow()
         {
@@ -32,14 +33,14 @@ namespace Client
         // Open the Server connection dialog.
         private void FileMenuItemConnect_Click(object sender, RoutedEventArgs e)
         {
+            // Open the Connection form and initialize an event to pass the data.
             Connect.ConnectDialog ConnectDialogForm = new Connect.ConnectDialog();
-            ConnectDialogForm.RaiseCustomEvent += new EventHandler<CustomEventArgs>(ConnectDiaglogForm_RaiseCustomEvent);
+            ConnectDialogForm.RaiseConnectionFormEvent += 
+                new EventHandler<ConnectionFormEventArgs>(ConnectDiaglogForm_RaiseCustomEvent);
             ConnectDialogForm.Show();
-        }
 
-        void ConnectDiaglogForm_RaiseCustomEvent(object sender, CustomEventArgs e)
-        {
-            this.Title = e.Message;
+            // try to establish a connection using the user settings.
+
         }
 
         // Disconnect to the current server.
@@ -52,7 +53,14 @@ namespace Client
         private void FileMenuItemExit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }        
-        
+        }
+
+        // handles the passage of data between forms
+        void ConnectDiaglogForm_RaiseCustomEvent(object sender, ConnectionFormEventArgs e)
+        {
+            UserSettings = e.ServerRequestSettings;
+        }
+
+
     }
 }

@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
+
 namespace Client.Connect
 {
 	/// <summary>
@@ -19,8 +21,8 @@ namespace Client.Connect
 	/// </summary>
 	public partial class ConnectDialog : Window
 	{
-
-		public event EventHandler<CustomEventArgs> RaiseCustomEvent;
+		// handles events between the form
+		public event EventHandler<ConnectionFormEventArgs> RaiseConnectionFormEvent;
 
 		Chat.Entry.ClientRequestInfo UserInfo = new Chat.Entry.ClientRequestInfo();
 
@@ -80,29 +82,29 @@ namespace Client.Connect
 				Chat.Client client = new Chat.Client(UserInfo);
 
 				 // CustomEventArgs xxxxxx = new CustomEventArgs(<STRUCT>);
-				 // RaiseCustomEvent(this, (ServerPortInputBox.Text));
+				ConnectionFormEventArgs t = new ConnectionFormEventArgs("me");
+				RaiseConnectionFormEvent(this,t);
 				this.Close();
-			}
-			
+			}			
 
 		}
 
 		private void ServerPasswordInputBox_TextChanged(object sender, TextChangedEventArgs e)
 		{
-			CanStartConnect();
+			CanStartConnection();
 		}
 
 		private void ServerPortInputBox_TextChanged(object sender, TextChangedEventArgs e)
 		{
-			CanStartConnect();
+			CanStartConnection();
 		}
 
 		private void ServerNameInputBox_TextChanged(object sender, TextChangedEventArgs e)
 		{
-			CanStartConnect();
+			CanStartConnection();
 		}
 
-		private void CanStartConnect()
+		private void CanStartConnection()
 		{
 			// enable the connect button if all of the other text box's are filled.
 			if (ServerNameInputBox.Text != ""
@@ -115,14 +117,14 @@ namespace Client.Connect
 
 	}
 
-	public class CustomEventArgs : EventArgs
+	public class  ConnectionFormEventArgs : EventArgs
 	{
-		public CustomEventArgs(string s)
+		public ConnectionFormEventArgs(Chat.Entry.ClientRequestInfo UserSettings)
 		{
-			msg = s;
+			_ServerRequestSettings = UserSettings;
 		}
-		private string msg;
-		public string Message
+		private string _ServerRequestSettings;
+		public Chat.Entry.ClientRequestInfo ServerRequestSettings
 		{
 			get { return msg; }
 		}
