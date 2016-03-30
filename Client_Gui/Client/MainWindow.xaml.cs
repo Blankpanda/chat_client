@@ -22,7 +22,7 @@ namespace Client
     public partial class MainWindow : Window
     {
 
-        // public Chat.Client client = new Chat.Client()
+        public bool TryConnection = false;
         public Chat.Entry.ClientRequestInfo UserSettings;
 
         public MainWindow()
@@ -31,6 +31,7 @@ namespace Client
         }
         
         // Open the Server connection dialog.
+        // TODO: we need to make it so that it calls client.Start() when its ready
         private void FileMenuItemConnect_Click(object sender, RoutedEventArgs e)
         {
             // Open the Connection form and initialize an event to pass the data.
@@ -39,7 +40,23 @@ namespace Client
                 new EventHandler<ConnectionFormEventArgs>(ConnectDiaglogForm_RaiseCustomEvent);
             ConnectDialogForm.Show();
 
-            // try to establish a connection using the user settings.
+            // try to establish a connection using the user settings. 
+            Chat.Client client = new Chat.Client();
+            if (TryConnection)
+            {
+                client.LoadSettings(UserSettings);
+                try
+                {
+                    client.Start();
+                    this.Title = client.isConnected.ToString();
+                }
+                catch (Exception)
+                {
+                    
+                    throw;
+                }
+            }
+             
 
         }
 
@@ -59,6 +76,7 @@ namespace Client
         void ConnectDiaglogForm_RaiseCustomEvent(object sender, ConnectionFormEventArgs e)
         {
             UserSettings = e.ServerRequestSettings;
+            TryConnection = true;
         }
 
 

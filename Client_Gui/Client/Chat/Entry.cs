@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Chat
 {
     [System.Runtime.InteropServices.GuidAttribute("C67F93C0-C172-4B7B-93AA-C29F43F91763")]
-    class Entry
+    public class Entry
     {
         /* Information gained from the user will be stored here and used in Client.cs 
          * to be used when connecting to specifed server */

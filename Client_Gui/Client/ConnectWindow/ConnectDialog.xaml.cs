@@ -36,6 +36,7 @@ namespace Client.Connect
 		// Close out of the form.
 		private void ExitBtn_Click(object sender, RoutedEventArgs e)
 		{
+
 			this.Close();
 		}
 
@@ -47,7 +48,7 @@ namespace Client.Connect
 			{
 				err += 1;
 
-				ServerNameInputBox.Text = "Invalid IP Address.";
+				ServerNameInputBox.Text = "Invalid IP Adress.";
 				ServerNameInputBox.Select(0, ServerPortInputBox.Text.Length);
 
 			}
@@ -77,8 +78,6 @@ namespace Client.Connect
 				UserInfo.ip_address = ServerNameInputBox.Text;   // IP address
 				UserInfo.port_number = int.Parse(ServerPortInputBox.Text);  // Port Number
 				UserInfo.password = ServerPasswordInputBox.Text; // the password to the server    
-
-				Chat.Client client = new Chat.Client(UserInfo);
 
 				ConnectionFormEventArgs info = new ConnectionFormEventArgs(UserInfo);
 				RaiseConnectionFormEvent(this,info);
@@ -115,16 +114,13 @@ namespace Client.Connect
 
 	}
 
-
-	// handles the information retrieved from completing this form.
-	// invoked by RaiseConnectionFormEvent.
 	public class  ConnectionFormEventArgs : EventArgs
 	{
-		public ConnectionFormEventArgs(Chat.Entry.ClientRequestInfo UserSettings)
+		public ConnectionFormEventArgs(Chat.Entry.ClientRequestInfo CRI)
 		{
-			_ServerRequestSettings = UserSettings;
+			_ServerRequestSettings = CRI;
 		}
-		private  Chat.Entry.ClientRequestInfo _ServerRequestSettings;
+		private Chat.Entry.ClientRequestInfo _ServerRequestSettings;
 		public Chat.Entry.ClientRequestInfo ServerRequestSettings
 		{
 			get { return _ServerRequestSettings; }

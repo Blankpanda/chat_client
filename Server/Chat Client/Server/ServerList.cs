@@ -132,7 +132,7 @@ namespace Chat_Client.Server
 		public void DisplayServerList()
 		{
 			string[] directories = Directory.GetDirectories(ServerDirectory);
-
+			
 			if (directories.Length == 0)
 			{
 				Console.WriteLine("No servers currently created.");

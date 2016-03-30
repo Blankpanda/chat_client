@@ -25,7 +25,10 @@ namespace Chat
             set { isConnected = _isConnected; }
         }
 
-
+        public void LoadSettings(Entry.ClientRequestInfo userSettings)
+        {
+            Settings = userSettings;
+        }
                 
         /* constructor requires the user to enter in a strucutre with settings.*/
         public Client(Entry.ClientRequestInfo userSettings)
@@ -33,6 +36,12 @@ namespace Chat
             Settings = userSettings;
         }
 
+
+        /* Load in the settigns using LoadSettings*/
+        public Client()
+        {
+
+        }
              
         public void Start()
         {
@@ -68,7 +77,7 @@ namespace Chat
                        returned = returned.Replace("<EOF>", "");
                       
 
-                       UpdateMainWIndow(returned);
+                       UpdateMainWindow(returned);
                     
                    }
 
@@ -87,9 +96,9 @@ namespace Chat
 
         }
        
-        private void UpdateMainWIndow(string returned)
+        private void UpdateMainWindow(string returned)
         {
-            throw new NotImplementedException();
+            
         }
 
     }
