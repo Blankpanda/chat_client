@@ -74,7 +74,7 @@ namespace Chat_Client.Server
 			string inp = 
 				Console.ReadLine();
 
-			string path = @"Servers\" + inp;
+			string path = inp; // useless but doccumenting 
 			string[] srvs = GetServerList();
 
 			bool exists = false; // I dont really want to do this.
@@ -86,7 +86,7 @@ namespace Chat_Client.Server
 
 			if (exists)			
 			{
-				Directory.Delete(path, true);            
+				Directory.Delete(ServerDirectory + @"\" +path, true);            
 				Console.WriteLine(path + " server deleted.");
 			}
 			else			
@@ -123,7 +123,14 @@ namespace Chat_Client.Server
 		// returns the server list with their config files
 		public string[] GetServerList()
 		{
-			string[] directories = Directory.GetDirectories(ServerDirectory);
+			string[] directories = Directory.GetDirectories(ServerDirectory);            
+			// remove the parent directory part of each string (we dont need it.)
+			
+			for (int i = 0; i < directories.Length; i++)
+			{
+				directories[i] = directories[i].Split('\\')[1];
+			
+			}
 
 			return directories;
 		}
@@ -131,7 +138,7 @@ namespace Chat_Client.Server
 		// displays the server list using standard output
 		public void DisplayServerList()
 		{
-			string[] directories = Directory.GetDirectories(ServerDirectory);
+			string[] directories = GetServerList();
 			
 			if (directories.Length == 0)
 			{
@@ -159,8 +166,7 @@ namespace Chat_Client.Server
 		public bool ServerExists(string ServerName)
 		{
 			// we need to add the Folder that Servers is contained in so we can check for equality.
-			ServerName = @"Servers\" + ServerName;
-
+			
 			string[] Servers = GetServerList();
 
 			for (int i = 0; i <= Servers.Length - 1; i++)
@@ -177,5 +183,45 @@ namespace Chat_Client.Server
 			// this should always work as long as ServerExists() is used before to check if it has a valid name			
 			return ServerInit.Init(ServerName);
 		}
+
+		public void PrintServerSettings()
+		{
+			string[] ids = { "ServerId", "ServerName", "ServerPassword", "ServerBacklog", "ServerIP", "ServerPort" };      
+			string[] Servers = GetServerList();
+			if (Servers.Length == 0)
+				Console.WriteLine("No Servers currently created.");
+			else
+			{            
+				Console.WriteLine("What sever would you like to read?");             
+				string Name = Console.ReadLine();
+
+
+				if (ServerExists(Name))
+				{
+					ServerInit.ServerSettings settings;
+
+					for (int i = 0; i <= Servers.Length - 1; i++)
+					{
+						if (Name == Servers[i])
+						{
+							string ServerPath = MainServerDirectory + @"\" + Name + @"\" + Name +"_config.txt"; // BLECH
+							List<string> ReadSettings = Tools.IO.ReadTextFileList(ServerPath);
+
+							for (int j = 0; i < ReadSettings.Count; j++)
+							{
+								Console.WriteLine(ids[j] + "=" + ReadSettings[j]);
+							}
+							break;
+						}
+					}
+				}
+				else
+				{
+					Console.WriteLine("Invalid name for command 'view'");
+				}
+			}
+					
+		}
+
 	}
 }

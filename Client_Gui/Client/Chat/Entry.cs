@@ -40,35 +40,33 @@ namespace Chat
             
             return settings;
         }
+ 
+        ///* Asks the user for the server that they want connect to.*/
+        //private string GetServerIP()
+        //{
+        //    string inAddr = "";
+        //    while (true)
+        //    {
+        //        Console.WriteLine("Enter in the IP address of the server: ");
+        //        inAddr = Console.ReadLine();
+        //        inAddr = inAddr.Trim();
 
+        //        if (Net.IsPrivateAddress(inAddr))
+        //        {
+        //            if (Net.CheckAddress(inAddr))
+        //            {
+        //                break;
+        //            }
+        //        }                    
+        //        else
+        //        {
+        //            Console.WriteLine("Invalid entry. format: X.X.X.X");
+        //            continue;
+        //        }
 
-        // TODO: Database
-        /* Asks the user for the server that they want connect to.*/
-        private string GetServerIP()
-        {
-            string inAddr = "";
-            while (true)
-            {
-                Console.WriteLine("Enter in the IP address of the server: ");
-                inAddr = Console.ReadLine();
-                inAddr = inAddr.Trim();
-
-                if (Net.IsPrivateAddress(inAddr))
-                {
-                    if (Net.CheckAddress(inAddr))
-                    {
-                        break;
-                    }
-                }                    
-                else
-                {
-                    Console.WriteLine("Invalid entry. format: X.X.X.X");
-                    continue;
-                }
-
-            }
-            return inAddr;
-        }
+        //    }
+        //    return inAddr;
+        //}
 
         
         // TODO: Rewrite this         

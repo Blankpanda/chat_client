@@ -28,6 +28,8 @@ namespace Client
         public MainWindow()
         {
             InitializeComponent();
+
+            FileMenuItemDisconnect.IsEnabled = false;
         }
         
         // Open the Server connection dialog.
@@ -38,17 +40,15 @@ namespace Client
             Connect.ConnectDialog ConnectDialogForm = new Connect.ConnectDialog();
             ConnectDialogForm.RaiseConnectionFormEvent += 
                 new EventHandler<ConnectionFormEventArgs>(ConnectDiaglogForm_RaiseCustomEvent);
-            ConnectDialogForm.Show();
+            ConnectDialogForm.Show();           
 
-            // try to establish a connection using the user settings. 
-            Chat.Client client = new Chat.Client();
+            // try to establish a connection using the user settings.             
             if (TryConnection)
-            {
-                client.LoadSettings(UserSettings);
+            {                
                 try
                 {
-                    client.Start();
-                    this.Title = client.isConnected.ToString();
+                    FileMenuItemDisconnect.IsEnabled = true;
+                    StartConnection(UserSettings);                    
                 }
                 catch (Exception)
                 {
@@ -79,6 +79,17 @@ namespace Client
             TryConnection = true;
         }
 
+        void StartConnection(Chat.Entry.ClientRequestInfo cri)
+        {
+            Chat.Client client = new Chat.Client(cri);
+            client.Start();
+
+            // send the IP address of this client to the server.
+
+
+            //todo: authentication.
+           
+        }
 
     }
 }

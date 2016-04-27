@@ -74,29 +74,7 @@ namespace Chat
                 if (replies[i] == IPStatus.Success)                
                     scount++;                           
         }
-
-
-        // TODO: rewrite this to accomdate for GUI.
-        /*Pings the entered address to see if the address is on the network.*/
-        public static bool CheckAddress(string addr)
-        {
-            // Console.WriteLine("Checking address...");
-
-            Net pinger = new Net();
-
-            pinger.PingAddress(addr); // ping the supplied address.
-
-            if (scount >= 1)
-            {
-               //  Console.WriteLine("Address found.");
-                return true;
-            }
-            else
-                // Console.WriteLine("Address was not found.");
-
-            return false;
-        }
-
+        
          public static string GetHostIpAddress()
          {
             IPHostEntry host = Dns.Resolve(Dns.GetHostName());

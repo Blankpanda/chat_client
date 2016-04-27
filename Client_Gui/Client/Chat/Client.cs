@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
+using System.Windows;
 
 
 namespace Chat
@@ -57,16 +58,16 @@ namespace Chat
                 
                     // socket used to send information
                    Socket sender = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                   Chat client = new Chat();
+                   Chat messenger = new Chat();
                    sender.Connect(remoteEP);
 
                    // intially we want to send a message to the server telling what IP is connecting to it
-                   client.SendIP(sender);                    
+                   messenger.SendIP(sender);                    
              
                    // Begin Chat.
                    while (true)
                    {                      
-                       client.SendMessage(sender); // send the message
+                       messenger.SendMessage(sender); // send the message
                        
                        // get the bytes that we recieve
                        byte[] buf = new byte[1024];
@@ -98,7 +99,7 @@ namespace Chat
        
         private void UpdateMainWindow(string returned)
         {
-            
+            MessageBox.Show(returned);
         }
 
     }

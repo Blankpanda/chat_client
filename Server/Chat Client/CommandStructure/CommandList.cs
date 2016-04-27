@@ -22,6 +22,7 @@ namespace Chat_Client.CommandStructure
             LS       ,
             START    ,
             ALIAS    ,
+            VIEW     ,
         }
          int NUMBER_OF_COMMANDS = Enum.GetValues(typeof(Commands)).Length;
 

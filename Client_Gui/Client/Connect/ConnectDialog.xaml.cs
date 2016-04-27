@@ -52,7 +52,6 @@ namespace Client.Connect
 
 			}
 
-
 			int PortNumber;           
 			try 
 			{	        
@@ -78,7 +77,7 @@ namespace Client.Connect
 				UserInfo.port_number = int.Parse(ServerPortInputBox.Text);  // Port Number
 				UserInfo.password = ServerPasswordInputBox.Text; // the password to the server    
 
-				Chat.Client client = new Chat.Client(UserInfo);
+				// Chat.Client client = new Chat.Client(UserInfo);
 
 				ConnectionFormEventArgs info = new ConnectionFormEventArgs(UserInfo);
 				RaiseConnectionFormEvent(this,info);

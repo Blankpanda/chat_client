@@ -58,6 +58,7 @@ namespace Chat_Client.CommandStructure.Commands
             Start start = new Start();
             Help help = new Help();
             Alias alias = new Alias();
+            View view = new View();
                    
 
             // im sorry mom
@@ -69,7 +70,8 @@ namespace Chat_Client.CommandStructure.Commands
             HelpDisplay.Add( "   " + slist.Name + " - " + slist.Description);
             HelpDisplay.Add( "   " + start.Name + " - " + start.Description);
             HelpDisplay.Add("   "  + alias.Name + " - " + alias.Description);
-            HelpDisplay.Add( "   " + help.Name + " - " + help.Description);
+            HelpDisplay.Add("   " + help.Name + " - " + help.Description);
+            HelpDisplay.Add("   " + view.Name + " - " + view.Description);
 
             foreach (string command in HelpDisplay)
                 Console.WriteLine(command);

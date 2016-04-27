@@ -105,6 +105,10 @@ namespace Chat_Client.CommandStructure
                     {
                         Commands.Alias.Execute();
                     } break;
+                case "VIEW":
+                    {
+                        Commands.View.Execute();
+                    } break;
             }    
         }
 
@@ -169,7 +173,7 @@ namespace Chat_Client.CommandStructure
                 case "START":
                     {
                         Commands.Start.Execute(argument);
-                    } break;
+                    } break;                
                 default:
                     {
                         for (int i = 0; i < NoArgsCommands.Count; i++)
