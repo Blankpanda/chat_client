@@ -12,9 +12,15 @@ namespace Chat_Client.Server
         // appends a time stamp to an inputed string
         public static string WriteTime(string s)
         {
-            
+
             string stamp = "[" + DateTime.Now.ToString() + "]";            
             return stamp + s;
+        }
+
+        public static string GetTime()
+        {
+            string stamp = "[" + DateTime.Now.ToString() + "]";
+            return stamp;
         }
     }
 }

@@ -66,8 +66,8 @@ namespace Chat_Client.Server
 			// then we populate ConfigurationFile with elements of the txt file.
 			// we then use a SeverSettings to pass into Listen()
 		   
-			for (int i = 0; i < ServerList.Length; i++)            
-				ServerList[i] = ServerList[i].Remove(0, SL.MainServerDirectory.Length + 1);
+			//for (int i = 0; i < ServerList.Length; i++)            
+			//    ServerList[i] = ServerList[i].Remove(0, SL.MainServerDirectory.Length + 1);
 
 
 			for (int i = 0; i < ServerList.Length; i++)

@@ -71,5 +71,13 @@ namespace Client.Client
             }
 
         }
+
+        public void Start2()
+        {
+            TcpClient ClientSocket = new TcpClient();
+            NetworkStream ServerStream = default(NetworkStream);
+            string ReadData = null;
+
+        }
     }
 }
