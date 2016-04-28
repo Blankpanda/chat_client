@@ -198,7 +198,6 @@ namespace Chat_Client.Server
 
 				if (ServerExists(Name))
 				{
-					ServerInit.ServerSettings settings;
 
 					for (int i = 0; i <= Servers.Length - 1; i++)
 					{
@@ -207,7 +206,7 @@ namespace Chat_Client.Server
 							string ServerPath = MainServerDirectory + @"\" + Name + @"\" + Name +"_config.txt"; // BLECH
 							List<string> ReadSettings = Tools.IO.ReadTextFileList(ServerPath);
 
-							for (int j = 0; i < ReadSettings.Count; j++)
+							for (int j = 0; j < ReadSettings.Count - 1; j++) // - 1 for newline.
 							{
 								Console.WriteLine(ids[j] + "=" + ReadSettings[j]);
 							}

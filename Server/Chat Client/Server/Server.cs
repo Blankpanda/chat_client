@@ -120,11 +120,11 @@ namespace Chat_Client.Server
 	
 		private void Listen2(ServerInit.ServerSettings settings)
 		{
-			TcpListener ServerSocket = new TcpListener(IPAddress.Parse("127.0.0.1"), settings.port_number);
+			TcpListener ServerSocket = new TcpListener(IPAddress.Any, settings.port_number);
 			TcpClient ClientSocket = default(TcpClient);
 			int counter = 0;
 
-			ServerSocket.Start(settings.backlog);
+			ServerSocket.Start();
 
 			Console.WriteLine("Server Started.");
 			counter = 0;
