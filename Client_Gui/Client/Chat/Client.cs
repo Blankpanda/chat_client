@@ -6,12 +6,18 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
 using System.Windows;
+using System.Threading;
 
 
 namespace Chat
 {
     class Client
     {
+        Window _MainWindow;
+
+        TcpClient ClientSocket = new TcpClient();
+        NetworkStream ServerStream = default(NetworkStream);
+        string ReadData = null;
 
         private bool _isConnected = false;
 
@@ -32,9 +38,10 @@ namespace Chat
         }
                 
         /* constructor requires the user to enter in a strucutre with settings.*/
-        public Client(Entry.ClientRequestInfo userSettings)
+        public Client(Entry.ClientRequestInfo userSettings, Window MainWindow)
         {
             Settings = userSettings;
+            _MainWindow = MainWindow;
         }
 
 
@@ -78,7 +85,6 @@ namespace Chat
                        returned = returned.Replace("<EOF>", "");
                       
 
-                       UpdateMainWindow(returned);
                     
                    }
 
@@ -96,11 +102,7 @@ namespace Chat
             }
 
         }
-       
-        private void UpdateMainWindow(string returned)
-        {
-            MessageBox.Show(returned);
-        }
+
 
     }
 }

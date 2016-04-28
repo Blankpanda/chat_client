@@ -12,6 +12,10 @@ namespace Client.Client
     class Client
     {
         public Entry.ClientRequestInfo settings; /* settings for the user to pass in*/
+        TcpClient ClientSocket = new TcpClient();
+        NetworkStream ServerStream = default(NetworkStream);
+        string ReadData = null;
+
 
         /* constructor requires the user to enter in a strucutre with settings.*/
         public Client(Entry.ClientRequestInfo userSettings)
@@ -72,12 +76,9 @@ namespace Client.Client
 
         }
 
-        public void Start2()
+        public void Start2(Entry.ClientRequestInfo userSettings)
         {
-            TcpClient ClientSocket = new TcpClient();
-            NetworkStream ServerStream = default(NetworkStream);
-            string ReadData = null;
-
+            
         }
     }
 }

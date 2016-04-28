@@ -13,6 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Net.Sockets;
+using System.Net;
+using System.Threading;
 
 namespace Client
 {
@@ -24,6 +27,10 @@ namespace Client
 
         public bool TryConnection = false;
         public Chat.Entry.ClientRequestInfo UserSettings;
+
+        TcpClient ClientSocket = new TcpClient();
+        NetworkStream ServerStream = default(NetworkStream);
+        string ReadData = null;
 
         public MainWindow()
         {
@@ -48,7 +55,8 @@ namespace Client
                 try
                 {
                     FileMenuItemDisconnect.IsEnabled = true;
-                    StartConnection(UserSettings);                    
+                 //   StartConnection(UserSettings);
+            
                 }
                 catch (Exception)
                 {
@@ -79,16 +87,60 @@ namespace Client
             TryConnection = true;
         }
 
-        void StartConnection(Chat.Entry.ClientRequestInfo cri)
-        {
-            Chat.Client client = new Chat.Client(cri);
-            client.Start();
-
-            // send the IP address of this client to the server.
-
-
-            //todo: authentication.
+        //void StartConnection(Chat.Entry.ClientRequestInfo cri)
+        //{
+        //    Chat.Client client = new Chat.Client(cri, this);
+        //    client.Start2();     
+        //    //todo: authentication.
            
+        //}
+
+        // Hack: need to add this here sucks.
+        // todo: rename and or (preferably or, perhaps and + or but who know) remove.
+        public void Start2()
+        {
+            ReadData = "Connecting to Chat Server...";
+            UpdateMainWindow();
+            ClientSocket.Connect(UserSettings.ip_address, UserSettings.port_number);
+            ServerStream = ClientSocket.GetStream();
+
+            byte[] outStream = System.Text.Encoding.ASCII.GetBytes(MessageTextBox.Text + "$"); //txt box
+            ServerStream.Write(outStream, 0, outStream.Length);
+            ServerStream.Flush();
+
+            Thread ctThread = new Thread(getMessage);
+        }
+
+        private void getMessage()
+        {
+            while (true)
+            {
+                ServerStream = ClientSocket.GetStream();
+                int buffsize = 0;
+                byte[] inStream = new byte[10025];
+                buffsize = ClientSocket.ReceiveBufferSize;
+                ServerStream.Read(inStream, 0, buffsize);
+                string returndata = System.Text.Encoding.ASCII.GetString(inStream);
+                ReadData = "" + returndata;
+                UpdateMainWindow();
+
+            }
+        }
+        private void UpdateMainWindow()
+        {
+            MessageTextBox.Text = MessageTextBox.Text + Environment.NewLine + " >> " + ReadData;
+        }
+
+        private void SendButton_click(object sender, RoutedEventArgs e)
+        {            
+            byte[] outStream = System.Text.Encoding.ASCII.GetBytes(MessageTextBox.Text + "$");
+            ServerStream.Write(outStream, 0, outStream.Length);
+            ServerStream.Flush();
+        }
+
+        private void test_button_click(object sender, RoutedEventArgs e)
+        {
+            Start2();
         }
 
     }

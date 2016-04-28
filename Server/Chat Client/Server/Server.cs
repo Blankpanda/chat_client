@@ -43,7 +43,7 @@ namespace Chat_Client.Server
 			Console.WriteLine();
 			command.Prompt(settings.server_name + "> ");
 			
-			Listen(settings);
+			Listen2(settings);
 		}
 
 		/// <summary>
@@ -143,7 +143,7 @@ namespace Chat_Client.Server
 
 				clientList.Add(ClientData, ClientSocket);
 
-				broadcast(ClientData + " Joined ", ClientData, false);
+				broadcast(ClientData + " Joined ", ClientData, true);
 			}
 
 			ClientSocket.Close();
