@@ -18,7 +18,7 @@ namespace Chat_Client.Server
 		private ServerInit.ServerSettings settings;
 		public static string data = null;
 
-		public static Hashtable clientList = new Hashtable();
+	//	public static Hashtable clientList = new Hashtable();
 
 		/// <summary>
 		/// Constructor takes Server configuration structure which is read from the config file.
@@ -42,8 +42,8 @@ namespace Chat_Client.Server
 			CommandStructure.RunCommand command = new CommandStructure.RunCommand(); // change the prompt.
 			Console.WriteLine();
 			command.Prompt(settings.server_name + "> ");
-			
-			Listen2(settings);
+
+			Listen(settings);
 		}
 
 		/// <summary>
@@ -100,6 +100,7 @@ namespace Chat_Client.Server
 						// we want to return the data to the client
 						byte[] ReturnMessage = Encoding.ASCII.GetBytes(data);
 						handler.Send(ReturnMessage);
+                        Console.WriteLine();
 					}
 				   
 
@@ -117,63 +118,70 @@ namespace Chat_Client.Server
 			}
 
 		}
-	
-		private void Listen2(ServerInit.ServerSettings settings)
-		{
-			TcpListener ServerSocket = new TcpListener(IPAddress.Any, settings.port_number);
-			TcpClient ClientSocket = default(TcpClient);
-			int counter = 0;
 
-			ServerSocket.Start();
+		#region 2
+		//private void Listen2(ServerInit.ServerSettings settings)
+		//{
+		//    TcpListener ServerSocket = new TcpListener(settings.port_number);
+		//    TcpClient ClientSocket = default(TcpClient);
+		//    int counter = 0;
 
-			Console.WriteLine("Server Started.");
-			counter = 0;
-			while(true)
-			{
-				counter += 1;
-				ClientSocket = ServerSocket.AcceptTcpClient();
+		//    ServerSocket.Start();
 
-				byte[] BytesFrom = new byte[10025];
-				string ClientData = null;
+		//    Console.WriteLine("Server Started.");
+		//    counter = 0;
+		//    while (true)
+		//    {
+		//        counter += 1;
+		//        ClientSocket = ServerSocket.AcceptTcpClient();
 
-				NetworkStream NetStream = ClientSocket.GetStream();
-				NetStream.Read(BytesFrom, 0, (int)ClientSocket.ReceiveBufferSize);
-				ClientData = System.Text.Encoding.ASCII.GetString(BytesFrom);
-				ClientData = ClientData.Substring(0, ClientData.IndexOf('$'));
+		//        byte[] BytesFrom = new byte[4096];
+		//        string ClientData = null;
 
-				clientList.Add(ClientData, ClientSocket);
+		//        NetworkStream NetStream = ClientSocket.GetStream();
+		//        NetStream.Read(BytesFrom, 0, (int)ClientSocket.ReceiveBufferSize);
+		//        ClientData = System.Text.Encoding.ASCII.GetString(BytesFrom);
+		//        ClientData = ClientData.Substring(0, ClientData.IndexOf('$'));
 
-				broadcast(ClientData + " Joined ", ClientData, true);
-			}
+		//        clientList.Add(ClientData, ClientSocket);
 
-			ClientSocket.Close();
-			ServerSocket.Stop();
-			Console.WriteLine("exit");
-			Console.ReadLine();
-		}
+		//        broadcast(ClientData + " Joined ", ClientData, true);
+		//    }
 
-		private void broadcast(string msg, string UserName, bool flag)
-		{
-			foreach (DictionaryEntry Item in clientList)
-			{
-				TcpClient BroadcastSocket;
-				BroadcastSocket = (TcpClient)Item.Value;
-				NetworkStream BroadcastStream = BroadcastSocket.GetStream();
-				Byte[] BroadcastBytes = null;
+		//    ClientSocket.Close();
+		//    ServerSocket.Stop();
+		//    Console.WriteLine("exit");
+		//    Console.ReadLine();
+		//}
 
-				if (flag == true)
-				{
-					string time = TimeStamp.GetTime();
-					BroadcastBytes = Encoding.ASCII.GetBytes(time + " " + UserName + " said : " + msg);
-				}
-				else
-				{
-					BroadcastBytes = Encoding.ASCII.GetBytes(msg);
-				}
-				BroadcastStream.Write(BroadcastBytes, 0, BroadcastBytes.Length);
-				BroadcastStream.Flush();
-			}
-		}
+		//private void broadcast(string msg, string UserName, bool flag)
+		//{
+		//    foreach (DictionaryEntry Item in clientList)
+		//    {
+		//        TcpClient BroadcastSocket;
+		//        BroadcastSocket = (TcpClient)Item.Value;
+		//        NetworkStream BroadcastStream = BroadcastSocket.GetStream();
+		//        Byte[] BroadcastBytes = null;
+
+		//        if (flag == true)
+		//        {
+		//            string time = TimeStamp.GetTime();
+		//            BroadcastBytes = Encoding.ASCII.GetBytes(time + " " + UserName + " said : " + msg);
+		//        }
+		//        else
+		//        {
+		//            BroadcastBytes = Encoding.ASCII.GetBytes(msg);
+		//        }
+		//        BroadcastStream.Write(BroadcastBytes, 0, BroadcastBytes.Length);
+		//        BroadcastStream.Flush();
+		//    }
+		//}
+		
+
+		#endregion
+
+
+
 		/// <summary>
 		/// Reads incoming data and stores it in a buffer which then formats it into a string.
 		/// </summary>

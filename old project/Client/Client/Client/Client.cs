@@ -12,9 +12,9 @@ namespace Client.Client
     class Client
     {
         public Entry.ClientRequestInfo settings; /* settings for the user to pass in*/
-        TcpClient ClientSocket = new TcpClient();
-        NetworkStream ServerStream = default(NetworkStream);
-        string ReadData = null;
+      //  TcpClient ClientSocket = new TcpClient();
+     //   NetworkStream ServerStream = default(NetworkStream);
+    //    string ReadData = null;
 
 
         /* constructor requires the user to enter in a strucutre with settings.*/
@@ -37,7 +37,7 @@ namespace Client.Client
                 
                     // socket used to send information
                    Socket sender = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                   Chat client = new Chat();
+                   Chat client = new Chat(settings.username);
                    sender.Connect(remoteEP);
 
                    // intially we want to send a message to the server telling what IP is connecting to it
@@ -56,9 +56,6 @@ namespace Client.Client
                        string returned = Encoding.ASCII.GetString(buf, 0, BytesRecieved);
                        returned = returned.Replace("<EOF>", "");
                        Console.WriteLine(returned);
-
-                       
-                    
                    }
 
                    sender.Shutdown(SocketShutdown.Send);
@@ -76,9 +73,5 @@ namespace Client.Client
 
         }
 
-        public void Start2(Entry.ClientRequestInfo userSettings)
-        {
-            
-        }
     }
 }

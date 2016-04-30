@@ -11,7 +11,7 @@ namespace Client.Client
 		
 		public enum MessageType
 		{
-			SentIP = 1,
+			SentIP = 1,          
 			Message,
 
 		}

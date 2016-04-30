@@ -14,14 +14,16 @@ namespace Client.Client
         
         public struct ClientRequestInfo
         {
-            public string ip_address, password;
-            public int    port_number;
+            public string ip_address, password, username;
+            public int    port_number;            
 
-            ClientRequestInfo(string addr, string pass, int port)
+            ClientRequestInfo(string addr, string pass, int port, string uname)
             {
                 ip_address  = addr;
                 password    = pass;
+                username    =uname;
                 port_number = port;
+                
             }      
 
         }
@@ -32,13 +34,36 @@ namespace Client.Client
 
             Console.WriteLine("Press 'Enter' to find a server.");
             Console.ReadLine();
-
+            Console.Clear();
             settings.ip_address = GetServerIP();
             settings.port_number = GetServerPort();
+            settings.username = GetUserName();
             
             return settings;
         }
 
+        private string GetUserName()
+        {
+            string inName = "";
+            while(true)
+            {
+                Console.WriteLine("Please Enter in your display name:");
+                try
+                {
+                    inName = Console.ReadLine();
+                    return inName;
+                }
+                catch (Exception)
+                {
+
+                    Console.WriteLine("Invalid name entered.");
+                    continue;
+                }
+                
+                
+                
+            }
+        }
 
         /* Asks the user for the server that they want connect to.*/
         private string GetServerIP()
@@ -64,6 +89,7 @@ namespace Client.Client
                 }
 
             }
+            Console.Clear();
             return inAddr;
         }
 
@@ -89,6 +115,7 @@ namespace Client.Client
                     else
                     {
                         numberPort = int.Parse(inPort);
+                        Console.Clear();
                         return numberPort;
                     }
 

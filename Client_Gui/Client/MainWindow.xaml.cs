@@ -63,9 +63,7 @@ namespace Client
                     
                     throw;
                 }
-            }
-             
-
+            }            
         }
 
         // Disconnect to the current server.
@@ -85,18 +83,9 @@ namespace Client
         {
             UserSettings = e.ServerRequestSettings;
             TryConnection = true;
-        }
+        }    
 
-        //void StartConnection(Chat.Entry.ClientRequestInfo cri)
-        //{
-        //    Chat.Client client = new Chat.Client(cri, this);
-        //    client.Start2();     
-        //    //todo: authentication.
-           
-        //}
-
-        // Hack: need to add this here sucks.
-        // todo: rename and or (preferably or, perhaps and + or but who know) remove.
+        #region 2
         public void Start2()
         {
             ReadData = "Connecting to Chat Server...";
@@ -109,6 +98,7 @@ namespace Client
             ServerStream.Flush();
 
             Thread ctThread = new Thread(getMessage);
+            ctThread.Start();
         }
 
         private void getMessage()
@@ -117,7 +107,7 @@ namespace Client
             {
                 ServerStream = ClientSocket.GetStream();
                 int buffsize = 0;
-                byte[] inStream = new byte[10025];
+                byte[] inStream = new byte[4096];
                 buffsize = ClientSocket.ReceiveBufferSize;
                 ServerStream.Read(inStream, 0, buffsize);
                 string returndata = System.Text.Encoding.ASCII.GetString(inStream);
@@ -128,20 +118,24 @@ namespace Client
         }
         private void UpdateMainWindow()
         {
-            MessageTextBox.Text = MessageTextBox.Text + Environment.NewLine + " >> " + ReadData;
+            ChatTextBox.Text = ChatTextBox.Text + Environment.NewLine + " >> " + ReadData;
         }
 
         private void SendButton_click(object sender, RoutedEventArgs e)
-        {            
-            byte[] outStream = System.Text.Encoding.ASCII.GetBytes(MessageTextBox.Text + "$");
-            ServerStream.Write(outStream, 0, outStream.Length);
-            ServerStream.Flush();
+        {
+            //byte[] outStream = System.Text.Encoding.ASCII.GetBytes(MessageTextBox.Text + "$");
+            //ServerStream.Write(outStream, 0, outStream.Length);
+            //ServerStream.Flush();
         }
 
         private void test_button_click(object sender, RoutedEventArgs e)
         {
             Start2();
         }
+        #endregion
+        // Hack: need to add this here sucks.
+        // todo: rename and or (preferably or, perhaps and + or but who know) remove.
+       
 
     }
 }

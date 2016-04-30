@@ -10,14 +10,25 @@ namespace Client.Client
     class Chat
     {
         public const string EOF_FLAG = "<EOF>";
-        
+
+        private string _UserName;
+
+        public Chat()
+        {
+
+        }
+        public Chat(string Username)
+        {
+            _UserName = Username;
+        }
+
         /// <summary>
         /// Constructs a message prompt and accepts input from a user.
         /// </summary>
         /// <returns></returns>
         public string GetMessageFromStream()
         {
-            Console.Write(":");
+            Console.Write(_UserName +":");
             string input = Console.ReadLine();
             return input;
         }
