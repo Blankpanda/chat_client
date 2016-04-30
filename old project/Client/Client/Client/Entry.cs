@@ -38,6 +38,8 @@ namespace Client.Client
             settings.ip_address = GetServerIP();
             settings.port_number = GetServerPort();
             settings.username = GetUserName();
+
+            Console.WriteLine("Press Enter' to continue.");
             
             return settings;
         }
@@ -51,6 +53,7 @@ namespace Client.Client
                 try
                 {
                     inName = Console.ReadLine();
+                    Console.Clear();
                     return inName;
                 }
                 catch (Exception)
@@ -110,6 +113,7 @@ namespace Client.Client
 
                     if (inPort == "")
                     {
+                        Console.Clear();
                         return 7777;                        
                     }
                     else
@@ -135,6 +139,54 @@ namespace Client.Client
 
         //}
 
-       
+
+
+        internal void CheckServer(ClientRequestInfo settings)
+        {
+            int err = 0;
+
+            // Check the IP address.
+            Console.WriteLine("Checking" + settings.ip_address + "Server address...");            
+            if(Net.CheckAddress(settings.ip_address))
+            {
+                Console.WriteLine("Address Found.");
+            }
+            else
+            {
+                err++;
+                Console.WriteLine("Failed to find address.");
+            }
+
+
+            // Check if the port is open
+            Console.WriteLine("Checking to see if port " + settings.port_number.ToString() + " is open...");
+            using(System.Net.Sockets.TcpClient tcp = new System.Net.Sockets.TcpClient())
+            {
+                try
+                {
+                    tcp.Connect(settings.ip_address, settings.port_number);
+                    Console.WriteLine(settings.port_number.ToString() + " is open.");
+                }
+                catch (Exception)
+                {
+                    err++;
+                    Console.WriteLine(settings.port_number.ToString() + " is not open");                    
+                }
+            }
+
+            // TODO: Check if the password is correct.            
+
+            if (err == 0)
+            {
+                Console.WriteLine("Starting Connection to Server...");
+            }
+            else
+            {
+                // TODO: later we can just have the application close out
+                Console.WriteLine("Connection to Server Failed. Shuting down.");
+                Console.ReadLine();
+                Environment.Exit(0);
+            }
+        }
     }
 }

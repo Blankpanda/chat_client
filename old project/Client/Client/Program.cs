@@ -17,19 +17,38 @@ namespace Client
         static void Main(string[] args)
         {
             // Number of rows for each area
-            areaHeights = (Console.WindowHeight - 2) / 2;
+            areaHeights = (Console.WindowHeight - 2);
 
-            drawScreen();
+            
+            // Run through the starting dialog.
+            Client.Entry entry = new Client.Entry();
+            Client.Entry.ClientRequestInfo UserSettings = entry.FindServer();
 
-            int i = 0;
+            entry.CheckServer(UserSettings);
+            DrawScreen(); //initalize the screen
+          //  AddLineToBuffer(ref area1, UserSettings.ip_address + "|" + UserSettings.password + "|" + UserSettings.port_number.ToString() + "|" + UserSettings.username);
+            
+            string Input = "";
             while (true)
             {
-                i++;              
-                    AddLineToBuffer(ref area1, Console.ReadLine());
+                try
+                {
+                    // Timestamp the Input.
+                    Input = Console.ReadLine();
+                }
+                catch (Exception)
+                {
+                    // todo: specifiy this exeception
+                    throw;
+                }
                 
-                  //  AddLineToBuffer(ref area2, Console.ReadLine());
 
-                drawScreen();
+                if (Input != "")
+                {
+                    AddLineToBuffer(ref area1, Input);
+                }
+                  //  AddLineToBuffer(ref area2, Console.ReadLine());
+                DrawScreen();
             }
         }
 
@@ -44,7 +63,7 @@ namespace Client
         }
 
 
-        private static void drawScreen()
+        private static void DrawScreen()
         {
             Console.Clear();
 
@@ -59,9 +78,8 @@ namespace Client
 
             for (int i = 0; i < area1.Count; i++)
             {
-                Console.SetCursorPosition(0, currentLine - (i + 1));
-                Console.WriteLine(area1[i]);
-
+                Console.SetCursorPosition(0, currentLine - (i + 1));                
+                Console.WriteLine(area1[i]);                                
             }
 
             currentLine = (areaHeights * 2);

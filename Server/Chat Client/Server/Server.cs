@@ -100,7 +100,7 @@ namespace Chat_Client.Server
 						// we want to return the data to the client
 						byte[] ReturnMessage = Encoding.ASCII.GetBytes(data);
 						handler.Send(ReturnMessage);
-                        Console.WriteLine();
+						Console.WriteLine();
 					}
 				   
 
