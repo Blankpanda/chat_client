@@ -23,7 +23,7 @@ namespace Client.Client
         }
 
         /// <summary>
-        /// Constructs a message prompt and accepts input from a user.
+        /// Depracated. dont use this.
         /// </summary>
         /// <returns></returns>
         public string GetMessageFromStream()
@@ -38,10 +38,9 @@ namespace Client.Client
             Enum MessageType = Message.MessageType.Message; // the type of message where sending here is a text message.
             Message msg = new Message();
 
-            string ChatMessage = "";
-            ChatMessage = GetMessageFromStream();
+            string sdfsa = GetMessageFromStream();
 
-            byte[] message = Encoding.ASCII.GetBytes(ChatMessage + "<EOF>");
+            byte[] message = Encoding.ASCII.GetBytes(sdfsa + "<EOF>");
             int sent = sender.Send(message);
 
             return sent;

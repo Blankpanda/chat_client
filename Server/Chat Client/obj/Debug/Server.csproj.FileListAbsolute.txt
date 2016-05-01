@@ -21,3 +21,6 @@ C:\Users\CalebsComp\Documents\chat\Server\Chat Client\obj\Debug\Chat Client.pdb
 C:\Users\CalebsComp\Documents\chat\Server\Chat Client\bin\Debug\Chat Client.exe
 C:\Users\CalebsComp\Documents\chat\Server\Chat Client\bin\Debug\Chat Client.pdb
 C:\Users\CalebsComp\Documents\chat\Server\Chat Client\obj\Debug\Server.csprojResolveAssemblyReference.cache
+C:\Users\CalebsComp\Desktop\chat\Server\Chat Client\bin\Debug\Chat Client.exe.config
+C:\Users\CalebsComp\Desktop\chat\Server\Chat Client\obj\Debug\Chat Client.exe
+C:\Users\CalebsComp\Desktop\chat\Server\Chat Client\obj\Debug\Chat Client.pdb

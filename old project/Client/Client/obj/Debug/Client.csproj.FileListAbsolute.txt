@@ -33,3 +33,9 @@ C:\Users\CalebsComp\Documents\chat\old project\Client\Client\obj\Debug\Client.pd
 C:\Users\CalebsComp\Documents\chat\old project\Client\Client\bin\Debug\Client.exe
 C:\Users\CalebsComp\Documents\chat\old project\Client\Client\bin\Debug\Client.pdb
 C:\Users\CalebsComp\Documents\chat\old project\Client\Client\obj\Debug\Client.csprojResolveAssemblyReference.cache
+C:\Users\CalebsComp\Desktop\chat\old project\Client\Client\bin\Debug\Client.exe.config
+C:\Users\CalebsComp\Desktop\chat\old project\Client\Client\obj\Debug\Client.exe
+C:\Users\CalebsComp\Desktop\chat\old project\Client\Client\obj\Debug\Client.pdb
+C:\Users\CalebsComp\Desktop\chat\old project\Client\Client\bin\Debug\Client.exe
+C:\Users\CalebsComp\Desktop\chat\old project\Client\Client\bin\Debug\Client.pdb
+C:\Users\CalebsComp\Desktop\chat\old project\Client\Client\obj\Debug\Client.csprojResolveAssemblyReference.cache

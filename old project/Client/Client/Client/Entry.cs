@@ -38,9 +38,7 @@ namespace Client.Client
             settings.ip_address = GetServerIP();
             settings.port_number = GetServerPort();
             settings.username = GetUserName();
-
-            Console.WriteLine("Press Enter' to continue.");
-            
+                        
             return settings;
         }
 
@@ -146,7 +144,7 @@ namespace Client.Client
             int err = 0;
 
             // Check the IP address.
-            Console.WriteLine("Checking" + settings.ip_address + "Server address...");            
+            Console.WriteLine("Checking " + settings.ip_address + " Server address...");
             if(Net.CheckAddress(settings.ip_address))
             {
                 Console.WriteLine("Address Found.");
@@ -158,21 +156,21 @@ namespace Client.Client
             }
 
 
-            // Check if the port is open
-            Console.WriteLine("Checking to see if port " + settings.port_number.ToString() + " is open...");
-            using(System.Net.Sockets.TcpClient tcp = new System.Net.Sockets.TcpClient())
-            {
-                try
-                {
-                    tcp.Connect(settings.ip_address, settings.port_number);
-                    Console.WriteLine(settings.port_number.ToString() + " is open.");
-                }
-                catch (Exception)
-                {
-                    err++;
-                    Console.WriteLine(settings.port_number.ToString() + " is not open");                    
-                }
-            }
+            //// Check if the port is open
+            //Console.WriteLine("Checking to see if port " + settings.port_number.ToString() + " is open...");
+            //using(System.Net.Sockets.TcpClient tcp = new System.Net.Sockets.TcpClient())
+            //{
+            //    try
+            //    {
+            //        tcp.Connect(settings.ip_address, settings.port_number);
+            //        Console.WriteLine(settings.port_number.ToString() + " is open.");
+            //    }
+            //    catch (Exception)
+            //    {
+            //        err++;
+            //        Console.WriteLine(settings.port_number.ToString() + " is not open.");
+            //    }
+            //}
 
             // TODO: Check if the password is correct.            
 

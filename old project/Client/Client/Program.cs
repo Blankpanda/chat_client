@@ -23,33 +23,10 @@ namespace Client
             // Run through the starting dialog.
             Client.Entry entry = new Client.Entry();
             Client.Entry.ClientRequestInfo UserSettings = entry.FindServer();
-
+           
             entry.CheckServer(UserSettings);
-            DrawScreen(); //initalize the screen
-          //  AddLineToBuffer(ref area1, UserSettings.ip_address + "|" + UserSettings.password + "|" + UserSettings.port_number.ToString() + "|" + UserSettings.username);
-            
-            string Input = "";
-            while (true)
-            {
-                try
-                {
-                    // Timestamp the Input.
-                    Input = Console.ReadLine();
-                }
-                catch (Exception)
-                {
-                    // todo: specifiy this exeception
-                    throw;
-                }
-                
-
-                if (Input != "")
-                {
-                    AddLineToBuffer(ref area1, Input);
-                }
-                  //  AddLineToBuffer(ref area2, Console.ReadLine());
-                DrawScreen();
-            }
+            Client.Client client = new Client.Client(UserSettings);
+            client.Start2();
         }
 
         private static void AddLineToBuffer(ref List<string> areaBuffer, string line)
