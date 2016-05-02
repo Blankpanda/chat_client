@@ -44,8 +44,9 @@ namespace Client.Client
         }
 
         // todo: write this
-        public void DropConnection()
+        public void DropConnection(Socket sender)
         {
+            sender.Close();
         }
 
         public int SendMessage(Socket sender, string msg)
@@ -67,7 +68,7 @@ namespace Client.Client
             IPAddress ip = IPAddress.Parse(settings.ip_address);
             remoteEP = new IPEndPoint(ip, settings.port_number);
 
-            areaHeights = (Console.WindowHeight -2);
+            areaHeights = (Console.WindowHeight - 2);
 
             try
             {
@@ -75,18 +76,20 @@ namespace Client.Client
                 {
                     sender.Connect(remoteEP);
                     DrawScreen();
-                    // AddLineToBuffer(ref area1, "conn " + sender.RemoteEndPoint.ToString());                    
+                    // AddLineToBuffer(ref area1, "conn " + sender.RemoteEndPoint.ToString());
+                    sender.ReceiveTimeout = 10;
                     while (true)
                     {
                         string Input = Console.ReadLine();
-                        SendMessage(sender, settings.username + ": " + Input);
 
                         byte[] buf = new byte[1024];
+                        SendMessage(sender, settings.username + ": " + Input);
+
                         int BytesRecieved = sender.Receive(buf);
                         string returned = Encoding.ASCII.GetString(buf, 0, BytesRecieved);
 
-                        returned = returned.Replace("<EOF>", "");                        
-                       // AddLineToBuffer(ref area1, returned);
+                        returned = returned.Replace("<EOF>", "");
+                        // AddLineToBuffer(ref area1, returned);
                         string[] cont = returned.Split('|');
                         area1 = new List<string>(cont);
                         DrawScreen();
@@ -103,6 +106,7 @@ namespace Client.Client
                 Environment.Exit(0);
             }
         }
+
         private static void AddLineToBuffer(ref List<string> areaBuffer, string line)
         {
             areaBuffer.Insert(0, line);
@@ -115,7 +119,7 @@ namespace Client.Client
 
         private static void DrawScreen()
         {
-            Console.Clear();            
+            Console.Clear();
 
             // Draw the area divider
             for (int i = 0; i < Console.BufferWidth; i++)

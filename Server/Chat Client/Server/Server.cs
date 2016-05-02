@@ -68,12 +68,12 @@ namespace Chat_Client.Server
                 {
                     Thread EstablishConnectionThread = new Thread(NewConnection);    
                     EstablishConnectionThread.Start();
-
-                    bcount++;
+                 bcount++;
                 }
 
                 while (true)
                 {
+   
                     ;
                 }
                 
@@ -86,7 +86,7 @@ namespace Chat_Client.Server
                     Console.WriteLine("et");
                 }
             }
-        }
+         }
 
         private void NewConnection()
         {

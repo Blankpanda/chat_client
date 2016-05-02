@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Chat_Client.CommandStructure.Commands
+﻿namespace Chat_Client.CommandStructure.Commands
 {
-    class View
+    internal class View
     {
-
         private string _Name = "view";
         private string _Desc = "View server settings from a select server";
-                               
+
         public string Name
         {
             get { return _Name; }
@@ -24,13 +17,12 @@ namespace Chat_Client.CommandStructure.Commands
             set { Description = _Desc; }
         }
 
-
         public static void Execute()
         {
-             Server.ServerList slist = new Server.ServerList();
+            Server.ServerList slist = new Server.ServerList();
             //string[] ServerList = slist.GetServerList(); // gets a list of all of the created servers from the Servers/ directory.
-        
-            slist.PrintServerSettings();                           
+
+            slist.PrintServerSettings();
         }
     }
 }

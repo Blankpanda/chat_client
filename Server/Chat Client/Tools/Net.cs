@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Net;
 using System.Net.NetworkInformation;
+using System.Text;
 
 namespace Chat_Client.Tools
 {
-    class Net
+    internal class Net
     {
         public static bool IsPrivateAddress(string address)
         {
@@ -25,26 +21,23 @@ namespace Chat_Client.Tools
                 {
                     return false;
                 }
-
             }
 
             return true;
         }
-        
+
         public void PingAddress()
         {
             Console.WriteLine("Enter in an address to ping.");
             string addr = Console.ReadLine();
 
-            
             int count = 0;
 
             if (IsPrivateAddress(addr))
             {
                 while (count <= 4)
                 {
-
-                    // used to construct a 32 byte message 
+                    // used to construct a 32 byte message
                     string data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
                     byte[] buffer = Encoding.ASCII.GetBytes(data);
                     int timeout = 120;
@@ -72,11 +65,10 @@ namespace Chat_Client.Tools
             {
                 Console.WriteLine("The entered address is not an IP address.");
             }
-            
         }
 
-
         /* Overload to have an already supplied address ping.*/
+
         public void PingAddress(string addr)
         {
             int count = 0;
@@ -85,8 +77,7 @@ namespace Chat_Client.Tools
             {
                 while (count <= 4)
                 {
-
-                    // used to construct a 32 byte message 
+                    // used to construct a 32 byte message
                     string data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
                     byte[] buffer = Encoding.ASCII.GetBytes(data);
                     int timeout = 120;
@@ -114,7 +105,6 @@ namespace Chat_Client.Tools
             {
                 Console.WriteLine("The entered address is not an IP address.");
             }
-
         }
     }
 }

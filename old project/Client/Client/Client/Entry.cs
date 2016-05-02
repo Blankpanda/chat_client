@@ -1,31 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 
 namespace Client.Client
 {
-    class Entry
+    internal class Entry
     {
-        /* Information gained from the user will be stored here and used in Client.cs 
+        /* Information gained from the user will be stored here and used in Client.cs
          * to be used when connecting to specifed server */
-        
+
         public struct ClientRequestInfo
         {
             public string ip_address, password, username;
-            public int    port_number;            
+            public int port_number;
 
-            ClientRequestInfo(string addr, string pass, int port, string uname)
+            private ClientRequestInfo(string addr, string pass, int port, string uname)
             {
-                ip_address  = addr;
-                password    = pass;
-                username    =uname;
+                ip_address = addr;
+                password = pass;
+                username = uname;
                 port_number = port;
-                
-            }      
-
+            }
         }
 
         public ClientRequestInfo FindServer()
@@ -38,14 +31,14 @@ namespace Client.Client
             settings.ip_address = GetServerIP();
             settings.port_number = GetServerPort();
             settings.username = GetUserName();
-                        
+
             return settings;
         }
 
         private string GetUserName()
         {
             string inName = "";
-            while(true)
+            while (true)
             {
                 Console.WriteLine("Please Enter in your display name:");
                 try
@@ -56,17 +49,14 @@ namespace Client.Client
                 }
                 catch (Exception)
                 {
-
                     Console.WriteLine("Invalid name entered.");
                     continue;
                 }
-                
-                
-                
             }
         }
 
         /* Asks the user for the server that they want connect to.*/
+
         private string GetServerIP()
         {
             string inAddr = "";
@@ -82,24 +72,23 @@ namespace Client.Client
                     {
                         break;
                     }
-                }                    
+                }
                 else
                 {
                     Console.WriteLine("Invalid entry. format: X.X.X.X");
                     continue;
                 }
-
             }
             Console.Clear();
             return inAddr;
         }
 
-                         
         /* Gets the desired port from the user. 7777 by default. */
+
         private int GetServerPort()
         {
             string inPort = "";
-            int numberPort = 0;                    
+            int numberPort = 0;
 
             while (true)
             {
@@ -112,7 +101,7 @@ namespace Client.Client
                     if (inPort == "")
                     {
                         Console.Clear();
-                        return 7777;                        
+                        return 7777;
                     }
                     else
                     {
@@ -120,24 +109,18 @@ namespace Client.Client
                         Console.Clear();
                         return numberPort;
                     }
-
                 }
                 catch (Exception)
                 {
                     Console.WriteLine("Invalid input entered.  use a number.");
                 }
-              
             }
         }
-
 
         ///*If the server is found on the network, get entry for the password the user gave. */
         //private string GetPassword()
         //{
-
         //}
-
-
 
         internal void CheckServer(ClientRequestInfo settings)
         {
@@ -145,7 +128,7 @@ namespace Client.Client
 
             // Check the IP address.
             Console.WriteLine("Checking " + settings.ip_address + " Server address...");
-            if(Net.CheckAddress(settings.ip_address))
+            if (Net.CheckAddress(settings.ip_address))
             {
                 Console.WriteLine("Address Found.");
             }
@@ -154,7 +137,6 @@ namespace Client.Client
                 err++;
                 Console.WriteLine("Failed to find address.");
             }
-
 
             //// Check if the port is open
             //Console.WriteLine("Checking to see if port " + settings.port_number.ToString() + " is open...");
@@ -172,7 +154,7 @@ namespace Client.Client
             //    }
             //}
 
-            // TODO: Check if the password is correct.            
+            // TODO: Check if the password is correct.
 
             if (err == 0)
             {

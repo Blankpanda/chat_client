@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Chat_Client.Tools
 {
-    class IO
+    internal class IO
     {
-
         /// <summary>
         /// write a list to a text file.
         /// </summary>
@@ -40,10 +35,10 @@ namespace Chat_Client.Tools
                 string[] lines = file.Split('\n'); // split it up by new lines
 
                 for (int i = 0; i < lines.Length; i++) // remove \r return character
-                    lines[i] = lines[i].Replace("\r", "");                                    
+                    lines[i] = lines[i].Replace("\r", "");
 
                 for (int i = 0; i < lines.Length; i++) // convert into a list
-                    contents.Add(lines[i]);                                   
+                    contents.Add(lines[i]);
             }
 
             return contents;

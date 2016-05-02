@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Chat_Client.CommandStructure.Commands
 {
     /// <summary>
     /// Generate a list of Aliases.
     /// </summary>
-    class Alias
+    internal class Alias
     {
         private string _Name = "alias";
         private string _Desc = "Generates a list of aliases";
-        
+
         public string Name
         {
             get { return _Name; }
@@ -36,10 +33,6 @@ namespace Chat_Client.CommandStructure.Commands
 
             foreach (string alias in aliases)
                 Console.WriteLine("   " + alias);
-                
-            
-
         }
-
     }
 }

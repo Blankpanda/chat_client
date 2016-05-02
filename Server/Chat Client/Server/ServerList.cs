@@ -1,226 +1,207 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
-
 
 namespace Chat_Client.Server
 {
-	/// <summary>
-	/// Used to maintain and add to a list of directories 
-	/// </summary>
-	class ServerList
-	{
-		private string ServerDirectory = "Servers";
+    /// <summary>
+    /// Used to maintain and add to a list of directories
+    /// </summary>
+    internal class ServerList
+    {
+        private string ServerDirectory = "Servers";
 
-		public string MainServerDirectory
-		{
-			get { return ServerDirectory;  }
-			set { MainServerDirectory = ServerDirectory; }
-		}
+        public string MainServerDirectory
+        {
+            get { return ServerDirectory; }
+            set { MainServerDirectory = ServerDirectory; }
+        }
 
-		/* Initalizes a directory in the constructor to hold all fo the servers config files */        
-		public ServerList()
-		{
-			Directory.CreateDirectory(ServerDirectory);
-		}
+        /* Initalizes a directory in the constructor to hold all fo the servers config files */
 
+        public ServerList()
+        {
+            Directory.CreateDirectory(ServerDirectory);
+        }
 
-		/* Creates a directory to store the configuration file and writes the configuration file */
-		internal void Add (ServerInit.ServerSettings settings)
-		{
-			
-			string NewDirectory = ServerDirectory + @"\" + settings.server_name; // EX Servers\myserver\
-			Directory.CreateDirectory(NewDirectory);																											
-			
-			List<string> settings_content = new List<string>();
-			// build a list that makes the configuration file
+        /* Creates a directory to store the configuration file and writes the configuration file */
 
-			// Example config file:
-			//      server #
-			//      name
-			//      password
-			//      backlog
-			//      IP
-			//      Port
+        internal void Add(ServerInit.ServerSettings settings)
+        {
+            string NewDirectory = ServerDirectory + @"\" + settings.server_name; // EX Servers\myserver\
+            Directory.CreateDirectory(NewDirectory);
 
-			int ServerNumber = GetServerListCount(); // gives the server a number
+            List<string> settings_content = new List<string>();
+            // build a list that makes the configuration file
 
+            // Example config file:
+            //      server #
+            //      name
+            //      password
+            //      backlog
+            //      IP
+            //      Port
 
-			settings_content.Add(ServerNumber.ToString());  // Server #
-			settings_content.Add(settings.server_name);     // Name
-			settings_content.Add(settings.server_password); // password
-			settings_content.Add(settings.backlog.ToString());  // Backlog
-			settings_content.Add(settings.server_ip_address);   // IP
-			settings_content.Add(settings.port_number.ToString());  //  Port
+            int ServerNumber = GetServerListCount(); // gives the server a number
 
-			string TextFile = settings.server_name + "_Config" + ".txt";
-			string ConfigPath = ServerDirectory + @"\" + settings.server_name + @"\";
+            settings_content.Add(ServerNumber.ToString());  // Server #
+            settings_content.Add(settings.server_name);     // Name
+            settings_content.Add(settings.server_password); // password
+            settings_content.Add(settings.backlog.ToString());  // Backlog
+            settings_content.Add(settings.server_ip_address);   // IP
+            settings_content.Add(settings.port_number.ToString());  //  Port
 
-			ConfigPath = ConfigPath + TextFile;
-		
-			Tools.IO.WriteToTextFile(settings_content, ConfigPath);
+            string TextFile = settings.server_name + "_Config" + ".txt";
+            string ConfigPath = ServerDirectory + @"\" + settings.server_name + @"\";
 
-			
-		}
+            ConfigPath = ConfigPath + TextFile;
 
-		/* delets a server from the server list */
-		public void Delete()
-		{
-			Console.WriteLine("Enter the name of the server you want to remove.");
+            Tools.IO.WriteToTextFile(settings_content, ConfigPath);
+        }
 
-			string inp = 
-				Console.ReadLine();
+        /* delets a server from the server list */
 
-			string path = inp; // useless but doccumenting 
-			string[] srvs = GetServerList();
+        public void Delete()
+        {
+            Console.WriteLine("Enter the name of the server you want to remove.");
 
-			bool exists = false; // I dont really want to do this.
+            string inp =
+                Console.ReadLine();
 
-			for (int i = 0; i < srvs.Length; i++)            
-				if (path == srvs[i])				
-					exists = true;
-				
+            string path = inp; // useless but doccumenting
+            string[] srvs = GetServerList();
 
-			if (exists)			
-			{
-				Directory.Delete(ServerDirectory + @"\" +path, true);            
-				Console.WriteLine(path + " server deleted.");
-			}
-			else			
-				Console.WriteLine("Sever doesn't exist. type 'SList' to display the lists of servers");
-			
-			
-			
-		}
-		// The user supplied a name to the delete command and we want to remove it using the name they supplied
-		public void Delete(string name)
-		{
-			name = name.ToLower();
+            bool exists = false; // I dont really want to do this.
 
-			string path = @"Servers\" + name;
-			string[] srvs = GetServerList();
+            for (int i = 0; i < srvs.Length; i++)
+                if (path == srvs[i])
+                    exists = true;
 
-			bool exists = false; // I dont really want to do this.
+            if (exists)
+            {
+                Directory.Delete(ServerDirectory + @"\" + path, true);
+                Console.WriteLine(path + " server deleted.");
+            }
+            else
+                Console.WriteLine("Sever doesn't exist. type 'SList' to display the lists of servers");
+        }
 
-			for (int i = 0; i < srvs.Length; i++)
-				if (path == srvs[i])
-					exists = true;
+        // The user supplied a name to the delete command and we want to remove it using the name they supplied
+        public void Delete(string name)
+        {
+            name = name.ToLower();
 
+            string path = @"Servers\" + name;
+            string[] srvs = GetServerList();
 
-			if (exists)
-			{
-				Directory.Delete(path, true);
-				Console.WriteLine(path + " server deleted.");
-			}
-			else
-				Console.WriteLine("Sever doesn't exist. type 'SList' to display the lists of servers");
+            bool exists = false; // I dont really want to do this.
 
-		}
+            for (int i = 0; i < srvs.Length; i++)
+                if (path == srvs[i])
+                    exists = true;
 
-		// returns the server list with their config files
-		public string[] GetServerList()
-		{
-			string[] directories = Directory.GetDirectories(ServerDirectory);            
-			// remove the parent directory part of each string (we dont need it.)
-			
-			for (int i = 0; i < directories.Length; i++)
-			{
-				directories[i] = directories[i].Split('\\')[1];
-			
-			}
+            if (exists)
+            {
+                Directory.Delete(path, true);
+                Console.WriteLine(path + " server deleted.");
+            }
+            else
+                Console.WriteLine("Sever doesn't exist. type 'SList' to display the lists of servers");
+        }
 
-			return directories;
-		}
+        // returns the server list with their config files
+        public string[] GetServerList()
+        {
+            string[] directories = Directory.GetDirectories(ServerDirectory);
+            // remove the parent directory part of each string (we dont need it.)
 
-		// displays the server list using standard output
-		public void DisplayServerList()
-		{
-			string[] directories = GetServerList();
-			
-			if (directories.Length == 0)
-			{
-				Console.WriteLine("No servers currently created.");
-			}
-			else
-			{
+            for (int i = 0; i < directories.Length; i++)
+            {
+                directories[i] = directories[i].Split('\\')[1];
+            }
 
-				for (int i = 0; i < directories.Length; i++)
-				{
-					Console.WriteLine(directories[i]);
-				}
-			}
+            return directories;
+        }
 
-		}
+        // displays the server list using standard output
+        public void DisplayServerList()
+        {
+            string[] directories = GetServerList();
 
-		/* Gets the total number of directories in the servers directory */        
-		public int GetServerListCount()
-		{
-			int ServerCount = 0;
-			ServerCount = Directory.GetDirectories(ServerDirectory, "*").Length;
-			return ServerCount;
-		}
+            if (directories.Length == 0)
+            {
+                Console.WriteLine("No servers currently created.");
+            }
+            else
+            {
+                for (int i = 0; i < directories.Length; i++)
+                {
+                    Console.WriteLine(directories[i]);
+                }
+            }
+        }
 
-		public bool ServerExists(string ServerName)
-		{
-			// we need to add the Folder that Servers is contained in so we can check for equality.
-			
-			string[] Servers = GetServerList();
+        /* Gets the total number of directories in the servers directory */
 
-			for (int i = 0; i <= Servers.Length - 1; i++)
-				if (ServerName == Servers[i])
-					return true;    // the user entry and a entry in the server list matched
+        public int GetServerListCount()
+        {
+            int ServerCount = 0;
+            ServerCount = Directory.GetDirectories(ServerDirectory, "*").Length;
+            return ServerCount;
+        }
 
+        public bool ServerExists(string ServerName)
+        {
+            // we need to add the Folder that Servers is contained in so we can check for equality.
 
-			return false;          // the user entry and a entry in the server list didnt match
+            string[] Servers = GetServerList();
 
-		}
+            for (int i = 0; i <= Servers.Length - 1; i++)
+                if (ServerName == Servers[i])
+                    return true;    // the user entry and a entry in the server list matched
 
-		internal ServerInit.ServerSettings GetServerByName(string ServerName)
-		{         
-			// this should always work as long as ServerExists() is used before to check if it has a valid name			
-			return ServerInit.Init(ServerName);
-		}
+            return false;          // the user entry and a entry in the server list didnt match
+        }
 
-		public void PrintServerSettings()
-		{
-			string[] ids = { "ServerId", "ServerName", "ServerPassword", "ServerBacklog", "ServerIP", "ServerPort" };      
-			string[] Servers = GetServerList();
-			if (Servers.Length == 0)
-				Console.WriteLine("No Servers currently created.");
-			else
-			{            
-				Console.WriteLine("What sever would you like to read?");             
-				string Name = Console.ReadLine();
+        internal ServerInit.ServerSettings GetServerByName(string ServerName)
+        {
+            // this should always work as long as ServerExists() is used before to check if it has a valid name
+            return ServerInit.Init(ServerName);
+        }
 
+        public void PrintServerSettings()
+        {
+            string[] ids = { "ServerId", "ServerName", "ServerPassword", "ServerBacklog", "ServerIP", "ServerPort" };
+            string[] Servers = GetServerList();
+            if (Servers.Length == 0)
+                Console.WriteLine("No Servers currently created.");
+            else
+            {
+                Console.WriteLine("What sever would you like to read?");
+                string Name = Console.ReadLine();
 
-				if (ServerExists(Name))
-				{
+                if (ServerExists(Name))
+                {
+                    for (int i = 0; i <= Servers.Length - 1; i++)
+                    {
+                        if (Name == Servers[i])
+                        {
+                            string ServerPath = MainServerDirectory + @"\" + Name + @"\" + Name + "_config.txt"; // BLECH
+                            List<string> ReadSettings = Tools.IO.ReadTextFileList(ServerPath);
 
-					for (int i = 0; i <= Servers.Length - 1; i++)
-					{
-						if (Name == Servers[i])
-						{
-							string ServerPath = MainServerDirectory + @"\" + Name + @"\" + Name +"_config.txt"; // BLECH
-							List<string> ReadSettings = Tools.IO.ReadTextFileList(ServerPath);
-
-							for (int j = 0; j < ReadSettings.Count - 1; j++) // - 1 for newline.
-							{
-								Console.WriteLine(ids[j] + "=" + ReadSettings[j]);
-							}
-							break;
-						}
-					}
-				}
-				else
-				{
-					Console.WriteLine("Invalid name for command 'view'");
-				}
-			}
-					
-		}
-
-	}
+                            for (int j = 0; j < ReadSettings.Count - 1; j++) // - 1 for newline.
+                            {
+                                Console.WriteLine(ids[j] + "=" + ReadSettings[j]);
+                            }
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid name for command 'view'");
+                }
+            }
+        }
+    }
 }

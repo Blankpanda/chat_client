@@ -1,20 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Chat_Client.CommandStructure.Commands
 {
     /// <summary>
     /// generates a list of commands and a description on how they are used.
     /// </summary>
-    /// 
-    
-    class Help
-    {
-        
+    ///
 
+    internal class Help
+    {
         private string _Name = "help";
         private string _Desc = "Outputs this display";
         private string _Alias = "?";
@@ -36,17 +31,14 @@ namespace Chat_Client.CommandStructure.Commands
             get { return _Alias; }
             set { Alias = _Alias; }
         }
-         
-
 
         // This is used to contain all of the props name and description props in each command
         // initalized in the constructor
         private static List<string> HelpDisplay =
-                new List<string>();            
+                new List<string>();
 
         public static void Execute()
         {
-
             // horrible hack
 
             Clear clear = new Clear();
@@ -59,17 +51,16 @@ namespace Chat_Client.CommandStructure.Commands
             Help help = new Help();
             Alias alias = new Alias();
             View view = new View();
-                   
 
             // im sorry mom
-            HelpDisplay.Add( "   " + clear.Name  + " - "  + clear.Description);
-            HelpDisplay.Add( "   " + create.Name + " - " + create.Description);
-            HelpDisplay.Add( "   " + delete.Name + " - " + delete.Description);
-            HelpDisplay.Add( "   " + exit.Name + " - " + exit.Description);
-            HelpDisplay.Add( "   " + ping.Name + " - " + ping.Description);
-            HelpDisplay.Add( "   " + slist.Name + " - " + slist.Description);
-            HelpDisplay.Add( "   " + start.Name + " - " + start.Description);
-            HelpDisplay.Add("   "  + alias.Name + " - " + alias.Description);
+            HelpDisplay.Add("   " + clear.Name + " - " + clear.Description);
+            HelpDisplay.Add("   " + create.Name + " - " + create.Description);
+            HelpDisplay.Add("   " + delete.Name + " - " + delete.Description);
+            HelpDisplay.Add("   " + exit.Name + " - " + exit.Description);
+            HelpDisplay.Add("   " + ping.Name + " - " + ping.Description);
+            HelpDisplay.Add("   " + slist.Name + " - " + slist.Description);
+            HelpDisplay.Add("   " + start.Name + " - " + start.Description);
+            HelpDisplay.Add("   " + alias.Name + " - " + alias.Description);
             HelpDisplay.Add("   " + help.Name + " - " + help.Description);
             HelpDisplay.Add("   " + view.Name + " - " + view.Description);
 
