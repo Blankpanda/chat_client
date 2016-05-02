@@ -67,7 +67,7 @@ namespace Client.Client
             IPAddress ip = IPAddress.Parse(settings.ip_address);
             remoteEP = new IPEndPoint(ip, settings.port_number);
 
-            areaHeights = (Console.WindowHeight - 2);
+            areaHeights = (Console.WindowHeight -2);
 
             try
             {
@@ -87,6 +87,7 @@ namespace Client.Client
                         string returned = Encoding.ASCII.GetString(buf, 0, BytesRecieved);
 
                         returned = returned.Replace("<EOF>", "");
+                        area1.Clear();
                         AddLineToBuffer(ref area1, returned);
                         DrawScreen();
                     }
