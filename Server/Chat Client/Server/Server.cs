@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 
 namespace Chat_Client.Server
 {
@@ -11,8 +12,10 @@ namespace Chat_Client.Server
     /// </summary>
     internal class Server
     {
-        private ServerInit.ServerSettings settings;
+        public Socket listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         public static string data = null;
+
+        private ServerInit.ServerSettings settings;        
         private byte[] bytes = new Byte[1024];
 
         /// <summary>
@@ -48,11 +51,7 @@ namespace Chat_Client.Server
             IPAddress ip = IPAddress.Parse(settings.server_ip_address);
             IPEndPoint localEndPoint = new IPEndPoint(ip, settings.port_number);
 
-            Socket listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
-            // list of IPs that have connected to the server.
-            List<string> ChatLog = new List<string>();
-
+    
             // clear the contents of the console.
             CommandStructure.Commands.Clear.Execute();
 
@@ -63,43 +62,22 @@ namespace Chat_Client.Server
                 listener.Listen(settings.backlog);
 
                 Console.WriteLine("Server is listening.");
-                Socket handler = listener.Accept(); // another socket handles the data that was sent in
-                Console.WriteLine(handler.RemoteEndPoint.ToString() + " Connected.");
-                // TODO: VERY IMPORTATN THREADING < <FDSKLF:LSDKJLF:DSKJL:
+
+                int bcount = 0;
+                while (bcount <= settings.backlog)
+                {
+                    Thread EstablishConnectionThread = new Thread(NewConnection);    
+                    EstablishConnectionThread.Start();
+
+                    bcount++;
+                }
+
                 while (true)
                 {
-                    // starts listening for incoming connections,
-
-                    // start a thread that handles other connections
-                    Console.WriteLine("Waiting for Request.");
-
-                    data = null;
-
-                    while (true)
-                    {
-                        bytes = new byte[1024];
-                        int recv = handler.Receive(bytes);
-                        data += Encoding.ASCII.GetString(bytes, 0, recv);
-                        if (data.IndexOf("<EOF>") > -1)
-                        {
-                            break;
-                        }
-                    }
-         
-                    // we want to return the data to the client
-                    ChatLog.Add(TimeStamp.WriteTimeNoDate(data));
-                    ChatLog.Reverse();
-                    string fullLog = "";
-                    foreach (var text in ChatLog)
-                    {
-                        fullLog += text + "|"; // test delimiter
-                    }
-                    ChatLog.Reverse(); // reset it back to the way its suppose to be
-                    //TimeStamp.WriteTimeNoDate(data)
-                    byte[] ReturnMessage = Encoding.ASCII.GetBytes(fullLog);
-                    Console.WriteLine(handler.RemoteEndPoint.ToString() + " says " + TimeStamp.WriteTime(data));
-                    handler.Send(ReturnMessage);
+                    ;
                 }
+                
+                // TODO: VERY IMPORTATN THREADING < <FDSKLF:LSDKJLF:DSKJL:
             }
             catch (SocketException e)
             {
@@ -107,6 +85,58 @@ namespace Chat_Client.Server
                 {
                     Console.WriteLine("et");
                 }
+            }
+        }
+
+        private void NewConnection()
+        {
+            Socket handler = listener.Accept();
+            Console.WriteLine(handler.RemoteEndPoint.ToString() + " " + "connected.");
+           
+            List<string> ChatLog = new List<string>();
+
+            while (true)
+            {
+                // start a thread that handles other connections
+                Console.WriteLine("Waiting for Request.");
+
+                data = null;
+                int recv;
+                while (true)
+                {
+                    bytes = new byte[1024];
+                    try 
+                    {
+                       recv = handler.Receive(bytes); 
+                    }                                       
+                    catch (Exception)
+                    {
+                        continue;
+                    }
+                        
+                    
+                    
+                    data += Encoding.ASCII.GetString(bytes, 0, recv);
+                    if (data.IndexOf("<EOF>") > -1)
+                    {
+                        break;
+                    }
+                }
+
+                // we want to return the data to the client
+                ChatLog.Add(TimeStamp.WriteTimeNoDate(data));
+                ChatLog.Reverse();
+                string fullLog = "";
+                foreach (var text in ChatLog)
+                {
+                    fullLog += text + "|"; // test delimiter
+                }
+                ChatLog.Reverse(); // reset it back to the way its suppose to be
+
+                //TimeStamp.WriteTimeNoDate(data)
+                byte[] ReturnMessage = Encoding.ASCII.GetBytes(fullLog);
+                Console.WriteLine(handler.RemoteEndPoint.ToString() + " says " + TimeStamp.WriteTime(data));
+                handler.Send(ReturnMessage);
             }
         }
 
@@ -169,8 +199,6 @@ namespace Chat_Client.Server
         //    }
         //}
 
-        #endregion 2
-
         /// <summary>
         /// Reads incoming data and stores it in a buffer which then formats it into a string.
         /// </summary>
@@ -194,5 +222,7 @@ namespace Chat_Client.Server
             }
             return inData;
         }
+
+        #endregion 2     
     }
 }
