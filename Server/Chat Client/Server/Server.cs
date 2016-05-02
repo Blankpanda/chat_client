@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading; 
 
 namespace Chat_Client.Server
 {
@@ -14,8 +15,7 @@ namespace Chat_Client.Server
         private ServerInit.ServerSettings settings;
         public static string data = null;
         byte[] bytes = new Byte[1024];
-
-
+       
         /// <summary>
         /// Constructor takes Server configuration structure which is read from the config file.
         /// </summary>
@@ -35,44 +35,48 @@ namespace Chat_Client.Server
             CommandStructure.RunCommand command = new CommandStructure.RunCommand(); // change the prompt.
             Console.WriteLine();
             command.Prompt(settings.server_name + "> ");
-
-            Listen(settings);
+            Listen();
         }
 
         /// <summary>
         /// Listens for a connection.
         /// </summary>
         /// <param name="settings"></param>
-        private void Listen(ServerInit.ServerSettings settings)
+        private void Listen()
         {
-            // byte[] buffer = new byte[1024]; // holds the incoming message.
-
+            // byte[] buffer = new byte[1024]; // holds the incoming message.            
             //endpoint for the socket.
             IPAddress ip = IPAddress.Parse(settings.server_ip_address);
             IPEndPoint localEndPoint = new IPEndPoint(ip, settings.port_number);
 
-            // basic TCP stream.
             Socket listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
+          
             // list of IPs that have connected to the server.
             List<string> IPconnectionsList = new List<string>();
 
             // clear the contents of the console.
             CommandStructure.Commands.Clear.Execute();
 
-            // Bind the socket to the local endpoint
+            
+            
             try
             {
-                // starts listening for incoming connections,
-                listener.Bind(localEndPoint);
+                // Bind the socket to the local endpoint                
+                listener.Bind(localEndPoint);                
                 listener.Listen(settings.backlog);
 
-                // another socket handles the data that was sent in and retireved by the listener
+
                 Console.WriteLine("Server is listening.");
-                Socket handler = listener.Accept();
-                while (true)                
-                {
-                    Console.WriteLine("waiting");
+                Socket handler = listener.Accept(); // another socket handles the data that was sent in and retireved by the listener
+                Console.WriteLine(handler.RemoteEndPoint.ToString() + " Connected.");
+                // TODO: VERY IMPORTATN THREADING < <FDSKLF:LSDKJLF:DSKJL:
+                while (true)
+                { 
+                // starts listening for incoming connections,
+
+                                   
+                    // start a thread that handles other connections             
+                    Console.WriteLine("Waiting for Request.");
                     
                     data = null;
 
@@ -89,12 +93,11 @@ namespace Chat_Client.Server
                     }
                    // data = ProcessData(handler); // returns the incoming data as a string.
 
-                    Console.WriteLine(data);
+                  //  Console.WriteLine(data);
                    // we want to return the data to the client
-                   byte[] ReturnMessage = Encoding.ASCII.GetBytes(TimeStamp.WriteTime(data));
-                   handler.Send(ReturnMessage);
-              //     Console.WriteLine(ReturnMessage);
-                    
+                   byte[] ReturnMessage = Encoding.ASCII.GetBytes(TimeStamp.WriteTimeNoDate(data));
+                   Console.WriteLine(handler.RemoteEndPoint.ToString() + " says " + TimeStamp.WriteTime(data));
+                   handler.Send(ReturnMessage);                                    
                 }
             }
             catch (SocketException e)

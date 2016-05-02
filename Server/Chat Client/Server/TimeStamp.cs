@@ -14,13 +14,19 @@ namespace Chat_Client.Server
         {
 
             string stamp = "[" + DateTime.Now.ToString() + "]";            
-            return stamp + s;
+            return stamp + " " + s;
         }
 
         public static string GetTime()
         {
             string stamp = "[" + DateTime.Now.ToString() + "]";
             return stamp;
+        }
+
+        internal static string WriteTimeNoDate(string data)
+        {
+            string stamp = "[" + DateTime.Now.ToLocalTime() + "]";
+            return stamp + " " + data;
         }
     }
 }

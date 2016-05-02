@@ -26,7 +26,9 @@ namespace Client
            
             entry.CheckServer(UserSettings);
             Client.Client client = new Client.Client(UserSettings);
-            client.Start2();
+            client.Start();
+
+
         }
 
         private static void AddLineToBuffer(ref List<string> areaBuffer, string line)
