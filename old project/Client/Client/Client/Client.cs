@@ -75,8 +75,7 @@ namespace Client.Client
                 {
                     sender.Connect(remoteEP);
                     DrawScreen();
-                    // AddLineToBuffer(ref area1, "conn " + sender.RemoteEndPoint.ToString());
-                    // DrawScreen();
+                    // AddLineToBuffer(ref area1, "conn " + sender.RemoteEndPoint.ToString());                    
                     while (true)
                     {
                         string Input = Console.ReadLine();
@@ -86,9 +85,10 @@ namespace Client.Client
                         int BytesRecieved = sender.Receive(buf);
                         string returned = Encoding.ASCII.GetString(buf, 0, BytesRecieved);
 
-                        returned = returned.Replace("<EOF>", "");
-                        area1.Clear();
-                        AddLineToBuffer(ref area1, returned);
+                        returned = returned.Replace("<EOF>", "");                        
+                       // AddLineToBuffer(ref area1, returned);
+                        string[] cont = returned.Split('|');
+                        area1 = new List<string>(cont);
                         DrawScreen();
                     }
                 }
@@ -103,7 +103,6 @@ namespace Client.Client
                 Environment.Exit(0);
             }
         }
-
         private static void AddLineToBuffer(ref List<string> areaBuffer, string line)
         {
             areaBuffer.Insert(0, line);
@@ -116,7 +115,7 @@ namespace Client.Client
 
         private static void DrawScreen()
         {
-            Console.Clear();
+            Console.Clear();            
 
             // Draw the area divider
             for (int i = 0; i < Console.BufferWidth; i++)
