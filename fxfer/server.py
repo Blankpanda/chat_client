@@ -3,7 +3,7 @@ import sys
 
 def main():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.bind(("localhost",9999))
+    s.bind(("192.168.1.10",9999))
     s.listen(10)
 
     while True:
@@ -18,13 +18,14 @@ def main():
         while(True):
             l = sc.recv(1024)
             while(l):
+                print(l)
                 f.write(l)
                 l = sc.recv(1024)
         f.close()
 
         sc.close()
         
-    s.close
+    s.close()
 
 if __name__ == '__main__':
     main()

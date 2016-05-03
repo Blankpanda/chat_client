@@ -24,3 +24,19 @@ C:\Users\CalebsComp\Documents\chat\Server\Chat Client\obj\Debug\Server.csprojRes
 C:\Users\CalebsComp\Desktop\chat\Server\Chat Client\bin\Debug\Chat Client.exe.config
 C:\Users\CalebsComp\Desktop\chat\Server\Chat Client\obj\Debug\Chat Client.exe
 C:\Users\CalebsComp\Desktop\chat\Server\Chat Client\obj\Debug\Chat Client.pdb
+C:\Users\CalebsComp\Documents\chat\Server\Chat Client\bin\Debug\IronPython.dll
+C:\Users\CalebsComp\Documents\chat\Server\Chat Client\bin\Debug\IronPython.Modules.dll
+C:\Users\CalebsComp\Documents\chat\Server\Chat Client\bin\Debug\IronPython.SQLite.dll
+C:\Users\CalebsComp\Documents\chat\Server\Chat Client\bin\Debug\IronPython.Wpf.dll
+C:\Users\CalebsComp\Documents\chat\Server\Chat Client\bin\Debug\Microsoft.Dynamic.dll
+C:\Users\CalebsComp\Documents\chat\Server\Chat Client\bin\Debug\Microsoft.Scripting.AspNet.dll
+C:\Users\CalebsComp\Documents\chat\Server\Chat Client\bin\Debug\Microsoft.Scripting.dll
+C:\Users\CalebsComp\Documents\chat\Server\Chat Client\bin\Debug\Microsoft.Scripting.Metadata.dll
+C:\Users\CalebsComp\Documents\chat\Server\Chat Client\bin\Debug\IronPython.xml
+C:\Users\CalebsComp\Documents\chat\Server\Chat Client\bin\Debug\IronPython.Modules.xml
+C:\Users\CalebsComp\Documents\chat\Server\Chat Client\bin\Debug\IronPython.SQLite.xml
+C:\Users\CalebsComp\Documents\chat\Server\Chat Client\bin\Debug\IronPython.Wpf.xml
+C:\Users\CalebsComp\Documents\chat\Server\Chat Client\bin\Debug\Microsoft.Dynamic.xml
+C:\Users\CalebsComp\Documents\chat\Server\Chat Client\bin\Debug\Microsoft.Scripting.xml
+C:\Users\CalebsComp\Documents\chat\Server\Chat Client\bin\Debug\Microsoft.Scripting.AspNet.xml
+C:\Users\CalebsComp\Documents\chat\Server\Chat Client\bin\Debug\Microsoft.Scripting.Metadata.xml

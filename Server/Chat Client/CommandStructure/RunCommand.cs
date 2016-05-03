@@ -90,7 +90,7 @@ namespace Chat_Client.CommandStructure
 
                 case "START":
                     {
-                        Commands.Start.Execute();
+                        Commands.Start.ExecuteFileServer();
                     } break;
 
                 case "ALIAS":
