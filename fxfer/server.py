@@ -9,13 +9,14 @@ def main():
     while True:
         sc, address = s.accept()
 
-        print address
+        print(address)
         i=1
         f = open('file_' + str(i)+".txt","wb")
         i = i + 1
         while(True):
             l = sc.recv(1024)
-            while(1):
+            while(l):
+                print(l)
                 f.write(l)
                 l = sc.recv(1024)
         f.close()
