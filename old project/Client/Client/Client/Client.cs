@@ -51,7 +51,6 @@ namespace Client.Client
 
         public int SendMessage(Socket sender, string msg)
         {
-            Chat messenger = new Chat(settings.username);
             byte[] message = Encoding.ASCII.GetBytes(msg + "<EOF>");
             int sent = sender.Send(message);
 
@@ -68,7 +67,7 @@ namespace Client.Client
             IPAddress ip = IPAddress.Parse(settings.ip_address);
             remoteEP = new IPEndPoint(ip, settings.port_number);
 
-            areaHeights = (Console.WindowHeight - 2);
+            areaHeights = (Console.WindowHeight - 2);  // interface height
 
             try
             {
@@ -81,16 +80,15 @@ namespace Client.Client
                     while (true)
                     {
                         string Input = Console.ReadLine();
-
                         byte[] buf = new byte[1024];
-                        SendMessage(sender, settings.username + ": " + Input);
 
+                        SendMessage(sender, settings.username + ": " + Input);
                         int BytesRecieved = sender.Receive(buf);
                         string returned = Encoding.ASCII.GetString(buf, 0, BytesRecieved);
 
-                        returned = returned.Replace("<EOF>", "");
-                        // AddLineToBuffer(ref area1, returned);
+                        returned = returned.Replace("<EOF>", "");                       
                         string[] cont = returned.Split('|');
+
                         area1 = new List<string>(cont);
                         DrawScreen();
                     }
@@ -147,51 +145,52 @@ namespace Client.Client
             Console.Write("> ");
         }
 
-        /// <summary>
-        /// DEPRACATED
-        /// </summary>
-        //public void Start()
-        //{
-        //    try
-        //    {
-        //        // get the server and its port and connect it to an endpoint
-        //        IPAddress ip = IPAddress.Parse(settings.ip_address);
-        //        IPEndPoint remoteEP = new IPEndPoint(ip, settings.port_number);
+         //<summary>
+         //depracated
+         //</summary>
+        public void start2()
+        {
+            try
+            {
+                // get the server and its port and connect it to an endpoint
+                IPAddress ip = IPAddress.Parse(settings.ip_address);
+                IPEndPoint remoteEP = new IPEndPoint(ip, settings.port_number);
+                Socket sender = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
-        //        try
-        //        {
-        //           sender.Connect(remoteEP);
+                try
+                {
+                   sender.Connect(remoteEP);
 
-        //           // intially we want to send a message to the server telling what IP is connecting to it
-        //          // client.SendIP(sender);
+                   // intially we want to send a message to the server telling what IP is connecting to it
+                  // client.SendIP(sender);
 
-        //           // Begin Chat.
-        //           while (true)
-        //           {
-        //        //       client.SendMessage(sender); // send the message
+                   // Begin Chat.
+                   while (true)
+                   {
+                //       client.SendMessage(sender); // send the message
 
-        //               // get the bytes that we recieve
-        //               byte[] buf = new byte[1024];
-        //               int BytesRecieved = sender.Receive(buf);
+                       // get the bytes that we recieve
+                       byte[] buf = new byte[1024];
+                       int BytesRecieved = sender.Receive(buf);
 
-        //               // write out any response we recieve.
-        //               string returned = Encoding.ASCII.GetString(buf, 0, BytesRecieved);
-        //               returned = returned.Replace("<EOF>", "");
-        //               Console.WriteLine(returned);
-        //           }
+                       // write out any response we recieve.
+                       string returned = Encoding.ASCII.GetString(buf, 0, BytesRecieved);
+                       returned = returned.Replace("<EOF>", "");
+                       Console.WriteLine(returned);
+                   }
 
-        //           sender.Shutdown(SocketShutdown.Send);
-        //        }
-        //        catch (Exception)
-        //        {
-        //        }
+                   sender.Shutdown(SocketShutdown.Send);
+                }
+                catch (Exception)
+                {
+                }
 
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
-        //}
+        }
     }
 }

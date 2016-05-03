@@ -12,8 +12,9 @@ namespace Chat_Client.Server
     /// </summary>
     internal class Server
     {
-        public Socket listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        
         public static string data = null;
+        public Socket listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
         private ServerInit.ServerSettings settings;        
         private byte[] bytes = new Byte[1024];
@@ -45,12 +46,10 @@ namespace Chat_Client.Server
         /// </summary>
         /// <param name="settings"></param>
         private void Listen()
-        {
-            // byte[] buffer = new byte[1024]; // holds the incoming message.
-            //endpoint for the socket.
+        {           
+            
             IPAddress ip = IPAddress.Parse(settings.server_ip_address);
-            IPEndPoint localEndPoint = new IPEndPoint(ip, settings.port_number);
-
+            IPEndPoint localEndPoint = new IPEndPoint(ip, settings.port_number); //endpoint for the socket.
     
             // clear the contents of the console.
             CommandStructure.Commands.Clear.Execute();
@@ -58,7 +57,7 @@ namespace Chat_Client.Server
             try
             {
                 // Bind the socket to the local endpoint
-                listener.Bind(localEndPoint);
+                listener.Bind(localEndPoint);  // listener is a public member
                 listener.Listen(settings.backlog);
 
                 Console.WriteLine("Server is listening.");
@@ -68,7 +67,7 @@ namespace Chat_Client.Server
                 {
                     Thread EstablishConnectionThread = new Thread(NewConnection);    
                     EstablishConnectionThread.Start();
-                 bcount++;
+                    bcount++;
                 }
 
                 while (true)
@@ -76,8 +75,7 @@ namespace Chat_Client.Server
    
                     ;
                 }
-                
-                // TODO: VERY IMPORTATN THREADING < <FDSKLF:LSDKJLF:DSKJL:
+                                
             }
             catch (SocketException e)
             {
@@ -126,14 +124,14 @@ namespace Chat_Client.Server
                 // we want to return the data to the client
                 ChatLog.Add(TimeStamp.WriteTimeNoDate(data));
                 ChatLog.Reverse();
+
                 string fullLog = "";
-                foreach (var text in ChatLog)
-                {
-                    fullLog += text + "|"; // test delimiter
-                }
+                foreach (var text in ChatLog)                
+                    fullLog += text + "|"; // delimiter
+                
                 ChatLog.Reverse(); // reset it back to the way its suppose to be
 
-                //TimeStamp.WriteTimeNoDate(data)
+                
                 byte[] ReturnMessage = Encoding.ASCII.GetBytes(fullLog);
                 Console.WriteLine(handler.RemoteEndPoint.ToString() + " says " + TimeStamp.WriteTime(data));
                 handler.Send(ReturnMessage);
