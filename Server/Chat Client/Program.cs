@@ -6,7 +6,7 @@ namespace Chat_Client
     {
         private static void Main(string[] args)
         {
-            Console.WriteLine("Chat Server application by Caleb Ellis (2015).");
+            Console.WriteLine("Server Management Application by Caleb Ellis (2015).");
             Console.WriteLine();
 
             // handles command input

@@ -67,6 +67,7 @@ def main():
 
 # hacky but it will do for now
 def run_command(command):
+    print(command)
     if command == "HELP":
         c_help()
         return None
@@ -125,14 +126,7 @@ def get():
     pass
 
 def c_list():
-    stop_code = 300
-    sender.send(b'LIST') # send the command name
-
-    reply = sender.recv(1024) # wait for a reply
-
-    print(reply.decode('ASCII')) # write out the reply
-    
-    
+    pass
 
 
 def get_file_from_path(filename):
@@ -150,7 +144,11 @@ def get_file_from_path(filename):
 
     filename = filename[:first_dir_count]
     filename = filename[::-1]
-    return filename       
+    return filename
+
+        
+        
+        
      
 if __name__ == '__main__':
     main()

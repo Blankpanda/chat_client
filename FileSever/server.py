@@ -30,10 +30,10 @@ def Start(ip_address, server_name, server_password,server_port_number,server_bac
             
             if l == b"PUT":
                 do_put(handler,res_folder_path) # PUT command
-            if l == b"GET":
+            if l == "GET":
                 pass
             if l == "LIST":
-                do_list(handler,res_folder_path)
+                pass
             else:
                 pass
             
@@ -74,25 +74,13 @@ def do_get(handler,res_folder_path):
     pass
 
 def do_list(handler,res_folder_path):
-    file_list = os.listdir(res_folder_path)
-
-    # build a string with the list, delimiting the list using a new line
-    send_str = ""
-    for fname in file_list:
-        send_str = send_str + fname + '\n'
-
-    handler.send(send_str)
-        
-        
-    
-    
+    pass
 
 
 def get_file_name_exten(filename):
     # simply split by the perion
     name, exten = filename.split('.')
     return name, exten
-
 # for testing compliation, this program is invoked through IronPython in Visual Studio
 if __name__ == '__main__':
     Start("192.168.1.10","car","it",7777,10,r"..\res")
