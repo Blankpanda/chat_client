@@ -10,7 +10,7 @@ def main():
     try:
         args = sys.argv
         server_socket = args[1]
-        server_password = args[2] 
+        server_password = args[2]
     except Exception:
         print("Invalid number of arguments. try: \n python client.py server_ip:server_port server_password")
         sys.exit(0)
@@ -24,7 +24,7 @@ def main():
     if not ":" in server_socket:
         print("Inavlid socket. try IPaddress:Portnumber")
         sys.exit(0)
-        
+
     # split the server socket into an IP address and a PORT number
     server_address,server_port = server_socket.split(':')
 
@@ -34,14 +34,14 @@ def main():
     except Exception:
         print("Invalid port number. use a integer.")
         sys.exit(0)
-    
+
     # make sure that server_address is a ip address, if not exit the application
     try:
         socket.inet_aton(server_address) # throws an error if the address supplied is not a IP address
     except socket.error:
         print("Invalid IP address, try X.X.X.X format")
         sys.exit(0)
-    
+
     # setup socket
     try:
         sender.connect((server_address,server_port ))
@@ -51,7 +51,7 @@ def main():
 
 
     # REEPL for the user to enter in commands to the server
-    
+
     while True:
         # parse command
         try:
@@ -63,7 +63,7 @@ def main():
                 print("Invalid command, type 'help' for help dialog.")
         except Exception as e:
             raise e
-        
+
 
 # hacky but it will do for now
 def run_command(command):
@@ -85,7 +85,7 @@ def run_command(command):
     else:
         print("Invalid command, type 'help' for help dialog.")
         return None
-        
+
 
 def c_exit():
     sender.close()
@@ -104,49 +104,56 @@ def c_help():
 def put():
     stop_code = 300
     sender.send(b"PUT") # the command that going to be used
-    
+
     path = input("Enter the path of the file that you would like to send: ")
     f = open(path, 'rb')
 
     filename = get_file_from_path(path)
-    sender.send(bytes(filename, 'ASCII')) # send the name of the file, so the server know how to stor it
-    
+    sender.send(bytes(filename, 'utf8')) # send the name of the file, so the server know how to stor it
+
     line = f.read(1024) # read the first line and send it (essentailly we want o to initalize line)
     while(line): # start sending the rest
         sender.send(b'' + line)
         line = f.readline(1024)
-    
+
     # send a stop code because were done sending
-    sender.send(bytes(str(stop_code), 'ASCII'))
+    sender.send(bytes(str(stop_code), 'utf8'))
 
     return None
 
 def get():
     stop_code = str(300)
-    buff = ""
+    buff = bytes("","utf8")
+   # buff = buff.encode()
 
     sender.send(b'GET')
 
     filename = input("Enter the name of the file that you would like to get: ")
 
     # todo: check if the file exist1s
-    sender.send(bytes(filename,'ASCII')) # send the file name that were looking for
+    sender.send(bytes(filename,'utf8')) # send the file name that were looking for
 
     f = open(filename,'wb')
 
     data = sender.recv(1024)
     while(data):
-        buff = buff + data.decode('ASCII')
-        buff = buff.strip(str(300))
-        if stop_code in data.decode('ASCII'):
+        try:
+        
+            buff = buff + data
+            buff = buff.decode().strip(str(300))
+            buff = buff.encode()
+        except Exception as e:
+            print(e)
+            break
+        
+        if stop_code in data.decode():
             break
 
         data = sender.recv(1024)
-        
         if not data: break
 
     print(buff)
-    f.write(bytes(buff,'ASCII'))
+    f.write(buff)
     f.close()
     print("done writing new file.")
     return None
@@ -157,16 +164,16 @@ def c_list():
 
     reply = sender.recv(1024) # wait for a reply
 
-    print(reply.decode('ASCII')) # write out the reply
-    
-    
+    print(reply.decode('utf8')) # write out the reply
+
+
 
 
 def get_file_from_path(filename):
     if '\\' not in filename:
         return filename
-        
-    
+
+
     filename = filename[::-1]
 
     first_dir_count = 0
@@ -177,8 +184,7 @@ def get_file_from_path(filename):
 
     filename = filename[:first_dir_count]
     filename = filename[::-1]
-    return filename       
-     
+    return filename
+
 if __name__ == '__main__':
     main()
- 
