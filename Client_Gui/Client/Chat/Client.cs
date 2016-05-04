@@ -1,23 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 using System.Windows;
-using System.Threading;
-
 
 namespace Chat
 {
-    class Client
+    internal class Client
     {
-        Window _MainWindow;
+        private Window _MainWindow;
 
-        TcpClient ClientSocket = new TcpClient();
-        NetworkStream ServerStream = default(NetworkStream);
-        string ReadData = null;
+        private TcpClient ClientSocket = new TcpClient();
+        private NetworkStream ServerStream = default(NetworkStream);
+        private string ReadData = null;
 
         private bool _isConnected = false;
 
@@ -36,24 +31,23 @@ namespace Chat
         {
             Settings = userSettings;
         }
-                
+
         /* constructor requires the user to enter in a strucutre with settings.*/
+
         public Client(Entry.ClientRequestInfo userSettings, Window MainWindow)
         {
             Settings = userSettings;
             _MainWindow = MainWindow;
         }
 
-
         /* Load in the settigns using LoadSettings*/
+
         public Client()
         {
-
         }
-             
+
         public void Start()
         {
-         
             try
             {
                 // get the server and its port and connect it to an endpoint
@@ -62,47 +56,38 @@ namespace Chat
 
                 try
                 {
-                
                     // socket used to send information
-                   Socket sender = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                   Chat messenger = new Chat();
-                   sender.Connect(remoteEP);
+                    Socket sender = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                    Chat messenger = new Chat();
+                    sender.Connect(remoteEP);
 
-                   // intially we want to send a message to the server telling what IP is connecting to it
-                   messenger.SendIP(sender);                    
-             
-                   // Begin Chat.
-                   while (true)
-                   {                      
-                       messenger.SendMessage(sender); // send the message
-                       
-                       // get the bytes that we recieve
-                       byte[] buf = new byte[1024];
-                       int BytesRecieved = sender.Receive(buf);
+                    // intially we want to send a message to the server telling what IP is connecting to it
+                    messenger.SendIP(sender);
 
-                       // write out any response we recieve.
-                       string returned = Encoding.ASCII.GetString(buf, 0, BytesRecieved);
-                       returned = returned.Replace("<EOF>", "");
-                      
+                    // Begin Chat.
+                    while (true)
+                    {
+                        messenger.SendMessage(sender); // send the message
 
-                    
-                   }
+                        // get the bytes that we recieve
+                        byte[] buf = new byte[1024];
+                        int BytesRecieved = sender.Receive(buf);
 
-                   sender.Shutdown(SocketShutdown.Send);
+                        // write out any response we recieve.
+                        string returned = Encoding.ASCII.GetString(buf, 0, BytesRecieved);
+                        returned = returned.Replace("<EOF>", "");
+                    }
+
+                    sender.Shutdown(SocketShutdown.Send);
                 }
                 catch (Exception)
                 {
-                    
                 }
-
             }
             catch (Exception)
-            {                
+            {
                 throw;
             }
-
         }
-
-
     }
 }

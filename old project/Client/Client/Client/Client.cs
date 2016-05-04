@@ -86,7 +86,7 @@ namespace Client.Client
                         int BytesRecieved = sender.Receive(buf);
                         string returned = Encoding.ASCII.GetString(buf, 0, BytesRecieved);
 
-                        returned = returned.Replace("<EOF>", "");                       
+                        returned = returned.Replace("<EOF>", "");
                         string[] cont = returned.Split('|');
 
                         area1 = new List<string>(cont);
@@ -145,9 +145,9 @@ namespace Client.Client
             Console.Write("> ");
         }
 
-         //<summary>
-         //depracated
-         //</summary>
+        //<summary>
+        //depracated
+        //</summary>
         public void start2()
         {
             try
@@ -159,38 +159,36 @@ namespace Client.Client
 
                 try
                 {
-                   sender.Connect(remoteEP);
+                    sender.Connect(remoteEP);
 
-                   // intially we want to send a message to the server telling what IP is connecting to it
-                  // client.SendIP(sender);
+                    // intially we want to send a message to the server telling what IP is connecting to it
+                    // client.SendIP(sender);
 
-                   // Begin Chat.
-                   while (true)
-                   {
-                //       client.SendMessage(sender); // send the message
+                    // Begin Chat.
+                    while (true)
+                    {
+                        //       client.SendMessage(sender); // send the message
 
-                       // get the bytes that we recieve
-                       byte[] buf = new byte[1024];
-                       int BytesRecieved = sender.Receive(buf);
+                        // get the bytes that we recieve
+                        byte[] buf = new byte[1024];
+                        int BytesRecieved = sender.Receive(buf);
 
-                       // write out any response we recieve.
-                       string returned = Encoding.ASCII.GetString(buf, 0, BytesRecieved);
-                       returned = returned.Replace("<EOF>", "");
-                       Console.WriteLine(returned);
-                   }
+                        // write out any response we recieve.
+                        string returned = Encoding.ASCII.GetString(buf, 0, BytesRecieved);
+                        returned = returned.Replace("<EOF>", "");
+                        Console.WriteLine(returned);
+                    }
 
-                   sender.Shutdown(SocketShutdown.Send);
+                    sender.Shutdown(SocketShutdown.Send);
                 }
                 catch (Exception)
                 {
                 }
-
             }
             catch (Exception)
             {
                 throw;
             }
-
         }
     }
 }

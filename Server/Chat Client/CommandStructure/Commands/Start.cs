@@ -145,7 +145,6 @@ namespace Chat_Client.CommandStructure.Commands
             {
                 Console.WriteLine("No Servers currently created.");
             }
-
         }
     }
 }

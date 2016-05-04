@@ -1,30 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 
 namespace Chat
 {
     [System.Runtime.InteropServices.GuidAttribute("C67F93C0-C172-4B7B-93AA-C29F43F91763")]
     public class Entry
     {
-        /* Information gained from the user will be stored here and used in Client.cs 
+        /* Information gained from the user will be stored here and used in Client.cs
          * to be used when connecting to specifed server */
-        
+
         public struct ClientRequestInfo
         {
             public string ip_address, password;
-            public int    port_number;
+            public int port_number;
 
-            ClientRequestInfo(string addr, string pass, int port)
+            private ClientRequestInfo(string addr, string pass, int port)
             {
-                ip_address  = addr;
-                password    = pass;
+                ip_address = addr;
+                password = pass;
                 port_number = port;
-            }      
-
+            }
         }
 
         // TODO: rewrite this
@@ -37,10 +31,10 @@ namespace Chat
 
             // settings.ip_address = GetServerIP();
             // settings.port_number = GetServerPort();
-            
+
             return settings;
         }
- 
+
         ///* Asks the user for the server that they want connect to.*/
         //private string GetServerIP()
         //{
@@ -57,7 +51,7 @@ namespace Chat
         //            {
         //                break;
         //            }
-        //        }                    
+        //        }
         //        else
         //        {
         //            Console.WriteLine("Invalid entry. format: X.X.X.X");
@@ -68,13 +62,13 @@ namespace Chat
         //    return inAddr;
         //}
 
-        
-        // TODO: Rewrite this         
+        // TODO: Rewrite this
         /* Gets the desired port from the user. 7777 by default. */
+
         private int GetServerPort()
         {
             string inPort = "";
-            int numberPort = 0;                    
+            int numberPort = 0;
 
             while (true)
             {
@@ -86,30 +80,24 @@ namespace Chat
 
                     if (inPort == "")
                     {
-                        return 7777;                        
+                        return 7777;
                     }
                     else
                     {
                         numberPort = int.Parse(inPort);
                         return numberPort;
                     }
-
                 }
                 catch (Exception)
                 {
                     Console.WriteLine("Invalid input entered.  use a number.");
                 }
-              
             }
         }
-
 
         ///*If the server is found on the network, get entry for the password the user gave. */
         //private string GetPassword()
         //{
-
         //}
-
-       
     }
 }

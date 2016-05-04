@@ -12,11 +12,10 @@ namespace Chat_Client.Server
     /// </summary>
     internal class Server
     {
-        
         public static string data = null;
         public Socket listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
-        private ServerInit.ServerSettings settings;        
+        private ServerInit.ServerSettings settings;
         private byte[] bytes = new Byte[1024];
 
         /// <summary>
@@ -46,11 +45,10 @@ namespace Chat_Client.Server
         /// </summary>
         /// <param name="settings"></param>
         private void Listen()
-        {           
-            
+        {
             IPAddress ip = IPAddress.Parse(settings.server_ip_address);
             IPEndPoint localEndPoint = new IPEndPoint(ip, settings.port_number); //endpoint for the socket.
-    
+
             // clear the contents of the console.
             CommandStructure.Commands.Clear.Execute();
 
@@ -65,17 +63,15 @@ namespace Chat_Client.Server
                 int bcount = 0;
                 while (bcount <= settings.backlog)
                 {
-                    Thread EstablishConnectionThread = new Thread(NewConnection);    
+                    Thread EstablishConnectionThread = new Thread(NewConnection);
                     EstablishConnectionThread.Start();
                     bcount++;
                 }
 
                 while (true)
                 {
-   
                     ;
                 }
-                                
             }
             catch (SocketException e)
             {
@@ -84,13 +80,13 @@ namespace Chat_Client.Server
                     Console.WriteLine("et");
                 }
             }
-         }
+        }
 
         private void NewConnection()
         {
             Socket handler = listener.Accept();
             Console.WriteLine(handler.RemoteEndPoint.ToString() + " " + "connected.");
-           
+
             List<string> ChatLog = new List<string>();
 
             while (true)
@@ -103,17 +99,15 @@ namespace Chat_Client.Server
                 while (true)
                 {
                     bytes = new byte[1024];
-                    try 
+                    try
                     {
-                       recv = handler.Receive(bytes); 
-                    }                                       
+                        recv = handler.Receive(bytes);
+                    }
                     catch (Exception)
                     {
                         continue;
                     }
-                        
-                    
-                    
+
                     data += Encoding.ASCII.GetString(bytes, 0, recv);
                     if (data.IndexOf("<EOF>") > -1)
                     {
@@ -126,12 +120,11 @@ namespace Chat_Client.Server
                 ChatLog.Reverse();
 
                 string fullLog = "";
-                foreach (var text in ChatLog)                
+                foreach (var text in ChatLog)
                     fullLog += text + "|"; // delimiter
-                
+
                 ChatLog.Reverse(); // reset it back to the way its suppose to be
 
-                
                 byte[] ReturnMessage = Encoding.ASCII.GetBytes(fullLog);
                 Console.WriteLine(handler.RemoteEndPoint.ToString() + " says " + TimeStamp.WriteTime(data));
                 handler.Send(ReturnMessage);
@@ -221,6 +214,6 @@ namespace Chat_Client.Server
             return inData;
         }
 
-        #endregion 2     
+        #endregion 2
     }
 }

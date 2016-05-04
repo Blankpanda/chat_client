@@ -1,26 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Chat
 {
-   
-    class Chat
+    internal class Chat
     {
         public const string EOF_FLAG = "<EOF>";
-        
+
         /// <summary>
         /// Constructs a message prompt and accepts input from a user.
         /// </summary>
         /// <returns></returns>
-         // TODO: This
+        // TODO: This
         private string GetMessageFromStream()
         {
             throw new NotImplementedException();
         }
-
 
         public int SendMessage(System.Net.Sockets.Socket sender)
         {
@@ -38,19 +33,18 @@ namespace Chat
 
         public int SendIP(System.Net.Sockets.Socket sender)
         {
-
             Message msg = new Message();
 
-            string HostIpAddress = 
+            string HostIpAddress =
                 Net.GetHostIpAddress();
 
             // the type of message where sending here is a Ip address.
-            string type = 
-                "type:" + msg.GetMessageTypeByName(Message.MessageType.SentIP); 
-            
-            byte[] message = Encoding.ASCII.GetBytes(HostIpAddress + 
+            string type =
+                "type:" + msg.GetMessageTypeByName(Message.MessageType.SentIP);
+
+            byte[] message = Encoding.ASCII.GetBytes(HostIpAddress +
                                                 " connected. " +
-                                                 type + 
+                                                 type +
                                                   Chat.EOF_FLAG);
 
             int sent = sender.Send(message);
