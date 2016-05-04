@@ -1,10 +1,12 @@
 import socket
 import sys
+import os
 #  Directly reference the os module
-sys.path.append(r"..\..\..\..\packages\IronPython.2.7.5\lib")
+sys.path.append(r"C:\Program Files (x86)\IronPython 2.7\Lib")
+from threading import Thread
+
 # import os
 def Start(ip_address, server_name, server_password,server_port_number,server_backlog, res_folder_path):
-
     
     # start of by converting the numeric arguments into integers
     server_port_number = int(server_port_number)
@@ -22,12 +24,35 @@ def Start(ip_address, server_name, server_password,server_port_number,server_bac
 
         print("{0} has connected.".format(address[0]))
 
+        # i = 0
+        # f = open(res_folder_path + "\\" + 'file_' + str(i),"wb") I dont have the os module
+        # i = i + 1
+
         i = 0
-        f = open(res_folder_path + "\\" + 'file_' + str(i),"wb") # I dont have the os module
-        i = i + 1
         
         while(True):
             l = handler.recv(1024) # buffer to hold what where recieving
+            
+            if l == "PUSH":
+                
+                l = handler.recv(1024)
+                f = open(res_folder_path + "\\" + "file_" + str(i), 'wb') # os.join
+                
+                print("recieving {0}".format(l))
+                
+                f.write(l)
+                l = handler.recv(1024)
+                
+                if not l:
+                    break
+                
+            if l == "GET":
+                pass
+            else:
+                pass # hm
+                
+                
+            
             if len(l) >= 1:                            
                 print("recieving {0}".format(l))
             f.write(l) # write what we've recieved

@@ -51,6 +51,7 @@ namespace Chat_Client.Server
 			CommandStructure.Commands.Clear.Execute(); // clear the terminal
 
 			var IronPythonRunTime = Python.CreateRuntime();
+
 			dynamic server = IronPythonRunTime.UseFile(@"python/server.py");
 			server.Start(
 				_ServerSettings.server_ip_address,
