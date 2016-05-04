@@ -1,11 +1,11 @@
 import socket
 import sys
-import os
 #  Directly reference the os module
 sys.path.append(r"C:\Program Files (x86)\IronPython 2.7\Lib")
+import os
 from threading import Thread
 
-# import os
+
 def Start(ip_address, server_name, server_password,server_port_number,server_backlog, res_folder_path):
     
     # start of by converting the numeric arguments into integers
@@ -23,46 +23,51 @@ def Start(ip_address, server_name, server_password,server_port_number,server_bac
         handler, address = listener.accept() # handler = handle requests , address = the remote end point
 
         print("{0} has connected.".format(address[0]))
-
-        # i = 0
-        # f = open(res_folder_path + "\\" + 'file_' + str(i),"wb") I dont have the os module
-        # i = i + 1
-
-        i = 0
         
         while(True):
-            l = handler.recv(1024) # buffer to hold what where recieving
-            
-            if l == "PUSH":
-                
-                l = handler.recv(1024)
-                f = open(res_folder_path + "\\" + "file_" + str(i), 'wb') # os.join
-                
-                print("recieving {0}".format(l))
-                
-                f.write(l)
-                l = handler.recv(1024)
-                
-                if not l:
-                    break
-                
+            l = handler.recv(1024) # buffer to hold what command we are
+            if l == b"PUSH":
+                get_push(handler,res_folder_path)
+                print('out')
             if l == "GET":
                 pass
+            if l == "LIST":
+                pass
             else:
-                pass # hm
+                continue
                 
-                
-            
-            if len(l) >= 1:                            
-                print("recieving {0}".format(l))
-            f.write(l) # write what we've recieved
-            l = handler.recv(1024) # continue to get more
-            if len(l) == 0:
-                f.close()
+              
+           
+            # if len(l) >= 1:                            
+            #     print("recieving {0}".format(l))
+            # f.write(l) # write what we've recieved
+            # l = handler.recv(1024) # continue to get more
+            # if len(l) == 0:
+            #     f.close()
 
         handler.close()
 
     listener.close()
 
+
+def get_push(handler, res_folder_path):
+    file_index = 0
+    f = open(res_folder_path + "\\" + "file_" + str(file_index) + ".txt", 'wb') # os.join
+    file_index = file_index + 1
+
+    buf = ""
+
+    l = handler.recv(1024)
+    while(l):
+        print("recieving {0}".format(l))
+        buf = buf +  l
+        l = handler.recv(1024)
+        if not l: break
+
+    f.write(buf)
+    f.close()
+    
+    return None
+    
 if __name__ == '__main__':
-    Start("192.168.1.10","car","it",7777,10)
+    Start("192.168.5.184","car","it",7777,10,r"..\res")
