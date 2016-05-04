@@ -2,7 +2,7 @@ import socket
 import sys
 
 
-command_list = ['GET','PUSH','LIST', 'EXIT','HELP']
+command_list = ['GET','PUT','LIST', 'EXIT','HELP']
 sender = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 def main():
@@ -45,9 +45,9 @@ def main():
     # setup socket
     try:
         sender.connect((server_address,server_port ))
-    except Exception:
+    except Exception as e:
         print("Failed to connect to the server. Is it online?")
-        sys.exit(0)
+        print(str(e))
 
 
     # REEPL for the user to enter in commands to the server
@@ -62,16 +62,8 @@ def main():
             else:
                 print("Invalid command, type 'help' for help dialog.")
         except Exception as e:
-            print(str(e))
+            raise e
         
-    # f=open("test.txt", "rb")
-    # l = f.read(1024)
-    
-    # while(l):
-    #     sender.send(l)
-    #     l = f.readline(1024)
-        
-    # sender.close()
 
 # hacky but it will do for now
 def run_command(command):
@@ -79,8 +71,8 @@ def run_command(command):
     if command == "HELP":
         c_help()
         return None
-    if command == "PUSH":
-        push()
+    if command == "PUT":
+        put()
         return None
     elif command == "GET":
         get()
@@ -101,29 +93,34 @@ def c_exit():
     sys.exit(0)
 
 def c_help():
-    print("The following commands are: \n {0} \n {1} \n {2} \n {3}, {4}".format(
+    print("The following commands are: \n {0} \n {1} \n {2} \n {3} \n {4}".format(
         "help - show this dialog.",
-        "push - push a file to the server.",
+        "put - push a file to the server.",
         "get  - get a file from the server.",
         "list - list files on the server.",
         "exit - exit out of the program."
     ))
 
 
-def push():
-    sender.send(b"PUSH")
+def put():
+    stop_code = 300
+    sender.send(b"PUT") # the command that going to be used
     
     path = input("Enter the path of the file that you would like to send: ")
     f = open(path, 'rb')
 
-    line = f.read(1024)
-
-    while(line):
+    filename = get_file_from_path(path)
+    sender.send(bytes(filename, 'utf-8')) # send the name of the file, so the server know how to stor it
+    
+    line = f.read(1024) # read the first line and send it (essentailly we want o to initalize line)
+    while(line): # start sending the rest
         sender.send(b'' + line)
         line = f.readline(1024)
-            
-
     
+    # send a stop code because were done sending
+    sender.send(bytes(str(stop_code), 'ASCII'))
+
+    return None
 
 def get():
     pass
@@ -131,6 +128,28 @@ def get():
 def c_list():
     pass
 
+
+def get_file_from_path(filename):
+    if '\\' not in filename:
+        return filename
+        
+    
+    filename = filename[::-1]
+
+    first_dir_count = 0
+    for char in filename:
+        if char == '\\':
+            break
+        first_dir_count += 1
+
+    filename = filename[:first_dir_count]
+    filename = filename[::-1]
+    return filename
+
+        
+        
+        
+     
 if __name__ == '__main__':
     main()
  
