@@ -109,7 +109,7 @@ def put():
     f = open(path, 'rb')
 
     filename = get_file_from_path(path)
-    sender.send(bytes(filename, 'utf-8')) # send the name of the file, so the server know how to stor it
+    sender.send(bytes(filename, 'ASCII')) # send the name of the file, so the server know how to stor it
     
     line = f.read(1024) # read the first line and send it (essentailly we want o to initalize line)
     while(line): # start sending the rest
@@ -122,7 +122,34 @@ def put():
     return None
 
 def get():
-    pass
+    stop_code = str(300)
+    buff = ""
+
+    sender.send(b'GET')
+
+    filename = input("Enter the name of the file that you would like to get: ")
+
+    # todo: check if the file exist1s
+    sender.send(bytes(filename,'ASCII')) # send the file name that were looking for
+
+    f = open(filename,'wb')
+
+    data = sender.recv(1024)
+    while(data):
+        buff = buff + data.decode('ASCII')
+        buff = buff.strip(str(300))
+        if stop_code in data.decode('ASCII'):
+            break
+
+        data = sender.recv(1024)
+        
+        if not data: break
+
+    print(buff)
+    f.write(bytes(buff,'ASCII'))
+    f.close()
+    print("done writing new file.")
+    return None
 
 def c_list():
     stop_code = 300

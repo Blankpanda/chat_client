@@ -31,11 +31,11 @@ def Start(ip_address, server_name, server_password,server_port_number,server_bac
             if l == b"PUT":
                 do_put(handler,res_folder_path) # PUT command
             if l == b"GET":
-                pass
+                do_get(handler,res_folder_path)
             if l == "LIST":
                 do_list(handler,res_folder_path)
-            else:
-                pass
+            
+                
             
         handler.close()
 
@@ -71,8 +71,24 @@ def do_put(handler, res_folder_path):
     return None
 
 def do_get(handler,res_folder_path):
-    pass
+    stop_code = 300
 
+    filename = handler.recv(4096) # first were going to get the name of the file
+    filename = filename.decode('ASCII')
+    # search the file list to see if that file exists.
+    if filename in os.listdir(res_folder_path):
+        # send the file that were looking for
+        f = open(res_folder_path + '\\' + filename, 'rb')
+        line = f.read(1024)
+        while(line):
+            handler.send(b'' + line) # ???
+            line = f.read(1024)
+            
+    handler.send(bytes(str(stop_code), 'ASCII'))
+    
+    return None
+    
+        
 def do_list(handler,res_folder_path):
     file_list = os.listdir(res_folder_path)
 
@@ -82,12 +98,7 @@ def do_list(handler,res_folder_path):
         send_str = send_str + fname + '\n'
 
     handler.send(send_str)
-        
-        
     
-    
-
-
 def get_file_name_exten(filename):
     # simply split by the perion
     name, exten = filename.split('.')

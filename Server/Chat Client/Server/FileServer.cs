@@ -42,7 +42,7 @@ namespace Chat_Client.Server
 				Directory.CreateDirectory(DirectoryPath);
 			}
 		}
-
+		
 		/// <summary>
 		/// Invokes a python script.
 		/// </summary>
