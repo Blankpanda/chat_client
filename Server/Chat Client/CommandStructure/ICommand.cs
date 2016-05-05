@@ -13,18 +13,12 @@ namespace Chat_Client.CommandStructure
             get;
             set;
         }
-
         string Description
         {
             get;
             set;
         }
 
-        string Alias
-        {
-            get;            
-        }
-
-        void Execute();        
+       
     }
 }

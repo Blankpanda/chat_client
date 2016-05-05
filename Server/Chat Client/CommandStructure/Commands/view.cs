@@ -1,6 +1,6 @@
 ﻿namespace Chat_Client.CommandStructure.Commands
 {
-    internal class View
+    internal class View : ICommand
     {
         private string _Name = "view";
         private string _Desc = "View server settings from a select server";

@@ -11,7 +11,7 @@
     ///     password
     /// </summary>
 
-    internal class Create
+    internal class Create : ICommand
     {
         private string _Name = "create";
 

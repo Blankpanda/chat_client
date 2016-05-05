@@ -8,7 +8,7 @@ namespace Chat_Client.Server
     internal class ServerInit
     {
         /* settings of the server */
-
+   
         public struct ServerSettings
         {
             public int port_number, backlog;
@@ -24,22 +24,75 @@ namespace Chat_Client.Server
             }
         }
 
-        /* used to add a new server entry */
-
-        public void Create()
+        public struct FileServerSettings
         {
-            ServerSettings settings = new ServerSettings();
+            public int port_number, backlog;
+            public string server_ip_address, server_password, server_name, resource_path;
+            ServerType server_type;
+
+             public FileServerSettings(int port, int log, string ip, string name, string password,
+                 string path, ServerType type)
+            {
+                port_number = port;
+                backlog = log;
+                server_ip_address = ip;
+                server_name = name;
+                server_password = password;
+                resource_path = path;
+                server_type = type;
+            }
+
+        }
+        
+     
+        // TODO: start different servers based on desire, currently have to programatically do it
+
+        /// <summary>
+        ///  Creats and initalize a file server
+        /// </summary>
+        /// <returns></returns>
+        public FileServerSettings CreateFileServer(string ServerName)
+        {
+            FileServerSettings settings = new FileServerSettings();
             ServerList serverlist = new ServerList();
 
-            settings.server_name = GetSeverName();
             settings.server_password = GetServerPassword();
             settings.backlog = GetServerBacklog();
             settings.port_number = GetServerPortNumber();
             settings.server_ip_address = GetServerIPAddress();
 
+            return settings;
+
+        }
+
+        public ServerSettings CreateChatServer(string ServerName)
+        {
+            ServerSettings settings = new ServerSettings();
+            ServerList serverlist = new ServerList();
+
+            settings.server_name = ServerName;
+            settings.server_password = GetServerPassword();
+            settings.backlog = GetServerBacklog();
+            settings.port_number = GetServerPortNumber();
+            settings.server_ip_address = GetServerIPAddress();
+
+            return settings;
+        }
+
+        /* used to add a new server entry */
+        public void Create()
+        {
+            ServerSettings settings = new ServerSettings();
+            ServerType sType = new ServerType();
+           
+            string ServerName = GetSeverName();
+            
+            settings = CreateChatServer(ServerName);
             Console.WriteLine(settings.server_name + " server created.");
             CreateNewServer(settings);
         }
+
+   
 
         /* this method is used when the server starts to search and load settings to be passed to the Listen() method */
 
@@ -194,6 +247,11 @@ namespace Chat_Client.Server
         {
             IPHostEntry host = Dns.Resolve(Dns.GetHostName()); // only need the IP as a string here
             return host.AddressList[0].ToString();
+        }
+
+        private string GetServerType()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -96,7 +96,7 @@ def do_list(handler,res_folder_path):
 
     # build a string with the list, delimiting the list using a new line
     send_str = ""
-    for fna36me in file_list:
+    for fname in file_list:
         send_str = send_str + fname + '\n'
 
     handler.send(send_str)

@@ -6,7 +6,7 @@ namespace Chat_Client.CommandStructure.Commands
     /// <summary>
     /// Generate a list of Aliases.
     /// </summary>
-    internal class Alias
+    internal class Alias : ICommand
     {
         private string _Name = "alias";
         private string _Desc = "Generates a list of aliases";

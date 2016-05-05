@@ -8,7 +8,7 @@ namespace Chat_Client.CommandStructure.Commands
     /// </summary>
     ///
 
-    internal class Help
+    internal class Help : ICommand
     {
         private string _Name = "help";
         private string _Desc = "Outputs this display";

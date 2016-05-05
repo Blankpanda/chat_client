@@ -7,7 +7,7 @@ namespace Chat_Client.CommandStructure.Commands
     ///  using console.Clear();
     /// </summary>
 
-    internal class Clear
+    internal class Clear : ICommand
     {
         private string _Name = "clear";
         private string _Desc = "Clears the contents of the console.";

@@ -3,7 +3,7 @@
     /// <summary>
     /// supplies a list of the current servers.
     /// </summary>
-    internal class SList
+    internal class SList : ICommand
     {
         private string _Name = "slist";
         private string _Desc = "Generates a List of created servers.";

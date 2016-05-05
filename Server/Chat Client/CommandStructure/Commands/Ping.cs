@@ -3,7 +3,7 @@
     /// <summary>
     ///  a simple built in diagnostics tool so the user can verify connectivity.
     /// </summary>
-    internal class Ping
+    internal class Ping : ICommand
     {
         private string _Name = "ping";
         private string _Desc = "Sends a simple ICMP to a target IP.";

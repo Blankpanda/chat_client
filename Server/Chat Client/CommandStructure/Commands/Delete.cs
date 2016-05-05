@@ -5,7 +5,7 @@
     ///  The Delete function is contain in ServerList.cs.
     /// </summary>
 
-    internal class Delete
+    internal class Delete : ICommand
     {
         private string _Name = "delete";
         private string _Desc = "Removes a Server from the /Server Directory";

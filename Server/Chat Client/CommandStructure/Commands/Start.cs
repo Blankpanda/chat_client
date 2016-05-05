@@ -5,7 +5,7 @@ namespace Chat_Client.CommandStructure.Commands
     /// <summary>
     /// starts a supplied server from name.
     /// </summary>
-    internal class Start
+    internal class Start : ICommand
     {
         private string _Name = "start";
         private string _Desc = "Starts a server by name";

@@ -4,7 +4,7 @@
     ///  Terminates the program and shutsdown any active server.
     /// </summary>
 
-    internal class Exit
+    internal class Exit : ICommand
     {
         private string _Name = "exit";
         private string _Desc = "Closes out of the console window.";
