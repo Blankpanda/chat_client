@@ -41,6 +41,7 @@ namespace Chat_Client.Server
         /// </summary>
         public void Start()
         {
+            TimeStamp stamper = new TimeStamp(); // unused right now
             CommandStructure.Commands.Clear.Execute(); // clear the terminal
 
             var IronPythonRunTime = Python.CreateRuntime();
